@@ -1,0 +1,273 @@
+Specifying Syntax with BNFs (Backus Naur Forms)
+
+<https://cs.calvin.edu/courses/cs/214/adams/pdfs/N01.BNF-Color.pdf>
+
+The *ORDER* of the words determines the meaning
+
+Every language has a set of rules - its grammar or syntax
+
+Syntax error...
+
+Following syntax rules allows us to translate the meaning of a particular set of things
+
+The meaning of words in a scentence with correct syntax is semantics
+Consider "Time flies like an arrow; fruit flies like a bannana"
+Decode a word's meaning using it's surrounding context
+Since a word's semantics depends on its context, English is a context-sensitive language (CSL)
+	
+Meaing of words in a program are determined by the syntax rules of the language in which it's written
+
+The BNF (Backus-Naur Form) is a tool for specifying the syntax of a high level language (HLL)
+<nonterminal> terminal
+- <nonterminals> require further definition, LOOK @ *SLIDES* for info & example
+
+ex. Is "R2D2" valid in <identifier>?
+Can we generate "R2D2" with <identifier> following the rules?
+Turns out, yes (example in *slides*)
+- pretty much always recursive, think RegEx
+
+ε used to terminate sequences/recursions
+
+Σ 
+
+Use descriptive names
+
+------ 2-10-2020 -------
+Non-terminals must be defined by a production (rule)
+
+Formal Definitions (iii)
+A BNF is a quadruple: (Σ, N, P, S)
+Σ is the set of symbols in the BNF
+N is the subset of Σ that are nonterminals in the language
+P is the set of productions defining the symbols in N;
+	- Things in N must be defined in BNF so...
+S is the starting nonterminal; the symbol from which we start our parse
+
+A derivation is a ... [cont on slides]
+
+-> a derivation is sometimes called a parse.
+
+Fomal Definitions (iv)
+A BNF <derivation tree (or parse tree)> is a tree such that ... [slide]
+
+If there isn't a parse tree, it's not valid in that language. BNF has to recognize all valid AND invalid sentences
+
+A <left-most derivation> is a derivation [slide]
+
+Do parse trees (using our <identifier> BNF) exist for these?
+<identifier> ::= <first_letter> <valid_seq>
+<first_letter> ::= <letter> | _
+<valid_seq> ::= <valid_sym> <valid_seq> | ε
+ - "i"
+				<identifier> 
+		<first_letter>  <valid_seq>
+	<letter>
+ <i>
+
+- a1b2
+							<identifier>
+				<first_letter>------<valid_seq>
+			<letter>		   <valid_sym>-------<valid_seq>
+		<a>					<digit>			<valid_sym><valid_seq>
+						<1>				<letter>			<valid_sym><valid_seq>
+									<b>					<digit>				<ε>
+													<2>
+- _5_
+							<identifier>
+				<first_letter>-------<valid_seq>
+			<_>					<valid_sym>----<valid_seq>
+							<digit>			<valid_sym><valid_seq>
+						<5>				<_>					<ε>
+						
+- _$_
+							<identifier>
+				<first_letter>-------<valid_seq>
+			<_>
+			<NONE: $ is not letter, seq, or _> <PARSE ERROR "$">
+Left-most derivation
+
+Recursive Productions
+
+Identifier BNF permits arbitrary length by recursive productions
+Useful for unrestricted repitition, can appear <0 or more times>
+
+ε-Production provides a base-case for trivial instances of nonterminal, and an anchor to terminate the recursion
+
+***Could be used on HW, midterm...***
+Writing BNFs: 3 Step Process
+A. Start with the non-terminal you are defining
+B. Build the productions to define the non-terminal:
+	1. Start with the question: What comes first?
+	2. If a construct is optional: (0 or 1 times)
+		a. create a new nonterminal for it
+		b. add a production for the non-optional case (1)
+		c. add an ε-production for the optional case (0)
+	3. If a construct can be repeated zero or more times: 
+		a. create a new nonterminal for it
+		b. add an ε-production for the zero-reps case
+		c. add a recursive production for the other cases
+C. For each nonterminal in the <RHS> of every production:
+	repeat step B until all nonterminals have been identified.
+	
+Example: C++ if statement
+A. create a nonterminal for what we're defining:
+	<if_stmt> 
+B. Build a production to define it: what comes first?
+	<if_stmt> ::= if ( <expr> ) <stmt> <opt_else>		(<stmt> includes block statements {blah blah})
+C. Repeat B for each undefined nonterminal
+
+	<opt_else> ::= else <statement> | ε
+	(<expr> and <stmt> are rediculous in a full language, later...)
+	
+What about "if (a < b) if (a < c) S1 else S2
+
+								<if_stmt>
+			<if>	(	<expr>	)	<stmt>	<opt_else>  -- ε
+						...			 ...
+						a < b	  <if_stmt>
+						<if>	(	<expr>	)	<stmt>	<opt_else> 			-- 2 else parts to derive S2
+									a < c		S1		else <stmt> -> S2   -- problem is there's more than one correct way
+									
+Ambiguities
+When a "sentence" has multiple parse trees, it is ambiguous (i.e., it has multiple interpretations and/or meanings)
+The two parses reflect different ways to associate the else:
+[slides]
+Grammar cannot resolve which is meant... so C++ uses a <semantic rule> to resolve the ambiguity
+An else associates with the closest prior unterminated if
+
+Example: C++ do statment
+A. Create a non-terminal for what we're doing
+<do_stmt>
+B. Build a produciton to define it: what comes first?
+1. Keyword do
+2. A statment
+3. keyword while ...
+
+<do_stmt> ::= do <stmt> while ( <expr> );
+
+
+<stmt> ::= <compound_stmt> | <selection_stmt> |
+		   <iteration_stmt> | <expression_stmt> |
+		   <jump_stmt> | <labeled_stmt> | <declaration_stmt>
+		   
+<compound_stmt> ::= {<stmt_list>}
+<stmt_list> ::= <stmt><stmt_list> | ε
+
+***<<<Example: C++ <stmt> (ii) Slide is very interesting/informative>>>***
+
+<assign_expr> ::= <lvalue><assign_op><assign_expr> |
+
+<unary_op> ::= * | ε
+
+<id_suffix> :: = [ <expr> ] <id_suffix> | . <lvalue> <id_suffix> |
+-> <lvalue> <id_suffix> | ε
+
+<assign_op> ::= _____ | += | -= | *= | /= | %= | <<= | >>= | &= | |= | ^=
+
+
+To ensure that higher precedence operators appear lower in
+the parse tree, we must build <hierarchy> into our BNF:
+
+<expr> ::= … | <add_expr> | … 
+<add_expr> ::= <mul_expr> | <add_expr> + <mul_expr> | <add_expr> - <mul_expr> 
+<mul_expr> ::= <value> | <mul_expr> * <expr> | <mul_expr> / <expr> | <mul_expr> % <expr> 
+Layering allows correct parse trees to be built <visual on slide>
+
+
+Associativity can be built into a grammar by using <left-
+recursive> productions for left-associative operators; and
+<right-recursive> productions for right-associative operators. (Right for right, left for left)
+
+<add_expr> ::= <mul_expr> | <add_expr> + <mul_expr> | <add_expr> - <mul_expr>
+
+<assign_expr> ::= <lvalue> <assign_op assign_expr>
+
+
+EBNF -- Extended BNF
+Capitalize first letter the word of non-terminals
+
+<Parentheses> may beused to denote grouping
+Parens on the language are terminal and are therefore marked accordingly
+
+{ and } surround symbols that are repeated zero or more times <make sure to mark accordingly that it's a non-terminal
+- No recursion!
+[ and ] surround symbols that are optional
+- No ε-productions!
+
+
+Ex.
+1. Block ::= '{' {Stmt} '}'
+
+2. Int-Literal ::= [Sign] [0x] Digit {Digit}
+	For a more complete version for C++: 
+	Int-Literal ::= [Sign] DecLiteral | OctalLiteral | HexLiteral
+	sign ::= + | -
+	OctalLiteral ::= 0 OctDigit {OctDigit}
+	OctDigit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+	DecLiteral ::= DecDigit {DecDigit}
+	DecDigit ::= OctDigit | 8 | 9
+	HexLiteral ::= 0x HexDigit {HexDigit}
+	HexDigit ::= DecDigit | a | b | c | d | e | f
+	
+3. <slides>
+Do-Stmt ::= do Stmt while '(' Expr ')'
+
+Problems:
+1. C++ Identifier with EBNF
+
+Identifier ::= FirstSymbol {ValidSymbol}
+FirstSymbol ::= Letter | _
+ValidSymbol ::= FirstSymbol | Digit
+Letter = A-Z | a-z
+Digit = 0-9
+
+2. C++ while statment
+WhileStmt ::= 'while' '(' Expr ')' Stmt
+
+3. C++ if statment
+IfStmt ::= 'if' '(' Expr ')' Stmt [ 'else' Stmt ]
+
+
+Basic Parsing Algorithm
+0. Push S (the starting symbol) onto a stack.
+1. Get firs symbol t from the input file.
+2. Repeat the following steps:
+	a. Pop the stack into topSymbol;
+	b. If topSymbol is a nonterminal
+		1) Choose a production p of topSymbol based on t
+		2) If p != ε:
+			Push p right-to-left onto the stack. (in place of what we just popped
+	c. Else if topSymbol is a terminal && topSymbol == t: (same as we read from input file (good))
+		Get the next terminal symbol t from the input file
+	d. Else
+		Generate a 'parse error' message.
+	while the stack is not empty 
+
+
+Example: Suppose our rules are 
+<var_dec> ::= <type> id <id_list> ; <var_dec> | ε
+<type> ::= int | char | float | double | …
+<id_list> ::= , <id> <id-list> | ε
+and we wanna parse the declaration : int x, y;
+assuming <var_dec> is our starting symbol
+
+<slides for answer>
+
+t: <int>			<id(x)>	<,>		<id(y)>	  <;>
+
+Summary
+There are different ways to specify language syntax
+- <BNF> 		- <EBNF>
+
+EBNF is simpler and easier to use, so it's frequently used in language guides and user manuals
+
+BNF's recursive and epsilon productions simplify the task of parsing, so id is more useful to compiler-writers
+
+
+
+
+
+
+
+
+

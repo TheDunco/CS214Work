@@ -1,0 +1,236 @@
+<https://cs.calvin.edu/courses/cs/214/adams/pdfs/N02.ControlStructures-Color.pdf />
+
+In the early 60's, <spaghetti coding> was a common practice, whether using a HLL or a formal model like the RAM.
+In assembly, you only have conditional and unconditional jumps, so these early languages were reflections of that
+
+double f(double n) {
+double x = y = 1.0;
+if (n < 2.0) goto label2;
+label1: if (x > n) goto label2;
+y *= x;
+x++;
+goto label1;
+label2: return y;
+}
+
+
+The <structure> does not indicate <the flow of control>
+Such code was <expensive to maintain...>
+
+in '68, Dijkstra published "Goto Considered Harmful"
+-- suggested the <goto> shoudl be outlawed because it encouraged <undisciplined coding>
+
+Language designers began building <control structures>
+-- statements whose syntax mad control-flow obvious
+
+- If 	FORTRAN		-If-Then-Else		COBOL
+- Case	Algol-W		-If-Then-Elseif		Algol-68
+- For	Algol-60	-While				Pascal
+-Do		COBOL
+
+With Pascal (1970), all of these were available in 1 language, resulting in a new coding style: <structured programming>
+Think of it like the Second generation in terms of programming style
+
+---day2---
+
+Structured programming emphasizes <readability> through:
+- Use of appropriate contorl structures
+- Use of descriptive identifiers
+- Use of white space (indentation, blank lines)
+
+ex. 
+double factorial(double n)
+{
+	double result = 1.0;
+	for (int count = 2; count <= n; count++)
+		result *= count;
+	return result;
+}
+
+With structured programming, <flow of control is clear!> 
+The resulting programs were <less expensive to maintain.>
+
+A C/C++ block has <0 or more> statements:
+
+<block-stmt> ::= { <stmt-list> }
+<stmt-list> ::= <stmt> <stmt-list> | ε
+
+
+An Ada block statement has <1 or more> stmts:
+
+<block-stmt> ::= begin <stmt-list> end
+<stmt-list> ::= <stmt> <more-stmts>
+
+<more-stmts> ::= <stmt> <more-stmts> | ε
+The semicolons are used as statement terminators in Ada (as seen in slides)
+
+The block is the control structure for <sequential execution>, 
+the default control structure in inperative languages.
+
+The guiding principle for all control structures is <One entry point, one exit point> 
+(denoted by arrows in <slides>)
+
+Smalltalk also has a <block> consruct, but it is an <object>
+"." seperates expressions in the block
+
+<block-object> ::= [ <params> <locals> <expr-list> ]
+<params> ::= <param-list> ‘|’ | ε
+<param-list> ::= : id <param-list> | ε
+<locals> ::= ‘|’ <id-list> ‘|’ | ε
+<id-list> ::= id <id-list> | ε
+<expr-list> ::= <expr> <more-exprs> | ε
+<more-exprs> ::= . <expr> <more-exprs> | ε
+
+[2 + 1] value            → 3
+
+Like C/C++, a Smalltalk block can declare local variables;
+but as an object, a Smalltalk block can also have <parameters>:
+
+[:i | i + 1] value: 2     → 3
+
+| aBlock | aBlock := [:x :y | (x*x) + (y*y) ] . aBlock value: 3 value: 4 → 25
+
+
+The expressions in the “body” of a Lisp function are executed
+sequentially, by default, with the value of the function being
+the value of <the last (final) expression in the sequence:
+
+(defun summation (n)
+	(setq t1 (+ n 1))
+	(setq t2 (* n t1))
+	(setq t3 (/ t2 2)))
+	)))
+summation (summation 100)  -> 5050
+
+Of course, summation() can be written more succinctly:
+(defun summation (n) 
+	(/ (* (+ n 1) n) 2)
+))
+
+Some Lisp function-arguments must be a single expression.
+Lisp’s <progn> function can be used to execute several
+expressions sequentially, much like other languages’ <block>:
+
+(defun summation (n)
+	(if (<= n 0)
+	(progn
+		(message "summation(n): n must be positive...")
+		0)
+	(/ (* (+ n 1) n) 2)))
+)))
+The progn function returns the value of its <final expression>.
+Lisp also has sequential prog1 and prog2 functions, that
+return the values of the 1st and 2nd expressions, respectively.
+
+
+
+Selective execution lets us <select/execute one statment and ignore another>
+
+The If Statement
+
+<if-statement> ::= if ( <expr> ) <stmt> <else-part>
+<else-part> ::= else <stmt> | ε
+
+<see slides for flow control>
+
+
+Examples
+
+These three forms allow us to use selective execution in
+whatever manner is appropriate to solve a given problem
+
+
+<Single-Branch Logic>:
+if (numValues != 0)
+	avg = sum / numValues;
+
+<Dual-Branch Logic>:
+if (first < second)
+	min = first;
+else
+	min = second;
+
+<Multi-Branch Logic>:
+if (score > 89)
+	grade = 'A';
+else if (score > 79)
+	grade = 'B';
+else if (score > 69)
+	grade = 'C';
+else if (score > 59)
+	grade = 'D';
+else
+	grade = 'F';
+
+
+The Dangling Else Problem
+Every language designer must resolve the question of how to
+associate a “dangling else” following nested if statements...
+<see slides for explanation/graphic>
+
+The problem occurs in languages with <ambiguous grammars>.
+→ Such a statement can be <parsed> in two different ways.
+
+There are two different approaches to resolving the question:
+•Add a *semantic rule* to resolve the ambiguity; vs.
+•Design a statement whose syntax is not ambiguous.
+
+
+Using Semantics
+Languages from the 1970s (Pascal, C) tended to use simple
+but ambiguous grammars:
+<if-stmt> ::= if ( <expr> ) <stmt> <else-part>
+<else-part> ::= else <stmt> | ε
+
+Plus a semantic rule:
+<An else always associates witht he nearest unterminated if>
+<slides for more info>
+
+Block statments provided a way to circumvent the rule. 
+Newer C-family languages (C++, Java) have inherited this
+
+
+Using Syntax
+Newer languages tend to use <syntax that is unambiguous>
+<if-stmt> ::= if ( <expr> ) <stmt-list> <else-part> end if
+<else-part> ::= else <stmt-list> | ε
+<stmt-list> ::= <stmt> <stmt-list> | ε
+
+Terminating an if with an end if “closes” the most recent
+else, eliminating the ambiguity without any semantic rules:
+
+
+Perl uses a (different) syntax solution:
+<if-stmt> ::= if ( <expr> ) <block> <else-part>
+<else-part> ::= else <block> | ε
+<block> ::= { <stmt-list> }
+
+By requiring each branch of an if to be a block, <any nested if is "enclosed" in a block,> eliminating the ambiguity: 
+The nested block serves to terminate the nested if
+
+Always putting the bracket after a C++ if will basically use this approach, even if you only have one statment
+
+if {
+} else {
+}
+
+
+Aesthetics <see slides for sure>
+
+To avoid this problem, Algol-68 added the elif keyword that substituted for else if, <extends the same if statement.>
+
+Modula-2 and Ada replaced the error-prone elif keyword with elsif
+
+-----'nother day----
+
+<Ada-if-stmt> ::= if <condition> then <stmt_list> <elsif_part> <opt_else-part> end if; (can exclude semicolon so every statment doesn't have to supply it)
+<elsif_part> ::= elsif <condition> then <stmt_list> <elsif_part> | ε
+<opt_else-part> ::= else <stmt_list> | ε
+
+
+
+
+
+
+
+
