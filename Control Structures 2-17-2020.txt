@@ -353,16 +353,18 @@ for (;;)	while (true)	do
 
 
 Ada
-Ada provides ________, ________, and ___________ loops:
+Ada provides <pretest>, <counting>, and <unrestricted> loops:
 
 Exercise: How would you build a BNF for Ada’s loops?
 
-<Ada-loop-stmt>::= _____________________________________________
-___________ ::= ___________________________________________
-____________ ::= _________________________
-___________ ::= ____________________________________
-____________ ::= ______________________________________________
-___________ ::= _______________________________
+<Ada-loop-stmt>::= <loop-prefix> loop <loop-stmt-list> end loop
+<loop-prefix> ::= <for-prefix> | <while-prefix> | ε
+<while-prefix> ::= <while> <condition>
+<for-prefix> ::= for id in <range-clause>
+<range-clause> ::= <scalar> .. <scalar> | reverse <scalar> .. <scalar>
+<loop-stmt> ::= <stmt> | <exit-when-clause>
+
+
 What if you need a post-test loop, or to count by i != 1?
 
 
