@@ -379,13 +379,36 @@ Smalltalk provides <2 pretest and 3 counting loop-messages>:
 <opt-by> ::= by: <numExpr> | ε
 
 
+Lisp
+Lisp has no loop functions, because anything that can be done
+by repetition can also be done using <recursion>.
+
+Recursive functions can provide test-at-the-top, test-at-thebottom,
+and test-in-the-middle behavior simply by varying <the placement of the recursive call and the if controlling it>: 
+<slides>
+If you can structure you're code like the middle one, you can call recurse() instead of g(n) to avoid extra overhead	
 
 
+Summary:
+There are three basic control structures:
+• Sequence • Selection • repetition
 
+Different kinds of languages accomplish these differently:
+• Sequence is the default mode of control provided by the <block> construct of most languages (<progn> in Lisp)
 
+• Selection is accomplished via: 
+- <Statments> (e.g., if, switch or case) controlled by boolean
+expressions in imperative languages 
+- <Functions> (e.g., if and cond in Lisp) with boolean arguments
+in functional languages
+- Messages (ifTrue:, ifFalse:, … in Smalltalk) sent to
+boolean objects in pure OO languages
 
+•Repetition is accomplished via:
+- <Statments> (e.g., while, do, for) controlled by boolean expressions in imperative languages
+- Recursive functions in functional languages
+- Messages (whileTrue:, timesRepeat:, to:by:do:, … in Smalltalk) sent to boolean (or numeric) objects in pure OO languages
 
-
-
+These 3 control structure and I/O are all we need to compute anythign tha tcan be computer (i.e., by a Turing machine).
 
 
