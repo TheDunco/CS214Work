@@ -1,0 +1,74 @@
+Script started on 2020-02-20 13:17:19-0500
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ cat jav[K[K[KYearCodes.java 
+/* YearCodes.java is a driver for function yearCode().
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed for CS 214 Lab 03 by Duncan Van Keulen
+ * On 2-20-2020
+ ****************************************************************/
+
+import java.util.Scanner;
+
+public class YearCodes {
+
+   public static void main(String[] args) {
+      Scanner keyboard = new Scanner(System.in);
+      System.out.println("\nEnter your academic year: "); // prompt
+
+      String year = keyboard.next();      // read year
+      System.out.println(yearCode(year)); // display its code
+   }
+
+   /***************************************************************
+    * yearCode() converts an academic year into its integer code.
+    *
+    * Receive: year, a string.
+    * PRE: year is one of {freshman, sophomore, junior, or senior}.
+    * Return: the integer code corresponding to year.
+    */
+    public static int yearCode(String year)
+    {
+       if (year.equals("freshman"))
+          return 1;
+       else
+          if (year.equals("sophomore"))
+             return 2;
+          else
+             if (year.equals("junior"))
+                return 3;
+             else
+                if (year.equals("senior"))
+                   return 4;
+                else
+                   return 0;
+    }
+}
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ javac -deprecation YearCodes.java 
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ java YearCodes 
+
+Enter your academic year: 
+freshman
+1
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ java YearCodes 
+
+Enter your academic year: 
+sophp omore
+2
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ java YearCodes 
+
+Enter your academic year: 
+junior
+3
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ java YearCodes 
+
+Enter your academic year: 
+senior
+4
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ java YearCodes 
+
+Enter your academic year: 
+blah blah blah
+0
+]0;djv78@gold24: ~/214/labs/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/java[00m$ exit
+
+Script done on 2020-02-20 13:18:49-0500

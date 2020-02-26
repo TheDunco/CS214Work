@@ -1,0 +1,18 @@
+Useful Commands ----
+For Java:
+javac -depracation FileName
+
+For Ada:
+gcc -c circle_area.adb 
+gnatmake projectName
+then ./FileName
+
+For Clojure:
+clojure -m FileName
+
+For Ruby:
+ruby FileName
+
+mkdir java ; mkdir ada ; mkdir clojure ; cd clojure ; mkdir src ; ls ; cd .. ; mkdir ruby ; ls
+
+cat java/java.script ada/ada.script clojure/clojure.script ruby/ruby.script > proj03-results

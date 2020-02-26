@@ -1,0 +1,319 @@
+Script started on 2020-02-06 14:57:13-0500
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ cat RectangleArea.
+cat: RectangleArea.: No such file or directory
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ cat RectangleArea.java 
+/* RectangleArea.java computes the area of a rectangle.
+ *
+ * Input: The width and height of a rectangle
+ * Precondition: Width/height are not negative numbers
+ * Output: The area of a rectangle
+ *
+ * Based off of CS214 Lab01 : Dr. Adams, for CS 214, at Calvin College.
+ * Completed by: Duncan Van Keulen 
+ * Date: 2-6-2020
+ **********************************************************/
+
+
+import java.util.Scanner;  // include class for Scanner
+
+public class RectangleArea {
+
+     /* function rectangleArea() computes a rectangle's area, given its height and width.
+      * Parameter: height, a double
+      * Parameter: width, a double
+      * Precondition: height/width is not negative
+      * Returns: the area of the rectangle
+      */
+     public static double rectangleArea(double height, double width) {
+        return height * width;              // return an expression
+     } // rectangleArea method
+	
+  // main program
+  public static void main(String[] args) {
+      // prompt for radius
+      System.out.println("\n\nTo compute the area of a rectangle,");
+      System.out.print(" enter its height: ");
+
+      // Create a connection named keyboard to standard in
+      Scanner keyboard = new Scanner(System.in);
+
+      //Get the height from the user
+      double height = keyboard.nextDouble();
+
+      System.out.print(" enter its width: ");
+      
+      //Get the width number from the user
+      double width = keyboard.nextDouble();
+
+      //Close the keyboard scanner (good practice)
+      keyboard.close();
+
+      // output area
+      System.out.println("\nThe area is " + rectangleArea(height, width) + "\n");
+  } // main method
+
+} // class RectangleArea]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ javac -deprecation RectangleArea.java 
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ java RectangleArea 
+
+
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 1
+
+The area is 2.0
+
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ java RectangleArea 
+
+
+To compute the area of a rectangle,
+ enter its height: 5.5
+ enter its width: 10.5
+
+The area is 57.75
+
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ java RectangleArea 
+
+
+To compute the area of a rectangle,
+ enter its height: .5
+ enter its width: 3
+
+The area is 1.5
+
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ java RectangleArea 
+
+
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 2 8.9999
+
+The area is 17.9998
+
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ Sweet!
+Sweet!: command not found
+]0;djv78@gold01: ~/214/projects/01/java[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/java[00m$ exit
+
+Script done on 2020-02-06 14:58:28-0500
+Script started on 2020-02-06 15:14:34-0500
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ cat rectangle_area.adb
+-- rectangle_area.adb computes the area of a rectangle.
+--
+-- Input: The height and width of a rectangle
+-- Output: The area of the rectangle.
+--
+-- Based off of CS214 Lab01 : Dr. Adams, for CS 214, at Calvin College.
+-- Completed by: Duncan Van Keulen 
+-- Date: 2-6-2020
+----------------------------------------------------
+
+with Ada.Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Float_Text_IO;
+
+procedure rectangle_area is
+
+   height, width, area : float; 
+
+   -- function rectangleArea computes a rectangle's area, given its height and width
+   -- Parameter: height, width: floats
+   -- Return: the area of the rectangle
+   ----------------------------------------------------
+   function rectangleArea(height: in float; width: in float) return float is 
+   begin
+      return height * width;
+   end rectangleArea;
+
+begin    
+   -- get input from the user                       
+   New_Line;
+   Put_Line("To compute the area of a rectangle,");
+   Put("enter its height: ");
+   Get(height);
+   Put("enter its width: ");
+   Get(width);
+
+   -- Calculate area using rectangleArea function
+   area := rectangleArea(height, width);
+
+   -- output
+   New_Line;
+   Put("The rectangle's area is ");
+   Put(area, 1, 15, 0);
+   New_Line; New_Line;  
+end rectangle_area;]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ gna[K[K[Kgnatmake -m cat rectangle_area.adbSweet![Kjava RectangleArea [19@c -deprecation RectangleArea.jav[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kjava RectangleArea [19@c -deprecation RectangleArea.jav[C[C[19P RectangleAre[C[C[1Pcat RectangleArea.java [15@javac -deprecation[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[19P RectangleAre[C[CSweet![Kcat rectangle_area.adb[10Pgnatmake -m rectangle_area.adb 
+gnatmake: "rectangle_area" up to date.
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ gnatmake -m rectangle_area.adb 
+gnatmake: "rectangle_area" up to date.
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ ./rectangle_area 
+
+To compute the area of a rectangle,
+enter its height: 2
+enter its width: 1
+
+The rectangle's area is 2.000000000000000
+
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ ./rectangle_area 
+
+To compute the area of a rectangle,
+enter its height: 5.5
+enter its width: 10.5
+
+The rectangle's area is 57.750000000000000
+
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ ./rectangle_area 
+
+To compute the area of a rectangle,
+enter its height: .5  
+enter its width: 3
+
+The rectangle's area is 1.500000000000000
+
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ ./rectangle_area 
+
+To compute the area of a rectangle,
+enter its height: 2
+enter its width: 8.9999
+
+The rectangle's area is 17.999799728393555
+
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ EPIC!!!
+EPIC./rectangle_area !
+bash: EPIC./rectangle_area: No such file or directory
+]0;djv78@gold01: ~/214/projects/01/ada[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ada[00m$ exit
+
+Script done on 2020-02-06 15:16:28-0500
+Script started on 2020-02-06 15:54:24-0500
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ cat src/rectangle_area.clj 
+;;;; rectangle_area.clj calculates the area of a rectangle.
+;;;;
+;;;; Input: The height and width of a rectangle.
+;;;; Output: The area of that rectangle.
+;;;;
+;;;; Usage: clojure -m rectangle_area
+;;;;
+;;;; Based off of CS214 Lab01 : Dr. Adams, for CS 214, at Calvin College.
+;;;; Completed by: Duncan Van Keulen 
+;;;; Date: 2-6-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns rectangle_area) ; namespace function names the program
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Function rectangleArea() computes the area of a rectangle.
+    ;;; Receive: itsHeight, itsWidth, a number.
+    ;;; Return: the area of the corresponding rectangle.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defn rectangleArea [itsHeight itsWidth]
+      (* itsWidth itsHeight )  ; return H*W
+    )
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Function -main is where execution begins
+    ;;; Input: the height and width of a rectangle.
+    ;;; Output: the area of that rectangle.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defn -main []
+        (println "\nTo compute the area of a rectangle,")
+
+        (print   " enter its height: ") (flush)
+        (let
+            ;; Read in the height
+            [ height (read) ]
+            (print " enter its width: ")
+            (flush)
+            (let
+                ;; Read in the width
+                [ width (read) ]
+                ;; Calculate and output the area
+                (print "The area of the rectangle is: ")
+                (println (rectangleArea height width))
+                (flush)
+            )
+        )
+    )  ]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ closure[K[K[K[Kjure -m t[Krectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 1
+The area of the rectangle is: 2
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 5.5
+ enter its width: 10.5
+The area of the rectangle is: 57.75
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 0.5
+ enter its width: 3
+The area of the rectangle is: 1.5
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 8.9999
+The area of the rectangle is: 17.9998
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ Whew!
+Whew!: command not found
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ exit
+
+Script done on 2020-02-06 15:55:23-0500
+Script started on 2020-02-06 16:02:45-0500
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ cat rectangle_area.rb 
+#! /usr/bin/ruby
+# rectangle_area.rb computes the area of a rectangle given its height and width
+# 
+# Input: the height and width of a rectangle
+# Output: the area of the rectangle.
+#
+# Based off of CS214 Lab01 : Dr. Adams, for CS 214, at Calvin College.
+# Completed by: Duncan Van Keulen 
+# Date: 2-6-2020
+###############################################################
+
+# function rectangleArea returns a rectangle's area, given its height and width
+# Parameters: height, width, numbers
+# Returns: the area of a rectangle with corresponding height and width.
+def rectangleArea(height, width)
+    height * width
+end
+
+if __FILE__ == $0
+   # Get info, compute and pring area
+   puts "To compute the area of a rectangle,"
+
+   print " enter its height: "
+   height = gets.chomp.to_f
+   print " enter its width: "
+
+   width = gets.chomp.to_f
+   print "The rectangle's area is: "
+   
+   puts rectangleArea(height, width)
+end]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ ruby rectangle_area.rb 
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 1
+The rectangle's area is: 2.0
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ ruby rectangle_area.rb 
+To compute the area of a rectangle,
+ enter its height: 5.5
+ enter its width: 10.5
+The rectangle's area is: 57.75
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ ruby rectangle_area.rb 
+To compute the area of a rectangle,
+ enter its height: .5
+ enter its width: 3
+The rectangle's area is: 1.5
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ ruby rectangle_area.rb 
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 8.9999
+The rectangle's area is: 17.9998
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ Cha-ching!
+Cha-ching!: command not found
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ Thanks grader (love you Hey[K[Kyeach[K[K[Kchan)[K)
+bash: syntax error near unexpected token `('
+]0;djv78@gold01: ~/214/projects/01/ruby[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/ruby[00m$ exit
+
+Script done on 2020-02-06 16:03:52-0500

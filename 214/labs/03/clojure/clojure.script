@@ -1,0 +1,126 @@
+Script started on 2020-02-20 14:12:22-0500
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ cat /sr[K[K[Ksrc/year_codes.clj 
+;;;; year_codes.clj is a driver for function yearCode.
+;;;;
+;;;; Input: An academic year, one of {freshman, sophomore,
+;;;;                                  junior, senior}.
+;;;; Output: The code for that academic year
+;;;;         (1, 2, 3, 4 for valid entries; 
+;;;;          0 for invalid entries).
+;;;;
+;;;; Usage: clojure -m year_codes
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Duncan Van Keulen
+;;;; Date: 2-20-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns year_codes)                    ; name the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; yearCode() returns the code for a given academic year.
+;;; Receive: year, a string.
+;;; Precondition: year is one of 
+;;;   {freshman, sophomore, junior or senior}.
+;;; Return: the integer code corresponding to year.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn yearCode [Year]
+   (if (= Year "freshman") 1 (
+      if (= Year "sophomore") 2 (
+         if (= Year "junior") 3 (
+            if (= Year "senior") 4 0
+            )
+         )
+      )
+   )  
+)
+
+;; solution using the cond function
+(defn yearCode2 [year]
+   (cond
+     (= year "freshman")  1
+     (= year "sophomore") 2
+     (= year "junior")    3
+     (= year "senior")    4
+     :else                0
+   )
+)
+
+;; solution using the case function
+(defn yearCode3 [year]
+   (case year
+     "freshman"  1
+     "sophomore" 2
+     "junior"    3
+     "senior"    4
+                 0 ; default
+   )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function -main() test-drives our yearCode() function.
+;;; Input: year: one of {freshman, sophomore, junior, or senior}.
+;;; Output: the code corresponding to year.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+ (print "\nEnter your academic year: ") (flush)
+ (let
+    [ year (read-line) ]                ; read year (a string)
+    (println " yearCode 1: " (yearCode year) "\n")      ; display code of yearCode 1 output
+    (println " yearCode 2: " (yearCode year) "\n")      ; display code of yearCode 2 output
+    (println " yearCode 3: " (yearCode year) "\n")      ; display code of yearCode 3 output
+
+
+ )
+)
+
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ cat src/year_codes.clj [Kclojure -m year_codes
+
+Enter your academic year: F freshman
+ yearCode 1:  1 
+
+ yearCode 2:  1 
+
+ yearCode 3:  1 
+
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ clojure -m year_codes
+
+Enter your academic year: sohp  phomore
+ yearCode 1:  2 
+
+ yearCode 2:  2 
+
+ yearCode 3:  2 
+
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ clojure -m year_codes
+
+Enter your academic year: junior
+ yearCode 1:  3 
+
+ yearCode 2:  3 
+
+ yearCode 3:  3 
+
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ clojure -m year_codes
+
+Enter your academic year: senior
+ yearCode 1:  4 
+
+ yearCode 2:  4 
+
+ yearCode 3:  4 
+
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ clojure -m year_codes
+
+Enter your academic year: blah blah
+ yearCode 1:  0 
+
+ yearCode 2:  0 
+
+ yearCode 3:  0 
+
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ ^C
+]0;djv78@gold24: ~/214/labs/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/clojure[00m$ exit
+
+Script done on 2020-02-20 14:13:21-0500

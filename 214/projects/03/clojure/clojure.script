@@ -1,0 +1,92 @@
+Script started on 2020-02-20 16:08:59-0500
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ cat s[Ksrc/average.clj 
+;;;; average.clj is a driver for function averageGrade.
+;;;;
+;;;; Input: An academic average score
+;;;; Output: The letter grade for that academic average
+;;;;         (100, 80, 50... for valid entries; 
+;;;;
+;;;; Usage: clojure -m average
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Duncan Van Keulen
+;;;; Date: 2-20-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns average)                    ; name the program
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; average() returns the code for a given academic average.
+    ;;; Receive: average, an integer.
+    ;;; Precondition: average is an integer
+    ;;; Return: the letter grade corresponding to the average.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    (defn average [avg]
+       (= avg (/ avg 10))
+       (cond
+         (>= avg 100)  "A"
+         (>= avg 90)   "A"
+         (>= avg 80)   "B"
+         (>= avg 70)   "C"
+         (>= avg 60)   "D"
+         :else       "F"
+       )
+    )
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Function -main() test-drives our average() function.
+    ;;; Input: average: an integer
+    ;;; Output: the letter grade corresponding to average.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defn -main []
+     (print "\nEnter your academic average: ") (flush)
+     (let
+        [ avg (read) ]                                           ; read average (an integer)
+        (println " Your letter grade: " (average avg) "\n")      ; display code of average's output
+     )
+    )
+    
+    ]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ cl[K[Kslojure -m [K[Kclojure -m average
+
+Enter your academic average: 100
+ Your letter grade:  A 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+10
+Enter your academic average: 65   5
+ Your letter grade:  F 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 105
+ Your letter grade:  A 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 95
+ Your letter grade:  A 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 80
+ Your letter grade:  B 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 70
+ Your letter grade:  C 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 60
+ Your letter grade:  D 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 55
+ Your letter grade:  F 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ exit
+
+Script done on 2020-02-20 16:10:06-0500

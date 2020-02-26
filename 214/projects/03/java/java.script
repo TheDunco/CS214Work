@@ -1,0 +1,95 @@
+Script started on 2020-02-20 15:08:46-0500
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ s[Kcat Average.java 
+/* Average.java implements a grade average function using a switch
+ * statement
+ *
+ * CS 214 Proj 03 by Duncan Van Keulen
+ * On 2-20-2020
+ ****************************************************************/
+
+import java.util.Scanner;
+
+public class Average {
+
+   public static void main(String[] args) {
+      Scanner keyboard = new Scanner(System.in);
+      System.out.println("\nEnter your average: "); // prompt for avg
+
+      // Make sure the user enters an integer
+      try {
+         int average = Integer.parseInt(keyboard.next()); // read avg
+         System.out.println(letterGrade(average)); // display letter grade
+      }
+      catch (Exception e) {
+         System.out.println("Error, you must enter an integer");
+         main(null);
+      }
+      
+   }
+   /***************************************************************
+    * yearCode() converts an academic year into its integer code.
+    *
+    * Receive: average, an int
+    * PRE: average (input) is an int
+    * Return: the letter grade corresponding to the entered average
+    */
+
+   public static char letterGrade(int average) {
+      switch (average / 10) {
+      case 10:
+      case 9:
+         return 'A';
+      case 8:
+         return 'B';
+      case 7:
+         return 'C';
+      case 6:
+         return 'D';
+      default:
+         return 'F';
+      }
+   }
+}
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ d[Kjavac -deprecation Average.java 
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ jva[K[Kava Average 
+
+Enter your average: 
+0
+F
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+bla   ah blah blah i d don't care
+Error, you must enter an integer
+
+Enter your average: 
+50
+F
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+60
+D
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+70
+C
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+80
+B
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+90
+A
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+100
+A
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ exit
+
+Script done on 2020-02-20 15:09:58-0500

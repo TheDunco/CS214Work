@@ -1,0 +1,67 @@
+Script started on 2020-02-20 15:49:13-0500
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ cat average.adb
+-- average.adb converts average scores to corresponding letter grades.
+--
+-- Duncan Van Keulen for Proj 03 on 2-20-2020
+--
+-- Input: average, an integer
+-- Precondition: average is an integer
+-- Output: The letter grade (A, B, C, D, F) corresponding to average.
+----------------------------------------------------
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure average is
+    grade : Integer;
+
+function grade_average(avg : in integer) return String is
+begin
+    case (avg / 10) is
+    when 10 | 9 => return "A";
+    when 8 => return "B";
+    when 7 => return "C";
+    when 6 => return "D";
+    when others => return "F";
+    end case;
+end grade_average;
+
+begin
+    Put("Enter your average: ");
+    Get(grade);
+    Put( grade_average(grade) );
+    New_Line;
+end average;]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ gnam[Ktmake average.adb 
+x86_64-linux-gnu-gcc-7 -c average.adb
+x86_64-linux-gnu-gnatbind-7 -x average.ali
+x86_64-linux-gnu-gnatlink-7 average.ali
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 100
+A
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 95
+A
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 80
+B
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 85
+B
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 70
+C
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 60
+D
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average 50
+Enter your average: 50
+F
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average 50[K[K
+Enter your average: 0
+F
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average 
+Enter your average: 15
+F
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ exit
+
+Script done on 2020-02-20 15:50:42-0500

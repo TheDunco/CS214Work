@@ -1,0 +1,77 @@
+Script started on 2020-02-06 15:54:24-0500
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ cat src/rectangle_area.clj 
+;;;; rectangle_area.clj calculates the area of a rectangle.
+;;;;
+;;;; Input: The height and width of a rectangle.
+;;;; Output: The area of that rectangle.
+;;;;
+;;;; Usage: clojure -m rectangle_area
+;;;;
+;;;; Based off of CS214 Lab01 : Dr. Adams, for CS 214, at Calvin College.
+;;;; Completed by: Duncan Van Keulen 
+;;;; Date: 2-6-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns rectangle_area) ; namespace function names the program
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Function rectangleArea() computes the area of a rectangle.
+    ;;; Receive: itsHeight, itsWidth, a number.
+    ;;; Return: the area of the corresponding rectangle.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defn rectangleArea [itsHeight itsWidth]
+      (* itsWidth itsHeight )  ; return H*W
+    )
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Function -main is where execution begins
+    ;;; Input: the height and width of a rectangle.
+    ;;; Output: the area of that rectangle.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defn -main []
+        (println "\nTo compute the area of a rectangle,")
+
+        (print   " enter its height: ") (flush)
+        (let
+            ;; Read in the height
+            [ height (read) ]
+            (print " enter its width: ")
+            (flush)
+            (let
+                ;; Read in the width
+                [ width (read) ]
+                ;; Calculate and output the area
+                (print "The area of the rectangle is: ")
+                (println (rectangleArea height width))
+                (flush)
+            )
+        )
+    )  ]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ closure[K[K[K[Kjure -m t[Krectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 1
+The area of the rectangle is: 2
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 5.5
+ enter its width: 10.5
+The area of the rectangle is: 57.75
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 0.5
+ enter its width: 3
+The area of the rectangle is: 1.5
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its height: 2
+ enter its width: 8.9999
+The area of the rectangle is: 17.9998
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ Whew!
+Whew!: command not found
+]0;djv78@gold01: ~/214/projects/01/clojure[01;32mdjv78@gold01[00m:[01;34m~/214/projects/01/clojure[00m$ exit
+
+Script done on 2020-02-06 15:55:23-0500

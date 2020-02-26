@@ -1,0 +1,115 @@
+---- Example 1 ----
+The lines (for me around 726 - 745) contian cases for the input that was 
+in the lex file. It seems to be using these labels to set up rules
+that the "grammar" knows. 
+
+----- Example 2 ----
+R2D2
+WORD
+
+12
+NUMBER
+
+test
+WORD
+
+_test
+_WORD
+
+_
+_
+
+2D2R
+NUMBER
+WORD
+
+1_ 
+NUMBER
+_
+_1
+_NUMBER
+
+When an underscore is uncluded, it outputs another underscore. underscore
+is not a character defined in the "grammar" or regular expression
+defining the "language" so the buffer doesn't recognize it as text and
+therefore once the buffer is dumped, invalid characters are still in there
+To include the underscore, you could do something like
+
+[_]*[a-zA-Z][a-zA-Z0-9]*    printf("WORD\n");
+
+This will allow 0 or more underscores at the beginning of a word. 
+You could do the same thing for numbers as well if you wanted
+
+---- Example 3 Output ----
+KEYWORD: class
+IDENTIFIER: StudentInfo
+PUNCTUATION: {
+KEYWORD: public
+PUNCTUATION: :
+IDENTIFIER: StudentInfo
+PUNCTUATION: (
+PUNCTUATION: )
+PUNCTUATION: {
+IDENTIFIER: myGPA
+OPERATOR: =
+DOUBLE: 0.0 (0)
+PUNCTUATION: ;
+IDENTIFIER: myHours
+OPERATOR: =
+INTEGER: 0 (0)
+PUNCTUATION: ;
+PUNCTUATION: }
+IDENTIFIER: StudentInfo
+PUNCTUATION: (
+KEYWORD: double
+IDENTIFIER: gpa
+PUNCTUATION: ,
+KEYWORD: int
+IDENTIFIER: hours
+PUNCTUATION: )
+PUNCTUATION: {
+IDENTIFIER: myGPA
+OPERATOR: =
+IDENTIFIER: gpa
+PUNCTUATION: ;
+IDENTIFIER: myHours
+OPERATOR: =
+IDENTIFIER: hours
+PUNCTUATION: ;
+PUNCTUATION: }
+KEYWORD: private
+PUNCTUATION: :
+KEYWORD: double
+IDENTIFIER: myGPA
+PUNCTUATION: ;
+KEYWORD: int
+IDENTIFIER: myHours
+PUNCTUATION: ;
+PUNCTUATION: }
+PUNCTUATION: ;
+
+---- Example 4 ----
+Study this grammar: What differentiates a terminal from a non-terminal? 
+
+A non-terminal is not fully defined and therefore needs to eventually
+be defined by terminals. By convention (I think) the terminals are all
+uppercase
+
+This heater grammar doesn't reject all invalid syntax; especially if
+it's between other valid syntax such as...
+
+heat a;lkjdflkasdjf on                       returns
+a;lkjdflkasdjf  Heat turned on or off
+
+But with valid syntax, it doens't specify whether it's acually on or off
+when it gives output feedback, aka...
+
+heat on
+        Heat turned on or off
+heat on
+        Heat turned on or off
+heat off
+        Heat turned on or off
+
+Also it doesn't set specific temperatures.
+

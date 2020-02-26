@@ -1,0 +1,57 @@
+Script started on 2020-02-20 14:33:29-0500
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ cat re[K[Kyear_codes.rb 
+#! /usr/bin/ruby
+# year_codes.rb translates an academic year into a numeric code
+# Begun by: Dr. Nelesen, for CS 214 at Calvin College 
+# Finished by: Duncan Van Keulen on 2-20-2020 for lab03
+################################################################
+
+# Input:  The name of an academic year
+# Precondition: The academic year is a string with a value of freshman, 
+#   sophomore, junior or senior
+# Output: The corresponding integer code for the given academic year
+
+def yearCode (year)
+   if year =~ /^freshman$/        # Match exatly to freshman
+         return 1
+      elsif year =~ /^sophomore$/ # Match exatly to sophomore
+         return 2 
+      elsif year =~ /^junior$/    # Match exatly to junior
+         return 3 
+      elsif year =~ /^senior$/    # Match exatly to senior
+         return 4 
+      else return 0
+   end
+end
+
+if __FILE__ == $0
+   print "Enter the year: "
+   year = gets
+   print "Numeric code is: "
+   puts yearCode(year)
+end
+
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: freshman
+Numeric code is: 1
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: sophomore
+Numeric code is: 2
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: junior
+Numeric code is: 3
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: senior
+Numeric code is: 4
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: supersenior
+Numeric code is: 0
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: noobyfree shman
+Numeric code is: 0
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ ruby year_codes.rb 
+Enter the year: blah blah blah
+Numeric code is: 0
+]0;djv78@gold24: ~/214/labs/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/labs/03/ruby[00m$ exit
+
+Script done on 2020-02-20 14:34:33-0500

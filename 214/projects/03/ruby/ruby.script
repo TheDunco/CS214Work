@@ -1,0 +1,64 @@
+Script started on 2020-02-20 16:26:03-0500
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ c[Ks[Kc[Kcat average.rb 
+#! /usr/bin/ruby
+# average.rb translates an academic average into a letter grade
+# Begun by: Dr. Nelesen, for CS 214 at Calvin College 
+# Finished by: Duncan Van Keulen on 2-20-2020 for lab03
+################################################################
+
+# Input:  Your average, an integer
+# Precondition: average is an integer
+# Output: The corresponding letter grade for the average
+
+def average(avg)
+    avg /= 10
+    case avg
+    when 10 then
+        'A'
+    when 9 then
+        'A'
+    when 8 then
+        'B'
+    when 7 then
+        'C'
+    when 6 then
+        'D'
+    else 'F'
+    end
+end
+ 
+ if __FILE__ == $0
+    print "Enter the average: " # Prompt for input
+    avg = gets                  # Get input
+    avg = avg.to_i              # Convet to integer
+    print "Your letter grade is: "
+    puts average(avg)           # Display output of average fn
+ end
+ 
+ ]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ rub [Ky average.rb 
+Enter the average: 100
+Your letter grade is: A
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 95
+Your letter grade is: A
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 90
+Your letter grade is: A
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 80
+Your letter grade is: B
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 0 70
+Your letter grade is: C
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 60
+Your letter grade is: D
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 50
+Your letter grade is: F
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 0 15
+Your letter grade is: F
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ exit
+
+Script done on 2020-02-20 16:26:42-0500

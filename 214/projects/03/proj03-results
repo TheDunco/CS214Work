@@ -1,0 +1,333 @@
+Script started on 2020-02-20 15:08:46-0500
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ s[Kcat Average.java 
+/* Average.java implements a grade average function using a switch
+ * statement
+ *
+ * CS 214 Proj 03 by Duncan Van Keulen
+ * On 2-20-2020
+ ****************************************************************/
+
+import java.util.Scanner;
+
+public class Average {
+
+   public static void main(String[] args) {
+      Scanner keyboard = new Scanner(System.in);
+      System.out.println("\nEnter your average: "); // prompt for avg
+
+      // Make sure the user enters an integer
+      try {
+         int average = Integer.parseInt(keyboard.next()); // read avg
+         System.out.println(letterGrade(average)); // display letter grade
+      }
+      catch (Exception e) {
+         System.out.println("Error, you must enter an integer");
+         main(null);
+      }
+      
+   }
+   /***************************************************************
+    * yearCode() converts an academic year into its integer code.
+    *
+    * Receive: average, an int
+    * PRE: average (input) is an int
+    * Return: the letter grade corresponding to the entered average
+    */
+
+   public static char letterGrade(int average) {
+      switch (average / 10) {
+      case 10:
+      case 9:
+         return 'A';
+      case 8:
+         return 'B';
+      case 7:
+         return 'C';
+      case 6:
+         return 'D';
+      default:
+         return 'F';
+      }
+   }
+}
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ d[Kjavac -deprecation Average.java 
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ jva[K[Kava Average 
+
+Enter your average: 
+0
+F
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+bla   ah blah blah i d don't care
+Error, you must enter an integer
+
+Enter your average: 
+50
+F
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+60
+D
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+70
+C
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+80
+B
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+90
+A
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ java Average 
+
+Enter your average: 
+100
+A
+]0;djv78@gold24: ~/214/projects/03/java[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/java[00m$ exit
+
+Script done on 2020-02-20 15:09:58-0500
+Script started on 2020-02-20 15:49:13-0500
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ cat average.adb
+-- average.adb converts average scores to corresponding letter grades.
+--
+-- Duncan Van Keulen for Proj 03 on 2-20-2020
+--
+-- Input: average, an integer
+-- Precondition: average is an integer
+-- Output: The letter grade (A, B, C, D, F) corresponding to average.
+----------------------------------------------------
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure average is
+    grade : Integer;
+
+function grade_average(avg : in integer) return String is
+begin
+    case (avg / 10) is
+    when 10 | 9 => return "A";
+    when 8 => return "B";
+    when 7 => return "C";
+    when 6 => return "D";
+    when others => return "F";
+    end case;
+end grade_average;
+
+begin
+    Put("Enter your average: ");
+    Get(grade);
+    Put( grade_average(grade) );
+    New_Line;
+end average;]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ gnam[Ktmake average.adb 
+x86_64-linux-gnu-gcc-7 -c average.adb
+x86_64-linux-gnu-gnatbind-7 -x average.ali
+x86_64-linux-gnu-gnatlink-7 average.ali
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 100
+A
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 95
+A
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 80
+B
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 85
+B
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 70
+C
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average
+Enter your average: 60
+D
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average 50
+Enter your average: 50
+F
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average 50[K[K
+Enter your average: 0
+F
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ ./average 
+Enter your average: 15
+F
+]0;djv78@gold24: ~/214/projects/03/ada[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ada[00m$ exit
+
+Script done on 2020-02-20 15:50:42-0500
+Script started on 2020-02-20 16:08:59-0500
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ cat s[Ksrc/average.clj 
+;;;; average.clj is a driver for function averageGrade.
+;;;;
+;;;; Input: An academic average score
+;;;; Output: The letter grade for that academic average
+;;;;         (100, 80, 50... for valid entries; 
+;;;;
+;;;; Usage: clojure -m average
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Duncan Van Keulen
+;;;; Date: 2-20-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns average)                    ; name the program
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; average() returns the code for a given academic average.
+    ;;; Receive: average, an integer.
+    ;;; Precondition: average is an integer
+    ;;; Return: the letter grade corresponding to the average.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    (defn average [avg]
+       (= avg (/ avg 10))
+       (cond
+         (>= avg 100)  "A"
+         (>= avg 90)   "A"
+         (>= avg 80)   "B"
+         (>= avg 70)   "C"
+         (>= avg 60)   "D"
+         :else       "F"
+       )
+    )
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Function -main() test-drives our average() function.
+    ;;; Input: average: an integer
+    ;;; Output: the letter grade corresponding to average.
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (defn -main []
+     (print "\nEnter your academic average: ") (flush)
+     (let
+        [ avg (read) ]                                           ; read average (an integer)
+        (println " Your letter grade: " (average avg) "\n")      ; display code of average's output
+     )
+    )
+    
+    ]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ cl[K[Kslojure -m [K[Kclojure -m average
+
+Enter your academic average: 100
+ Your letter grade:  A 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+10
+Enter your academic average: 65   5
+ Your letter grade:  F 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 105
+ Your letter grade:  A 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 95
+ Your letter grade:  A 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 80
+ Your letter grade:  B 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 70
+ Your letter grade:  C 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 60
+ Your letter grade:  D 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ clojure -m average
+
+Enter your academic average: 55
+ Your letter grade:  F 
+
+]0;djv78@gold24: ~/214/projects/03/clojure[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/clojure[00m$ exit
+
+Script done on 2020-02-20 16:10:06-0500
+Script started on 2020-02-20 16:26:03-0500
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ c[Ks[Kc[Kcat average.rb 
+#! /usr/bin/ruby
+# average.rb translates an academic average into a letter grade
+# Begun by: Dr. Nelesen, for CS 214 at Calvin College 
+# Finished by: Duncan Van Keulen on 2-20-2020 for lab03
+################################################################
+
+# Input:  Your average, an integer
+# Precondition: average is an integer
+# Output: The corresponding letter grade for the average
+
+def average(avg)
+    avg /= 10
+    case avg
+    when 10 then
+        'A'
+    when 9 then
+        'A'
+    when 8 then
+        'B'
+    when 7 then
+        'C'
+    when 6 then
+        'D'
+    else 'F'
+    end
+end
+ 
+ if __FILE__ == $0
+    print "Enter the average: " # Prompt for input
+    avg = gets                  # Get input
+    avg = avg.to_i              # Convet to integer
+    print "Your letter grade is: "
+    puts average(avg)           # Display output of average fn
+ end
+ 
+ ]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ rub [Ky average.rb 
+Enter the average: 100
+Your letter grade is: A
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 95
+Your letter grade is: A
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 90
+Your letter grade is: A
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 80
+Your letter grade is: B
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 0 70
+Your letter grade is: C
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 60
+Your letter grade is: D
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 50
+Your letter grade is: F
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ ruby average.rb 
+Enter the average: 0 15
+Your letter grade is: F
+]0;djv78@gold24: ~/214/projects/03/ruby[01;32mdjv78@gold24[00m:[01;34m~/214/projects/03/ruby[00m$ exit
+
+Figured I'd give you a break from the monotony of grading, enjoy this tasty treat
+       _.-.
+       ,'/ //\
+      /// // /)
+     /// // //|
+    /// // ///
+   /// // ///
+  (`: // ///
+   `;`: ///
+   / /:`:/
+  / /  `'
+ / /
+(_/  
+
+
+Script done on 2020-02-20 16:26:42-0500

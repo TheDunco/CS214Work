@@ -372,9 +372,15 @@ Smalltalk
 Smalltalk provides <2 pretest and 3 counting loop-messages>:
 
 <loop-expr> ::= <while-expr> | <times-expr> | <to-expr>
+<while-expr> ::= <block> <while-msg> <block>
+<while-msg> ::= whileTrue: | whileFalse:
 <times-expr> ::= <intExpr> timesRepeat: <block>
 <to-expr> ::= <numExpr> to: <numExpr> <opt-by> do: <block>
 <opt-by> ::= by: <numExpr> | ε
+
+
+
+
 
 
 
