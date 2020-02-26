@@ -117,7 +117,8 @@ expressions sequentially, much like other languages’ <block>:
 		(message "summation(n): n must be positive...")
 		0)
 	(/ (* (+ n 1) n) 2)))
-)))
+	
+	"
 The progn function returns the value of its <final expression>.
 Lisp also has sequential prog1 and prog2 functions, that
 return the values of the 1st and 2nd expressions, respectively.
@@ -226,6 +227,147 @@ Modula-2 and Ada replaced the error-prone elif keyword with elsif
 <Ada-if-stmt> ::= if <condition> then <stmt_list> <elsif_part> <opt_else-part> end if; (can exclude semicolon so every statment doesn't have to supply it)
 <elsif_part> ::= elsif <condition> then <stmt_list> <elsif_part> | ε
 <opt_else-part> ::= else <stmt_list> | ε
+
+
+Lisp’s 	if
+Lisp provides an <if function> as one if its expressions
+
+It is not unusual for a Lisp
+expression to end with ))))
+
+Lost In Silly Parentheses {[INSTALL RAINBOW MODE]}
+
+Selection in Smalltalk
+Smalltalk provides various <if True: and ifFalse: messages> that can be sent to <boolean objects>...
+
+<on board>
+Boolean Object 	if True: [block 1]
+True or False	if False: [block 2]
+
+<definately look at example on slides>
+Only four selection messages Smalltalk provides
+
+
+Problem: Non-Uniform execution
+
+The times to execute different branches are <different?>:
+•The 1st <stmt> executes after 1 comparison.
+•The nth and final <stmt> execute after <1> comparisons.
+The time to execute successive branches increases <linearly>.
+
+
+The Switch Statement
+
+The switch statement provides <uniform-time multibranching>.
+
+Note: If you neglect to supply
+break statements, control by
+default flows <sequentially>
+through the switch statement.
+The break is a <restricted-goto> statement...
+
+Uniform Execution time
+Compiled switch/case statements achieve uniform response
+time via a <jump table>, that stores the address of each branch.
+Simplified but gives the general idea
+
+<slides for assembly code>
+
+For non-default branches, a
+switch/case needs <2 compares (comp)>
+and <1 move (mov)> to find the branch. <(Never changes even if you have 100+ statments)>
+When a multibranch if does <three or more comparisons>,
+a switch is probably faster.
+A compiler spends <compile> time and space (to build the
+jump table) to decrease the
+average <run-time> time needed to
+find a branch.
+
+The Case Statement
+
+The switch is a descendent of the <case> statment (Algol-W).
+Only <C-family> languages use the switch syntax.
+
+Unlike the switch, a case
+statement <does not have drop-through> behavior.
+Most case stmts also let you use
+literal <lists> and <ranges>:
+
+BNF for Ada's case stmt.
+
+<Ada-case> ::= case <int-compatible-expression> of <when-clauses> <others-clause> end case; (again, semicolon optional)
+<when-clauses> ::= <when-clause> <more-clauses>
+<when-clause> ::= when <literals> => <stmt_list>
+<more-clauses> ::= <when-clause> <more-clauses> | ε
+<literals> ::= <literal-list> | <literal-range>
+<literal-list> ::= <literal> <more-literals>
+<more-literals> ::= , <literal> <more-literals> | ε
+<literal-range> ::= <literal> .. <literal>
+<others-clause> ::= when others => <stmt_list> | ε
+
+Lisp provices a <cond> function that looks similar to a <case>.
+<see slides for example and stuff>
+The predicates are evaluated <sequentially> until a true
+<predicate> is found; its <expr> is then evaluated.
+
+Repetition
+A third control structure is <repetition,> or looping. 
+
+The C++ <while> loop is a <pretest> or <test-at-the-top> loop:
+<while-stmt> ::= while ( <expr> ) <stmt>
+
+but the <do> loop is a <posttest> or <test-at-the-bottom> loop:
+<do-stmt> ::= do <stmt> while ( <expr> ) 
+
+<look at slides to clarify flow> 
+
+A pretest loop’s <stmt> is executed <0+> times (<zero trip behavior>).
+A posttest loop's <stmt> is executed <1+> (<one trip behavior>).
+
+
+Counting Loops
+
+Like most languages, C++ provides a <for> loop for counting:
+This provides unusual flexibility for an imperative language:
+<for-stmt> ::= for ( <opt-expr> ; <opt-expr> ; <opt-expr> ) <stmt> 
+
+This provides unusual flexibility for an imperative language: <see slides for examples>
+
+In most languages, the counting loop is a <pretest> loop.
+
+
+Unrestricted Loops
+
+Most modern languages also support an <unrestricted>.
+-Such loops have <no fixed exit point>.
+-All of the C/C++ loops can be made to behave this way:
+for (;;)	while (true)	do
+<stmt>		<stmt>			<stmt>
+							while (true);
+
+−The language usually provides a statement to exit such loops.
+−Unrestricted loops can be structured as <test-at-the-top>, <test-at-the-bottom>, or <test-in-the-middle> loops:
+
+- <stmt>1 executes <___> times;
+- <stmt>2 executes ____ times...
+
+
+Ada
+Ada provides ________, ________, and ___________ loops:
+
+Exercise: How would you build a BNF for Ada’s loops?
+
+<Ada-loop-stmt>::= _____________________________________________
+___________ ::= ___________________________________________
+____________ ::= _________________________
+___________ ::= ____________________________________
+____________ ::= ______________________________________________
+___________ ::= _______________________________
+What if you need a post-test loop, or to count by i != 1?
+
+
+
+
 
 
 
