@@ -1,0 +1,44 @@
+Script started on 2020-02-27 16:06:48-0500
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ cat a[Kfactorial.adb
+-- factorial.adb computes the factorial of a number.
+--
+-- Input: n, a positive real number
+-- Output: The factorial of n
+--
+-- Duncan Van Keulen on 2-27-2020
+--------------------------------------------------------------
+with Ada.Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Float_Text_IO;
+
+procedure factorial is
+
+    n, Count, Answer : Float;
+    begin
+        Put("Enter a number: ");
+        Get(n);
+
+        Count := n;
+        Answer := 1.0;
+        loop
+            exit when(Count = 0.0);
+            Answer := Answer * Count;   -- multiply the answer by count
+            Count := Count - 1.0;       -- decrement count
+        end loop;
+        Put(n); Put("! = ") ; Put(Answer);
+end;]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ make
+make: 'factorial' is up to date.
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ makecat factorial.adb[2Pjava Factorial cat factorial.adbmake[K[K./factorial 
+Enter a number: 2
+ 2.00000E+00! =  2.00000E+00
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ ./factorial 
+Enter a number: 3
+ 3.00000E+00! =  6.00000E+00
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ ./factorial 
+Enter a number: 5
+ 5.00000E+00! =  1.20000E+02
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ ./factorial 
+Enter a number: 6
+ 6.00000E+00! =  7.20000E+02
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ exit
+
+Script done on 2020-02-27 16:08:03-0500
