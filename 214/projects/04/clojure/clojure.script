@@ -1,0 +1,64 @@
+Script started on 2020-02-28 15:35:35-0500
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ cat /[Ksrc/factorial.clj 
+;;;; factorial displays the factorial of a number
+;;;;
+;;;; Input: n, a number
+;;;; Precondition: n is a positive number
+;;;; Output: The factorial of the input number
+;;;;
+;;;; By: Duncan Van Keulen
+;;;; Date: 2-27-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns factorial)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; factorial computes n!
+;;; Input: n, a positive number
+;;; Output: The factorial of that number to the console
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn factorial [n] 
+    ;; Loop, passing answer and count through
+    (loop [answer 1 count 2]
+        ;; (println answer count) ;; debugging
+
+        ;; When count > n, we have our answer
+        (if (> count n) (do 
+            (print n) (print "! = ")
+            (println answer) )
+        )
+        (when (<= count n)
+            ;; multiply answer by count and increment count when you pass through
+            (recur (* answer count) (inc count))
+        )   
+    )
+)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; -main is a 'driver' for the factorial function.
+;;; Input: n, a positive number
+;;; Output: The factorial of that number
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn -main [] 
+    ;; Get n
+    (print "Enter a number: ") (flush)
+    (let 
+        [ number (double (read))]
+        (factorial number)
+    )
+)]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+Enter a number: 2
+2.0! = 2
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+Enter a number: 3
+3.0! = 6
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+4Enter a number: 
+4.0! = 24
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+5Enter a number: 
+5.0! = 120
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ exit
+
+Script done on 2020-02-28 15:36:13-0500

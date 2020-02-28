@@ -1,0 +1,191 @@
+Script started on 2020-02-27 16:05:39-0500
+]0;djv78@gold07: ~/CS214Work/214/projects/04/java[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/java[00m$ cate[K Factorial.java
+/* Factorial.java outputs n! of the input number
+ *
+ * Input: double n
+ * Output: The factorial of the number
+ * Duncan Van Keulen on 2-27-2020
+ ********************************************************/
+import java.util.Scanner;
+
+class Factorial {
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        double n; double answer = 1.0;
+
+        n = keyboard.nextDouble();
+
+        // Loop from 2 to n, multiplying each time to calculate factorial
+        for(int i = 2; i <= n; i++) {
+            answer *= i;
+        } 
+        System.out.println(n + "! = " + answer);
+    }
+}]0;djv78@gold07: ~/CS214Work/214/projects/04/java[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/java[00m$ javac -deprecation Factorial.java [K[K[K[K[K[K.java
+]0;djv78@gold07: ~/CS214Work/214/projects/04/java[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/java[00m$ java a[KFactorial 
+Enter a number: 2
+2.0! = 2.0
+]0;djv78@gold07: ~/CS214Work/214/projects/04/java[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/java[00m$ java Factorial 
+Enter a number: 10  5
+5.0! = 120.0
+]0;djv78@gold07: ~/CS214Work/214/projects/04/java[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/java[00m$ java Factorial 
+Enter a number: 3
+3.0! = 6.0
+]0;djv78@gold07: ~/CS214Work/214/projects/04/java[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/java[00m$ exit
+
+Script done on 2020-02-27 16:06:36-0500
+Script started on 2020-02-27 16:06:48-0500
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ cat a[Kfactorial.adb
+-- factorial.adb computes the factorial of a number.
+--
+-- Input: n, a positive real number
+-- Output: The factorial of n
+--
+-- Duncan Van Keulen on 2-27-2020
+--------------------------------------------------------------
+with Ada.Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Float_Text_IO;
+
+procedure factorial is
+
+    n, Count, Answer : Float;
+    begin
+        Put("Enter a number: ");
+        Get(n);
+
+        Count := n;
+        Answer := 1.0;
+        loop
+            exit when(Count = 0.0);
+            Answer := Answer * Count;   -- multiply the answer by count
+            Count := Count - 1.0;       -- decrement count
+        end loop;
+        Put(n); Put("! = ") ; Put(Answer);
+end;]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ make
+make: 'factorial' is up to date.
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ makecat factorial.adb[2Pjava Factorial cat factorial.adbmake[K[K./factorial 
+Enter a number: 2
+ 2.00000E+00! =  2.00000E+00
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ ./factorial 
+Enter a number: 3
+ 3.00000E+00! =  6.00000E+00
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ ./factorial 
+Enter a number: 5
+ 5.00000E+00! =  1.20000E+02
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ ./factorial 
+Enter a number: 6
+ 6.00000E+00! =  7.20000E+02
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ada[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ada[00m$ exit
+
+Script done on 2020-02-27 16:08:03-0500
+Script started on 2020-02-28 15:35:35-0500
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ cat /[Ksrc/factorial.clj 
+;;;; factorial displays the factorial of a number
+;;;;
+;;;; Input: n, a number
+;;;; Precondition: n is a positive number
+;;;; Output: The factorial of the input number
+;;;;
+;;;; By: Duncan Van Keulen
+;;;; Date: 2-27-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns factorial)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; factorial computes n!
+;;; Input: n, a positive number
+;;; Output: The factorial of that number to the console
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn factorial [n] 
+    ;; Loop, passing answer and count through
+    (loop [answer 1 count 2]
+        ;; (println answer count) ;; debugging
+
+        ;; When count > n, we have our answer
+        (if (> count n) (do 
+            (print n) (print "! = ")
+            (println answer) )
+        )
+        (when (<= count n)
+            ;; multiply answer by count and increment count when you pass through
+            (recur (* answer count) (inc count))
+        )   
+    )
+)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; -main is a 'driver' for the factorial function.
+;;; Input: n, a positive number
+;;; Output: The factorial of that number
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn -main [] 
+    ;; Get n
+    (print "Enter a number: ") (flush)
+    (let 
+        [ number (double (read))]
+        (factorial number)
+    )
+)]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+Enter a number: 2
+2.0! = 2
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+Enter a number: 3
+3.0! = 6
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+4Enter a number: 
+4.0! = 24
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ clojure -m factorial
+5Enter a number: 
+5.0! = 120
+]0;djv78@gold24: ~/CS214Work/214/projects/04/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/04/clojure[00m$ exit
+
+Script done on 2020-02-28 15:36:13-0500
+Script started on 2020-02-27 16:46:24-0500
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ruby[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ruby[00m$ cat factorial.rb 
+#! /usr/bin/ruby
+# factorial.rb displays the factorial of the input number
+#
+# By: Duncan Van Keulen on 2-27-2020
+#
+# Input: n, a number
+# Precondition: n is positive
+# Output: the factorial of n
+
+
+if __FILE__ == $0
+    # Get an integer input for each variable
+    print "Enter a number n: "
+    n = gets.chomp.to_f 
+    i = 2
+    answer = 1
+
+    while (i <= n)
+        answer = answer*i   # multiply to compute factorial
+        i = i + 1           # increment i
+    end
+
+    puts("#{n}! = #{answer}") # output result
+ 
+ end]0;djv78@gold07: ~/CS214Work/214/projects/04/ruby[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ruby[00m$ ruby factorial.rb 
+Enter a number n: 2
+2.0! = 2
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ruby[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ruby[00m$ ruby factorial.rb 
+Enter a number n: 3
+3.0! = 6
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ruby[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ruby[00m$ ruby factorial.rb 
+Enter a number n: 5
+5.0! = 120
+]0;djv78@gold07: ~/CS214Work/214/projects/04/ruby[01;32mdjv78@gold07[00m:[01;34m~/CS214Work/214/projects/04/ruby[00m$ exit
+
+Thanks for the hard work grading, enjoy this ascii sleeping cat as a reward!
+
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_) 
+
+
+Script done on 2020-02-27 16:47:47-0500
