@@ -30,7 +30,7 @@
             (recur (* answer count) (inc count))
         )   
     )
-
+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; -main is a 'driver' for the factorial function.
 ;;; Input: n, a positive number
