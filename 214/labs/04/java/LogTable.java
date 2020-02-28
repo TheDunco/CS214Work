@@ -20,7 +20,6 @@ class LogTable{
     stop = keyboard.nextDouble();
     increment = keyboard.nextDouble();
 
-    //Replace this line with a while loop to generate the table of logs
     for(double i = start; i <= stop; i += increment) {
       // print out the logarithm in a readable format
       System.out.println("The logarithm of " + i + " is " + java.lang.Math.log10(i));

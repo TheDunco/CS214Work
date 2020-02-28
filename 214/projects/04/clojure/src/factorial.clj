@@ -16,16 +16,16 @@
 ;;; Output: The factorial of that number to the console
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn factorial [n] 
-    (def answer 1)
-    (loop [count 2]
-        (when (<= count n)
-            (= answer (* answer count))
-            (println answer count)
-            (recur (+ count 1))
+    (loop [answer 1 count 2]
+        (println answer count)
+        (if (> count n) (do 
+            (print n) (print "! = ")
+            (println answer) )
         )
+        (when (<= count n)
+            (recur (* answer count) (inc count))
+        )   
     )
-    (print n) (print "! = ")
-    (println answer)
 )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; -main is a 'driver' for the factorial function.
@@ -40,6 +40,6 @@
     (let 
         [ number (double (read))]
     )
-    (factorial number)
+    (factorial 5)
 
 )
