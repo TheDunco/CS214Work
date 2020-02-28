@@ -16,14 +16,12 @@
 ;;; Output: The factorial of that number to the console
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn factorial [n] 
-    (def answer 1)
+    (def ^:dynamic answer 1)
     (loop [count 2]
-        (when (<= count n)
-            (= answer (* answer count))
-            (println answer count)
-            (recur (+ count 1))
-        )
-    )
+      when ((<= count n)
+        (* answer count)
+        (println answer count)
+        (recur (+ count 1))))
     (print n) (print "! = ")
     (println answer)
 )
