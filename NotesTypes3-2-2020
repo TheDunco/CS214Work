@@ -1,0 +1,130 @@
+<https://cs.calvin.edu/courses/cs/214/adams/pdfs/N03.Types-I-Color.pdf>
+
+Types:{ 
+    A <type> is a <set V of values, and a set O of operations onto V.>
+
+    Ex. C++
+    •The <int> type:
+    V = {INT_MIN, ... -1, 0, 1, ..., INT_MAX-1, INT_MAX}
+    O = {<<, >>, +, -, *, /, %, =, ++, --, ...}
+
+    •The <char> type:
+    V = {NUL, ..., '0', …, '9', …, 'A', ..., 'Z', ..., ‘a', ..., 'z', DEL}
+    O = {<<, >>, =, ++, --, isupper(), islower(), toupper(), … }
+
+    •The <string> type:
+    V = {"", "A", "B", "C", ..., "AA", "AB", "AC", ..., "AAA", ...}
+    O = {<<, >>, +, +=, [], find(), substr(), … }
+
+    [Main point]: Types have data and operations you can perform on that type
+}
+
+Fundamental Types:{
+
+    [Better on slides]
+    Name          V    C++   Ada   Smalltalk Lisp
+    <bool> false, true bool boolean Boolean boole
+    <char> the set of chars char character Character character
+    <int> the integers int integer Integer integer
+    <real> the reals double float Float real
+
+    Given these, new types can be created via <type constructors>.
+
+    Each constructor has 3 components: 
+    − The syntax used to denote that constructor;
+    − The set of elements produced by that constructor; and 
+    − The operations associated with that constructor. 
+}
+
+Set Constructor I: <Product>:{
+    The product constructor is the basis for <A x B>. [A cross B]
+    
+    -A×B consists of all ordered pairs (a, b): a ∈ A, b ∈ B.
+    -A×B×C consists of all ordered triples (a, b, c): a ∈ A, b ∈ B , c ∈ C.
+    -A×B× … ×N consists of all ordered n-tuples (a, b, …, n): a ∈ A, b ∈ B , …, n ∈ N.
+
+    Example: the set <bool x char> has 256 elements:
+    { …, (true, 'A'), (false, 'A'), (true, 'B'), (false, 'B'), …, }.
+
+    − Operations associated with product are the <projection> operations:
+     first, applied to an n-tuple (s1, s2, …, sn) returns <S1>.
+     second, applied to an n-tuple (s1, s2, …, sn) returns <S2>.
+     nth, applied to an n-tuple (s1, s2, …, sn) returns <Sn>.
+}
+
+Product Example: C++ structs:{
+    [Look at slides for graphic]
+    Formally, a student consists of int x real x char.
+
+    Formally, a particular Student:
+    aStudent.id = 12345;
+    aStudent.gpa = 3.75;
+    aStudent.gender = 'F';
+
+    [Product is a meta language description, struct is just the C family realization of that primitive]
+
+    is the 3-tuple: <(12345, 3.75, 'F')>.
+
+    The C++ <"dot operator"> is a projection operation:
+        cout << aStudent.id // extract id
+            << aStudent.gpa // extract gpa
+            << aStudent.gender // extract gender
+            << endl;
+    [How the first, second, nth is implemented in C++]
+}
+
+Set Constructor II: <Function>:{
+    The function constructor is the basis for <subprograms>.
+
+    − The set of all functions from a set A to a set B is denoted <(A) -> B>.  [A maps to B]
+    − A particular function f mapping A to B is denoted <f(A) -> B>.  [Think prototypes in C++]
+
+    Examples:
+    − The set (char) → bool contains all functions that map char values into
+    bool values, some C examples of which include: 
+    isupper('A') -> true        islower('A') -> false
+    isalpha('A') -> true        isdigit('A') -> false
+    isa1num('A') -> true        isspace('A') -> false
+
+    − The set (char) → char contains all functions that map char values into
+    char values, some C examples of which include: 
+    tolower('A') -> 'a'     toupper('a') -> 'A'
+}
+
+Function and Product:{[combining things]
+
+    What does this set contain? (int × int) → int
+    - All functions that map paris of integers into an integer
+    [+,-,*,/]
+    <
+        +((2,3)) -> 5       -((2,3)) -> -1
+        *((2,3)) -> 6       /((2,3)) -> 0
+    >
+
+    Suppose we define an
+    aggregate named IntPair: [see slides]
+
+    add() is a member of the set: <(int x int) -> int>
+    − The function constructor let us create <new operations for a type>. 
+    [Can create new types beyond primitives and expand the language using this]
+}
+
+Function Arity:{
+    Product serves to denote an aggregate or an argument-list.
+    What does this set contain? (int × int) → bool
+
+    -All functions that map <pairs of integers into a boolean>
+    <[==, !=, <, >, <=, >=]>
+
+    Definition: 
+    The number of operands an operation requires is its <arity>.
+    − Operations with 1 operand are <unary> operations, with arity-1
+    − Operations with 2 operands are <binary> operations, with arity-2.
+    − Operations with 3 operand are <ternary> operations, with arity-3.
+    - ...
+
+}
+
+
+
+
