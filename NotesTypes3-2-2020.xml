@@ -92,7 +92,6 @@ Set Constructor II: <Function>:{
 }
 
 Function and Product:{[combining things]
-
     What does this set contain? (int × int) → int
     - All functions that map paris of integers into an integer
     [+,-,*,/]
@@ -122,9 +121,66 @@ Function Arity:{
     − Operations with 2 operands are <binary> operations, with arity-2.
     − Operations with 3 operand are <ternary> operations, with arity-3.
     - ...
+}
+
+Example Ternary Operaiton:{
+    [See expression stuff on slides!]
+    The C/C++ conditional expression is a ternary operation,
+    which in this case is a member of the set:
+    <?:(bool x int x int) -> int>
+    
+    [Board ex.
+    cout << "There" << is-vs-are << numItems << "item" << "s?"
+    cout << "there" << (numItems ==1)? "is" : "are"
+    << numItems
+    << "item"
+    << (numItems == 1)? "" : "s"
+    ]
 
 }
 
+
+Operator Positioning:{
+    Operators are also categorized by their
+    position relative to their operands:
+    − <Infix> operators appear between their operands:1 + 2 
+    − <Prefix> operators appear before their operands: + 1 2 
+    − <Postfix> operators appear after their operands: 1 2 + 
+    <* + 2 3 - 4 2 ≡ (2+3) * (4-2) ≡ - 2 3 + 4 2 - *>
+
+    Prefix, infix, and postfix notation are different conventions
+    for the same thing; a language may choose any of them:
+    
+    [Look at slides, this will help with table completion]
+    x<y <binary, infix>     (<xy) <binary, prefix>
+    ++x <unary, prefix>     (inc x) <unary, prefix>
+    11+12 <binary, infix>   (+ 11 12) <unary, prefix>
+    !flag <unary, prefix>   (not flag) <unary, prefix>
+    cout << x <binary, infix>   (princ x str) <binary, prefix>
+    x++ <unary, postfix>    None
+}
+
+Set Constructor III: Kleene Closure:{
+    Kleene Closure is the basis for representing <sequences>. 
+    − The Kleene Closure of a set A is denoted <A*>.
+    − The Kleene Closure of a set is the set of all tuples that can be formed using elements of that set.
+
+    Example: The Kleene Closure of bool -- bool* -- is the infinite set:
+    { (), (false), (true), (false, false), (false, true), (true, false), (true, true), (false, false false)...}
+
+    − For a tuple t ∈ A*, the operations include
+null(A*) → bool 
+    null(()) → <true> 
+    null((false)) → <false> 
+    null((true)) → <false> 
+    first((true, false)) → <true> 
+first(A*) → A    
+    first((false, true)) → <false> 
+rest(A*) → A*
+    rest((true, true, false)) → <(true, false)> 
+    rest((false, true, true)) → <(true, true)> [beheaded] 
+
+}
 
 
 
