@@ -249,3 +249,20 @@ Practice Using Constructors:{
         x (int x string x bool x real) 
 }
 
+Sumary:{
+    A type conists of <data> and <operations>
+
+    The set constructors:
+    - <product>,
+    - <function>,
+    - <Kleene closure>
+    provide a formal way to represent types:
+
+    → Use the product and Kleene closure to represent the <data>;
+    → Use the function constructor to represent the <operations> on the type.
+
+    [The key is that these things are language independant, can compare
+    the languages capabilities in a way that's independant of either of them;
+    mathematical "syntax" that sits above any particular language]
+}
+
