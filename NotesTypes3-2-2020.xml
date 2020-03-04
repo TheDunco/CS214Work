@@ -178,9 +178,74 @@ first(A*) → A
     first((false, true)) → <false> 
 rest(A*) → A*
     rest((true, true, false)) → <(true, false)> 
-    rest((false, true, true)) → <(true, true)> [beheaded] 
+    rest((false, true, true)) → <(true, true)> [beheaded, all of the sequence except the first thing] 
 
 }
 
+Kleene Closure Examples:{
+    If char is the set of ASCII characters, what is char* ?
+    − The infinite set of <all tuples formed from ASCII characters>. (AKA the set of all <strings>).
 
+    The C/C++ notation "Hello" is just the syntax for ('H', 'e', 'l', 'l', 'o',)
+
+    Thus, int* denotes a sequence (array, list, …) of <integers>;
+        int intStaticArray[32];
+        int * intDynamicArray = new int[n],
+        vector<int> intVec;
+        list<int> intList;
+        [The key is that these things are ordered]
+    real* denotes a sequence (array, list, …) of <reals>;
+        and so on.
+}
+
+Sequence Operations:{
+    [All on slides]
+
+    In Lisp:
+    - First is called <car>
+    - Rest is called <cdr>
+}
+
+Practice Using Constructors:{
+    Formal description for the logical and operation:
+    <Takes 2 operands
+    - Uses bool, bool operands
+    - Produces a bool
+    - Therefore is a member of (bool x bool) -> bool>
+
+    The C++/STL substring operation(str.substr(i,n))
+    <Takes 3 parameters (this, i, n)
+    - Types are string (char*), int, int
+    - Produces a string (char*)
+    - Therefore is a member of (string x int x int) -> string>
+
+    For you: The logical negation operation (!):
+    - Member of (bool) -> bool
+
+    This [on slides] C++ record:
+    - Represent agregate types with a product (*)
+    - [student can be though of as an element of this set] 
+    - Answer: (int x string x bool x real)
+
+    An accessor method:
+    - Member of (Student) -> int
+
+    How does this affect our Student description?:
+    - Student (element of) int x ((Student -> int) x int x string x bool x real)
+
+    A "complete" class:
+    [CLASS]
+    Student (elemnt of) 
+        [OPERATIONS]
+        () -> Student
+        x (int x string x bool x real) -> Student
+        x (Student) -> int
+        x (Student) -> string
+        x (Student) -> bool
+        x (Student) -> real
+        x (Student x istream&) -> (null)
+        x (Student x ostream&) -> (null)
+        [DATA]
+        x (int x string x bool x real) 
+}
 
