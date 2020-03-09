@@ -1,56 +1,71 @@
 -- roots.adb calculates quadratic roots.
 --
--- Input: 
+-- Input: A, B, C : floats corresponding to A, B, C in quadratic equation
 --        
--- Precondition: 
--- Output: 
+-- Precondition: A is positive, b^2 - 4 * a * c is positive
+-- Output: root1, root2 : floats, the roots fo the quadratic function
 --
 -- By: Duncan Van Keulen
--- Date: 3-6-2020
+-- Date: 3-9-2020
 --------------------------------------------------------------
 
-with Ada.Float_Text_IO; Ada.Text_IO; Ada.Numerics.Generic_Elementary_Functions;
-use Ada.Float_Text_IO; Ada.Text_IO; Ada.Numerics.Generic_Elementary_Functions;
+with Ada.Float_Text_IO, Ada.Text_IO, Ada.Numerics.Generic_Complex_Elementary_Functions,
+    Ada.Numerics.Elementary_Functions, Ada.Strings.Fixed;
+use Ada.Float_Text_IO, Ada.Text_IO, Ada.Strings.Fixed;
 
 procedure roots is
 
-    A, B, C, root1, root2 : Float;
+    A, B, C, root1, root2 : Float := 0.0;
 
 ------------------------------------------------
---  split() splits a string in two.           
--- Receive: The_String, the string to be split,
---          Position, the split index.        
--- PRE: 0 < Position <= The_String.length(). 
+--  get_roots gets the roots of a quadratic equation.           
+-- Receive: A, B, C, corresponding to quadratic equation values of the function        
+-- PRE: A != 0, A^2 - 4AC > 0
 --     (Ada arrays are 1-relative by default)
--- Passback: First_Part - the first substring,
---           Last_Part - the second substring.
+-- Passback: root1 - the first root,
+--           root2 - the second root.
 ------------------------------------------------
-procedure roots(A : in Float; B : in Float; C : in Float; root1 : out Float; root2 : out Float ) is
+function get_roots(A : in Float; B : in Float; C : in Float; root1 : out Float; root2 : out Float) return Boolean is
+arg : Float;
 begin
-    Put("Got'eem");
+    if (A /= 0.0) then 
+        -- calculate the discriminant
+        arg := ((B ** 2) - (4.0 * A * C));
+        -- make sure A is positive
+        if (arg >= 0.0) then
+            root1 := (-b + (Ada.Numerics.Elementary_Functions.Sqrt(arg)))/(2.0*a);
+            root2 := (-b - (Ada.Numerics.Elementary_Functions.Sqrt(arg)))/(2.0*a);
+            return true;
 
-end roots;
+        else  -- discriminant is zero
+            Put_Line("get_roots failed: b^2 - 4ac is negative!");
+            root1 := 0.0; root2 := 0.0;
+            return false;
+        end if;
+    else -- A is < zero
+        Put_Line("get_roots failed: a is zero!");
+        root1 := 0.0; root2 := 0.0;
+        return false;
+    end if;
+end get_roots;
 
 begin
     -- Get inputs of a, b, and c
-    Put("To get the roots of a quadratic function...\nEnter a: ");
+    Put_Line("To get the roots of a quadratic function...");
+    Put("Enter a: ");
     Get(A);
-    Put("\nEnter b: ");
+    Put("Enter b: ");
     Get(B);
-    Put("\nEnter c: ");
+    Put("Enter c: ");
     Get(C);
 
-    roots(A, B, C, root1, root2);
+    if (get_roots(A, B, C, root1, root2) = true) then
 
-    Put("The roots are: ");
-    Put(root1);
-    Put(" and ");
-    Put(root2);
+        Put("The roots are: ");
+        Put(root1);
+        Put(" and ");
+        Put(root2);
+
+    end if;
 
 end roots;
-
-
-
-
-
-
