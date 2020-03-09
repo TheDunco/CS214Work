@@ -1,0 +1,183 @@
+<https://cs.calvin.edu/courses/cs/214/adams/pdfs/N04.Subprograms-Color.pdf>
+
+[This material will not be on the midterm - but it will be on the final]
+
+Categorizing functions: {
+    Recall: The function set constructor: f(D) → R
+    can be used to describe the operations in a language.
+    This approach categorizes functions <domain (D)>, and <range (R)>.
+
+    Example: C++ lets us use function notation to cast…
+    int( real ) → int
+    double( int ) → real
+
+    But if we write a round() function:
+    int round( double value) { return int(value + 0.5); }  
+    
+    then round() is also a member of: <(real) -> int> 
+    and int() and round() obviously behave very differently...
+}
+
+Functions as: Mapping Rules: {
+    The function constructor defines a function’s <specification>
+    (i.e., it’s domain- and range-sets), but not its <behavior>
+
+    (i.e., indicate the domain-to-range element mappings).
+
+    Behavior can be defined via a domain-to-range mapping rule:
+    Example: In C++, we can specify that: abs( int ) → int
+    but to define the behavior of abs(), we need a rule:
+
+    abs(v) = {v, if v >= 0;
+            -v otherwise}
+            
+    A mapping rule must specify the range-value for each domain-value for which the funciton is defined.
+}
+
+Functions as: Algorithms: {
+    •the function’s <name> An alternative way to specify behavior is to specify:
+    •the function’s <parameters> 
+    •a <rule> for computing the result, using the parameters.
+
+    [See slides for Ada, Lisp, Smalltalk examples]
+
+    Some like to view a HLL as a <syntax for writing [expressing] algoritms>
+}
+
+Functions and Operators: {
+    Most functions can be defined as operators, and vice versa.
+    Example: Ada provides an exponentiation operator <**> where C++ provides an exponentiation function <pow()>.
+    So a 3rd-order polynomial can be expressed in C++ as
+
+    y = a * pow(x, 3) + b * pow(x, 2) + c * x + d;
+
+    Or in Ada...
+    y = a * x ** 3 + b * x ** 2 + c * x + d;
+
+    Superficially, functions and operators are equivalent:
+    - The <argumetns> of a function ≡ the <operands> of an operator.
+    - A function can be thought of as a <prefix operator>.
+}
+
+Functions as: Abstractions: {
+    Others prefer to view functions as an abstraction mechanism:
+    - the ability to <hide algorithm details behind a name>...
+    
+    Example: If a library provides a summation() function,
+    it might use any of these algorithms:
+
+    [See slides for iterative, recursive, and Gauss' formula examples]
+
+    The name summation() is an
+    abstraction that hides the details
+    of the particular algorithm it uses.
+}
+
+Functions as: Subprograms: {
+    [Algol family]
+    Imperative HLLs divide functions into two categories: 
+    − <Procedures>: subprograms that map: (P1 × P2 × ... × Pn) → ∅  [subprogram that returns nothing]
+    − <Functions>: subprograms that map: (P1 × P2 × ... × Pn) → R ≠ ∅
+
+    [See slides for standard names in different languages]
+
+    We will describe subprograms mapping (D) → R as functions, 
+    and describe subprograms mapping (D) → ∅ as procedures. 
+}
+
+Functions as: Messages: {
+    OO languages view functions as <messages to objects>.
+    The receiver of a message executes its <corresponding method>.
+        − The result is controlled by the <receiver>, not the sender.
+
+    Different OO languages use different syntax for messages...
+    Example: To find the length of anArray, we send it a message:
+    // C++
+    anArray->length()
+    // Java
+    anArray.length
+    // Smalltalk
+    anArray size
+
+    Messages are something like <postfix opearations>...
+}
+
+Subprogram Mechanisms: {
+    To have a subprogram mechanism, a language must provide: 
+    − A means of <defining> the subprogram (specifying its behavior); 
+    − A means of <calling> the subprogram (or activating it).
+
+    In programming languages, to define a thing is to: 
+    − <allocate storage for that thing>; and 
+    − <bind the things name to the address of that storage>.
+
+    Example: This is a C++
+    subprogram definition [on slides] because it:
+    (i) reserves storage (for the function’s code); and
+    (ii) binds the name summation to the first address in that storage.
+}
+
+Definitions vs. Declarations: {
+    Where a definition binds a name to storage, 
+    a <declaration> binds a name to a <type-constructor>.
+
+    Example: This is a C++ declaration: [int summation (int n);]
+    because it tells the compiler this about summation:
+        summation(int) -> int
+    allowing the compiler to type-check calls to the functions
+
+    For a variable, declaration and definition are <the same>... 
+    [int result;] [Declaring while also reserving storage]
+    This statement reserves a word of memory, and binds the name result to the address of that word.
+
+    For subprograms, declaration and definition <can be separated>.
+}
+
+C/C++ Family Pointers: {
+    Implication of a function definition:
+    a C/C++ function’s name is a <pointer to the starting address of the function>.
+
+    [Pls see slides for examples and stuff]
+    [typedef int* fptr(int) is a type that can store the address of a function]
+    [similar to polymorphism]
+
+    Classes use a similar table for <virtual/polymorphic functions>.
+}
+
+
+Subprogram definitions: {
+    To allocate a subprogram’s storage, 4 items are needed:
+    1. Its <parameters types> (data storage for values sent by the caller);
+    2. Its <return-type> (data storage for the return value);
+    3. Its <locals> (data storage for local variables); and
+    4. Its <body> or statements (executable code storage).
+
+    These are all provided by a subprogram’s definition.
+    By contrast, a subprogram’s declaration requires only:
+
+    1. Its <paraeters types> (i.e., its domain-set D); and
+    2. Its <pareturn type> (i.e., its range-set R)
+    This <function signature>: f(D) → R
+
+    lets the compiler check calls to the function for correctness.
+}
+
+Imperative Examples: {
+    Consider these imperative funciton definitions
+    [See slides!]
+
+    In each case, we have: <swap( int& x int& ) -> null> 
+
+    This allows the compiler to check that in calls: swap(x, y);
+    the arguments x and y are compatible with the parameters.
+}
+
+Subprograms: Lisp and Smalltalk: {
+    
+}
+
+
+
+
+
+
