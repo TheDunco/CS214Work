@@ -1,0 +1,106 @@
+Script started on 2020-03-09 21:09:10-0400
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ cat roots.rb
+# roots.rb calculates the roots of a quadratic function
+#
+# Input: a, b, c: doubles representing a, b, and c in the quadratic formula.
+# Precondition: a != 0, b^2 - 4ac not negative.
+# Output: the roots of the quadratic function
+#
+# By: Duncan Van Keulen
+# Date: 3-9-2020
+#################################################################
+
+
+# roots() calculates the roots of a quadratic function.
+# Receive: a, b, c doubles representing a, b, and c of quadratic formula          
+# PRE: a != 0, b^2 - 4ac not negative.
+# Return: the roots of the quadratic function in a vector along with a bool
+#         indicating if it succeeded
+######################################################
+
+def roots(a, b, c)
+    # Make sure a is not 0
+    if (a != 0) then
+        # Calculate the discriminant
+        arg = b**2 - 4 * a * c
+
+        # If discriminant is not negative
+        if (arg >= 0) then
+            # Calculate the roots
+            root1 = (-b + Math.sqrt(arg))/(2*a)
+            root2 = (-b - Math.sqrt(arg))/(2*a)
+            # Return an array indicating 
+            return Array[root1, root2, true]
+        
+        # Discriminant is negative
+        else 
+            puts "Error: roots(): b^2 - 4ac is negative!"
+            root1 = root2 = 0
+            return Array[0, 0, false]
+        end
+    # a is 0
+    else
+        puts "Error: roots(): a is zero!"
+        root1 = root2 = 0
+        return Array[0, 0, false]
+    end
+end
+
+def main
+    # Get a
+    print "To calculate the roots of a quadratic,\nEnter a: "
+    a = gets.to_f
+
+    # Get b
+    print "Enter b: "
+    b = gets.to_f
+
+    # Get c
+    print "Enter c: "
+    c = gets.to_f
+
+    # Get the roots
+    result = roots(a, b, c)
+
+    # If it suceeded, print out the formatted results
+    if result[2] == true then
+        puts "The roots are %0.5f and %0.5f" % [result[0], result[1]]
+    end
+end
+
+main
+
+
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 2
+Enter b: 2
+Enter c: 2
+Error: roots(): b^2 - 4ac is negative!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 0
+Enter b: 2
+Enter c: 2
+Error: roots(): a is zero!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 1
+Enter b: 4
+Enter c: 4
+The roots are -2.00000 and -2.00000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 1
+Enter b: 8
+Enter c: 8
+The roots are -1.17157 and -6.82843
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 1
+Enter b: -5
+Enter c: 6
+The roots are 3.00000 and 2.00000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ exit
+
+Script done on 2020-03-09 21:09:58-0400

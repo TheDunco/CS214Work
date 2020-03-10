@@ -13,7 +13,7 @@
 
 # split() splits a string into its two substrings.
 # Receive: aString, the string to be split,       
-#        pos, the split position.                  
+#        pos, the split position.       a is zero!           
 # PRE: 0 <= pos < the length of aString.
 # Return: the substring of aString before pos, and  
 #         the substring of aString from pos onwards.

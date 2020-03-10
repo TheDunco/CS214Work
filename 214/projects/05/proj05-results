@@ -1,0 +1,460 @@
+Script started on 2020-03-06 14:14:29-0500
+
+For your convenience and understanding, I used these as my test numbers:
+2, 2, 2 should say it's negative
+0, 2, 2 should say a is 0
+1, 4, 4 should give -2, -2
+1, 8, 8 should give -1.1715728752538097 and -1.1715728752538097
+1, -5, 6 should give 3, 2
+
+ ^ ^
+(O,O)
+(   )
+-"-"-------
+
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ cat Roots.java
+/* Roots.java is a method and driver for finding the roots of a 
+ * quadratic equation using the quadratic formula.
+ * 
+ * By: Duncan Van Keulen on 3-6-2020
+ ***************************************************************/
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class Roots {
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+
+        // Get inputs for a, b, c
+        System.out.print("Quadratic Root Finder\nEnter a: ");
+        double a = keyboard.nextDouble();
+    
+        System.out.print("Enter b: ");
+        double b = keyboard.nextDouble();
+    
+        System.out.print("Enter c: ");
+        double c = keyboard.nextDouble();
+
+        double[] rootsArr = new double[2];
+
+        // Only display roots if they are valid
+        if(root(a, b, c, rootsArr)) {
+            System.out.println("The roots are " + rootsArr[0] + " and " + rootsArr[1]);
+        }
+    }
+
+    /* 
+    * root() calculates the quadratic roots of an equation using the quadratic formula
+    * will return true if calculation succeeded and false if it failed.
+    * double a, b, c are the a, b, c numbers in the quadratic formula
+    * double[] rootsArr is the "pass by reference" array that will contain the roots
+    *******************************************************************************/
+    public static boolean root(double a, double b, double c, double[] rootsArr) {
+        if (a != 0) {
+            double arg = Math.pow(b, 2.0) - 4 * a * c;
+            if (arg >=0) {
+                rootsArr[0] = (-b + Math.sqrt(arg))/(2*a);
+                rootsArr[1] = (-b - Math.sqrt(arg))/(2*a);
+                return true;
+            }
+            else {
+                System.out.println("root(): b^2 - 4ac is negative!");
+                rootsArr[0] = 0.0;
+                rootsArr[1] = 0.0;
+                return false;
+            }
+        }
+        else {
+            System.out.println("root(): a is zero!");
+            rootsArr[0] = 0.0;
+            rootsArr[1] = 0.0;
+            return false;
+        }
+    }
+}
+
+
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ c[Kjavac - depre[K[K[K[K[K[Kdeprecation Roots.java 
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ java Roots 
+Quadratic Root Finder
+Enter a: 2
+Enter b: 2
+Enter c: 2
+root(): b^2 - 4ac is negative!
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ java Roots 
+Quadratic Root Finder
+Enter a: 0
+Enter b: 2
+Enter c: 2
+root(): a is zero!
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ java Roots 
+Quadratic Root Finder
+Enter a: 1
+Enter b: 4
+Enter c: 4
+The roots are -2.0 and -2.0
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ java Roots 
+Quadratic Root Finder
+Enter a: 1
+Enter b: 8
+Enter c: 8
+The roots are -1.1715728752538097 and -6.82842712474619
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ java Roots 
+Quadratic Root Finder
+Enter a: 1
+Enter b: -5
+Enter c: 6
+The roots are 3.0 and 2.0
+]0;djv78@gold09: ~/CS214Work/214/projects/05/java[01;32mdjv78@gold09[00m:[01;34m~/CS214Work/214/projects/05/java[00m$ exit
+
+Script done on 2020-03-06 14:15:25-0500
+Script started on 2020-03-09 19:04:45-0400
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ cat roots.adb
+-- roots.adb calculates quadratic roots.
+--
+-- Input: A, B, C : floats corresponding to A, B, C in quadratic equation
+--        
+-- Precondition: A is positive, b^2 - 4 * a * c is positive
+-- Output: root1, root2 : floats, the roots fo the quadratic function
+--
+-- By: Duncan Van Keulen
+-- Date: 3-9-2020
+--------------------------------------------------------------
+
+with Ada.Float_Text_IO, Ada.Text_IO, Ada.Numerics.Generic_Complex_Elementary_Functions,
+    Ada.Numerics.Elementary_Functions, Ada.Strings.Fixed;
+use Ada.Float_Text_IO, Ada.Text_IO, Ada.Strings.Fixed;
+
+procedure roots is
+
+    A, B, C, root1, root2 : Float := 0.0;
+
+------------------------------------------------
+--  get_roots gets the roots of a quadratic equation.           
+-- Receive: A, B, C, corresponding to quadratic equation values of the function        
+-- PRE: A != 0, A^2 - 4AC > 0
+--     (Ada arrays are 1-relative by default)
+-- Passback: root1 - the first root,
+--           root2 - the second root.
+------------------------------------------------
+function get_roots(A : in Float; B : in Float; C : in Float; root1 : out Float; root2 : out Float) return Boolean is
+arg : Float;
+begin
+    if (A /= 0.0) then 
+        -- calculate the discriminant
+        arg := ((B ** 2) - (4.0 * A * C));
+        -- make sure A is positive
+        if (arg >= 0.0) then
+            root1 := (-b + (Ada.Numerics.Elementary_Functions.Sqrt(arg)))/(2.0*a);
+            root2 := (-b - (Ada.Numerics.Elementary_Functions.Sqrt(arg)))/(2.0*a);
+            return true;
+
+        else  -- discriminant is zero
+            Put_Line("get_roots failed: b^2 - 4ac is negative!");
+            root1 := 0.0; root2 := 0.0;
+            return false;
+        end if;
+    else -- A is < zero
+        Put_Line("get_roots failed: a is zero!");
+        root1 := 0.0; root2 := 0.0;
+        return false;
+    end if;
+end get_roots;
+
+begin
+    -- Get inputs of a, b, and c
+    Put_Line("To get the roots of a quadratic function...");
+    Put("Enter a: ");
+    Get(A);
+    Put("Enter b: ");
+    Get(B);
+    Put("Enter c: ");
+    Get(C);
+
+    if (get_roots(A, B, C, root1, root2) = true) then
+
+        Put("The roots are: ");
+        Put(root1);
+        Put(" and ");
+        Put(root2);
+
+    end if;
+
+end roots;]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ gnatmake roots
+x86_64-linux-gnu-gcc-7 -c roots.adb
+x86_64-linux-gnu-gnatbind-7 -x roots.ali
+x86_64-linux-gnu-gnatlink-7 roots.ali
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ ./roots
+To get the roots of a quadratic function...
+Enter a: 2
+Enter b: 2
+Enter c: 2
+get_roots failed: b^2 - 4ac is negative!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ ./roots
+To get the roots of a quadratic function...
+Enter a: 0
+Enter b: 2
+Enter c: 2
+get_roots failed: a is zero!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ ./roots
+To get the roots of a quadratic function...
+Enter a: 1
+Enter b: 4
+Enter c: 4
+The roots are: -2.00000E+00 and -2.00000E+00
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ ./roots
+To get the roots of a quadratic function...
+Enter a: 1
+Enter b: 8
+Enter c: 8
+The roots are: -1.17157E+00 and -6.82843E+00
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ ./roots
+To get the roots of a quadratic function...
+Enter a: 1
+Enter b: -5
+Enter c: 6
+The roots are:  3.00000E+00 and  2.00000E+00
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ada[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ada[00m$ exit
+
+Script done on 2020-03-09 19:05:40-0400
+Script started on 2020-03-09 20:43:37-0400
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ cat src/roots.clj
+;;;; roots.clj  string into two substrings.
+;;;;
+;;;; Input: a, b, c, corresponding values to the quadratic function values
+;;;; Output: the roots of the quadratic function
+;;;;
+;;;; Usage: clojure -m roots
+;;;;
+;;;; By: Duncan Van Keulen
+;;;; Date: 2-9-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns roots)      ; the name of the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; roots() calculates the roots of a quadratic function.  
+;;; Receive: a, b, c: values for quadratic equation.
+;;; PRE: a != 0, b^2 - 4ac is positive.
+;;; Return: the roots of the function
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn roots [a b c]
+  (if (= a 0) 
+    ;; a is 0
+    (println "roots: a is zero!")
+  
+    ;; else: a is not 0
+    (let
+      ;; compute the discriminant
+      [arg (- (* b b) (* 4.0 (* a c)))]
+      ;; make sure discriminant is not negative
+      (if (>= arg 0.0) 
+        (do
+          ;; calculate the roots
+          (def root1 (/ (+ (- 0.0 b) (Math/sqrt arg)) (* 2.0 a)))
+          (def root2 (/ (- (- 0.0 b) (Math/sqrt arg)) (* 2.0 a)))
+          
+          ;; return a vector with the answers a bool indicating it suceeded
+          (vector root1 root2 true)
+        )
+        ;; else: discriminant is negative
+        (do 
+          (println "roots: discriminant is negative!")
+        )
+      )
+    )
+  )
+)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; main function
+;;; Input: a, b, c the values in the quadratic function
+;;; Output: the roots of that quadratic function
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn -main []
+  (print "To calculate the roots of a quadratic equation,\nEnter a: ") (flush)
+  (let
+    ;; get the value of a
+    [a (read)]
+    (print "Enter b: ") (flush)
+    (let 
+      ;; get the value of b
+      [b (read)]
+    (print "Enter c: ") (flush)
+      (let
+        ;; get the value of c
+        [c (read)]
+
+        ;; get the result and grab each individual thing returned from the vector
+        (let [
+          result (roots a b c)
+          root1 (get result 0)
+          root2 (get result 1)
+          succeeded (get result 2)
+          ]
+          ;; only print if it succeeded
+          (if succeeded 
+            (do 
+              (println (format "The roots are %f and %f" root1 root2))
+            )
+          )
+          ; else nothing
+        )
+      )
+    )
+  )
+)
+
+
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 2
+Enter b: 2
+Enter c: 2
+roots: discriminant is negative!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 0
+Enter b: 2
+Enter c: 2
+roots: a is zero!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 1
+Enter b: 4
+Enter c: 4
+The roots are -2.000000 and -2.000000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 1
+Enter b: 8
+Enter c: 8
+The roots are -1.171573 and -6.828427
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 1
+Enter b: -5
+Enter c: 6
+The roots are 3.000000 and 2.000000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ exit
+
+Script done on 2020-03-09 20:44:37-0400
+Script started on 2020-03-09 21:09:10-0400
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ cat roots.rb
+# roots.rb calculates the roots of a quadratic function
+#
+# Input: a, b, c: doubles representing a, b, and c in the quadratic formula.
+# Precondition: a != 0, b^2 - 4ac not negative.
+# Output: the roots of the quadratic function
+#
+# By: Duncan Van Keulen
+# Date: 3-9-2020
+#################################################################
+
+
+# roots() calculates the roots of a quadratic function.
+# Receive: a, b, c doubles representing a, b, and c of quadratic formula          
+# PRE: a != 0, b^2 - 4ac not negative.
+# Return: the roots of the quadratic function in a vector along with a bool
+#         indicating if it succeeded
+######################################################
+
+def roots(a, b, c)
+    # Make sure a is not 0
+    if (a != 0) then
+        # Calculate the discriminant
+        arg = b**2 - 4 * a * c
+
+        # If discriminant is not negative
+        if (arg >= 0) then
+            # Calculate the roots
+            root1 = (-b + Math.sqrt(arg))/(2*a)
+            root2 = (-b - Math.sqrt(arg))/(2*a)
+            # Return an array indicating 
+            return Array[root1, root2, true]
+        
+        # Discriminant is negative
+        else 
+            puts "Error: roots(): b^2 - 4ac is negative!"
+            root1 = root2 = 0
+            return Array[0, 0, false]
+        end
+    # a is 0
+    else
+        puts "Error: roots(): a is zero!"
+        root1 = root2 = 0
+        return Array[0, 0, false]
+    end
+end
+
+def main
+    # Get a
+    print "To calculate the roots of a quadratic,\nEnter a: "
+    a = gets.to_f
+
+    # Get b
+    print "Enter b: "
+    b = gets.to_f
+
+    # Get c
+    print "Enter c: "
+    c = gets.to_f
+
+    # Get the roots
+    result = roots(a, b, c)
+
+    # If it suceeded, print out the formatted results
+    if result[2] == true then
+        puts "The roots are %0.5f and %0.5f" % [result[0], result[1]]
+    end
+end
+
+main
+
+
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 2
+Enter b: 2
+Enter c: 2
+Error: roots(): b^2 - 4ac is negative!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 0
+Enter b: 2
+Enter c: 2
+Error: roots(): a is zero!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 1
+Enter b: 4
+Enter c: 4
+The roots are -2.00000 and -2.00000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 1
+Enter b: 8
+Enter c: 8
+The roots are -1.17157 and -6.82843
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ ruby roots.rb 
+To calculate the roots of a quadratic,
+Enter a: 1
+Enter b: -5
+Enter c: 6
+The roots are 3.00000 and 2.00000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/ruby[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/ruby[00m$ exit
+
+Thanks for all your hard work grading! This one must've been brutal.
+Enjoy this ascii apple as a reward!
+
+  ,--./,-.
+ / #      \
+|          |
+ \        /
+  `._,._,'
+
+Script done on 2020-03-09 21:09:58-0400
