@@ -1,0 +1,125 @@
+Script started on 2020-03-09 20:43:37-0400
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ cat src/roots.clj
+;;;; roots.clj  string into two substrings.
+;;;;
+;;;; Input: a, b, c, corresponding values to the quadratic function values
+;;;; Output: the roots of the quadratic function
+;;;;
+;;;; Usage: clojure -m roots
+;;;;
+;;;; By: Duncan Van Keulen
+;;;; Date: 2-9-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns roots)      ; the name of the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; roots() calculates the roots of a quadratic function.  
+;;; Receive: a, b, c: values for quadratic equation.
+;;; PRE: a != 0, b^2 - 4ac is positive.
+;;; Return: the roots of the function
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn roots [a b c]
+  (if (= a 0) 
+    ;; a is 0
+    (println "roots: a is zero!")
+  
+    ;; else: a is not 0
+    (let
+      ;; compute the discriminant
+      [arg (- (* b b) (* 4.0 (* a c)))]
+      ;; make sure discriminant is not negative
+      (if (>= arg 0.0) 
+        (do
+          ;; calculate the roots
+          (def root1 (/ (+ (- 0.0 b) (Math/sqrt arg)) (* 2.0 a)))
+          (def root2 (/ (- (- 0.0 b) (Math/sqrt arg)) (* 2.0 a)))
+          
+          ;; return a vector with the answers a bool indicating it suceeded
+          (vector root1 root2 true)
+        )
+        ;; else: discriminant is negative
+        (do 
+          (println "roots: discriminant is negative!")
+        )
+      )
+    )
+  )
+)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; main function
+;;; Input: a, b, c the values in the quadratic function
+;;; Output: the roots of that quadratic function
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn -main []
+  (print "To calculate the roots of a quadratic equation,\nEnter a: ") (flush)
+  (let
+    ;; get the value of a
+    [a (read)]
+    (print "Enter b: ") (flush)
+    (let 
+      ;; get the value of b
+      [b (read)]
+    (print "Enter c: ") (flush)
+      (let
+        ;; get the value of c
+        [c (read)]
+
+        ;; get the result and grab each individual thing returned from the vector
+        (let [
+          result (roots a b c)
+          root1 (get result 0)
+          root2 (get result 1)
+          succeeded (get result 2)
+          ]
+          ;; only print if it succeeded
+          (if succeeded 
+            (do 
+              (println (format "The roots are %f and %f" root1 root2))
+            )
+          )
+          ; else nothing
+        )
+      )
+    )
+  )
+)
+
+
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 2
+Enter b: 2
+Enter c: 2
+roots: discriminant is negative!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 0
+Enter b: 2
+Enter c: 2
+roots: a is zero!
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 1
+Enter b: 4
+Enter c: 4
+The roots are -2.000000 and -2.000000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 1
+Enter b: 8
+Enter c: 8
+The roots are -1.171573 and -6.828427
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ clojure -m roots
+To calculate the roots of a quadratic equation,
+Enter a: 1
+Enter b: -5
+Enter c: 6
+The roots are 3.000000 and 2.000000
+]0;djv78@gold24: ~/CS214Work/214/projects/05/clojure[01;32mdjv78@gold24[00m:[01;34m~/CS214Work/214/projects/05/clojure[00m$ exit
+
+Script done on 2020-03-09 20:44:37-0400

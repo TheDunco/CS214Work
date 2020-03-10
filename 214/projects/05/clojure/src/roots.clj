@@ -11,8 +11,6 @@
 
 (ns roots)      ; the name of the program
 
-(defn ** [x n] (reduce * (repeat n x)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; roots() calculates the roots of a quadratic function.  
 ;;; Receive: a, b, c: values for quadratic equation.
@@ -20,27 +18,31 @@
 ;;; Return: the roots of the function
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn roots [a, b, c]
-  (if (not= a 0) 
+(defn roots [a b c]
+  (if (= a 0) 
+    ;; a is 0
+    (println "roots: a is zero!")
+  
+    ;; else: a is not 0
     (let
-      [arg (- (** b 2) (* 4(* a c)))]
-      (if (>= arg 0) 
-        (let [
-          root1 ((/ (+ (- 0 b) (Math/sqrt arg)) (* 2 a)))
-          root2 ((/ (- (- 0 b) (Math/sqrt arg)) (* 2 a)))
-          ]
-          (vector root1 root2)
+      ;; compute the discriminant
+      [arg (- (* b b) (* 4.0 (* a c)))]
+      ;; make sure discriminant is not negative
+      (if (>= arg 0.0) 
+        (do
+          ;; calculate the roots
+          (def root1 (/ (+ (- 0.0 b) (Math/sqrt arg)) (* 2.0 a)))
+          (def root2 (/ (- (- 0.0 b) (Math/sqrt arg)) (* 2.0 a)))
+          
+          ;; return a vector with the answers a bool indicating it suceeded
+          (vector root1 root2 true)
         )
         ;; else: discriminant is negative
         (do 
-          (print "roots: discriminant is negative!")
+          (println "roots: discriminant is negative!")
         )
       )
     )
-    ;; else: a is 0
-    (do
-      (print "roots: a is zero!")
-    ) 
   )
 )
 
@@ -54,19 +56,31 @@
 (defn -main []
   (print "To calculate the roots of a quadratic equation,\nEnter a: ") (flush)
   (let
+    ;; get the value of a
     [a (read)]
     (print "Enter b: ") (flush)
     (let 
+      ;; get the value of b
       [b (read)]
     (print "Enter c: ") (flush)
       (let
+        ;; get the value of c
         [c (read)]
+
+        ;; get the result and grab each individual thing returned from the vector
         (let [
           result (roots a b c)
           root1 (get result 0)
           root2 (get result 1)
+          succeeded (get result 2)
           ]
-          (print (format "The roots are %d and %d" root1 root2))
+          ;; only print if it succeeded
+          (if succeeded 
+            (do 
+              (println (format "The roots are %f and %f" root1 root2))
+            )
+          )
+          ; else nothing
         )
       )
     )
