@@ -243,10 +243,122 @@ Memory Layout: {
 
     This flexible design uses memory efficiently:
     A typical program only runs out of memory if
-    − its stack overruns its heap (_____________________), or 
-    − its heap overruns its stack (___________________).
-
+    − its stack overruns its heap (<runaway recursion>), or 
+    − its heap overruns its stack (<memory leaks>).
 }
 
+Parameter Passing: {
+    Parameters are allocated space <within the subprograms activation record> on the runtime stack.
 
+    Before control is transferred to the
+    subprogram, the call’s arguments are
+    “associated with” these parameters. 
 
+    Exactly how arguments get associated with parameters
+    depends on the parameter passing mechanism being used.
+
+    There are four general mechanisms: <call by- value, reference, copy-restor, name>
+}
+
+Call By Value Parameters: {
+    … are <variables> into which their arguments are <copied>. 
+    − Changing a parameter doesn’t affect its argument’s value. 
+    − This is the default mechanism in most languages. 
+    − This is the only mechanism in C, Lisp, Java, Smalltalk, ...
+    [See slides for the language]
+    [In big structures, it's still going to be call by reference]
+}
+
+When function summ() is called: {
+    [Everything on slides!]
+}
+
+Call-by-Reference Parameters: {
+    … are <pointers> storing <the address of the arguments>, that are auto-dereferenced whenever they are accessed.
+
+    − The parameter is an alias for the argument. 
+    − Changing the parameter’s value changes the argument’s value.
+
+    Smalltalk and Lisp
+    implicitly provide
+    call-by-reference,
+    because “variables”
+    are actually pointers
+    to dynamic objects.
+    Java is complicated...
+
+    [See slides for C++ and Ada examples]
+}
+
+When swap() is called: {
+    [All on slide again, example]
+}
+
+Implementing Call-by-Reference?: {
+    Stroustrup’s first C++ “compiler” just produced C code,
+    so if C only provides the call-by-value mechanism,
+    how can it handle the C++ call-by-reference mechanism?
+
+    1. At the call, replace arguments
+    with <addresses>:
+
+    2. In the declaration and definition, replace reference parameters with <pointers>:
+
+    3. Within the function definition, <dereference> each access to the parameter
+
+    Any compiler can implement call-byreference this way.
+
+    [See slides for examples]
+}
+
+Call-by-Copy-Restore Parameters: {
+    … store <both the value and the address of their arguments>.
+
+    − Within the subprogram, parameter accesses <use the local values> 
+    − When the subprogram terminates, the local value is __________ into the corresponding argument. 
+    − More time-efficient then call-by-reference for heavily-used
+    parameters (avoids slow pointer-dereferencing). 
+    − Ada’s ___________ parameters may use copy-restore...
+} (big oof)
+
+Get() Exmaple: {[On slide]}
+
+Aliasing: {
+    Copy-restore parameters behave the same as reference
+    parameters, so long as the parameter is not an <alias> for a
+    non-local that is accessed within the same subprogram.
+
+    [See slide for code]
+
+    What is output, if param uses:
+    procedure aliasExample (param: in out integer) is
+    begin
+    param:= 1;
+    a:= 2;
+    end get;
+    - call-by-reference?
+    - call-by-value-restore?
+    To avoid this, Ada <forbids aliasing>.
+}
+
+Call-by-Name Parameters: {
+    [If you have code that represnts a variable that would be passed as a call by name parameter,
+    it won't get used until the thing gets evaluated]
+    [If statements in Clojure/Lisp, also allows partial execution]
+
+    1. Copy the body of the subprogram;
+    2. In the copy, substitute the arguments for the parameters;
+    3. Substitute the resulting copy for the call;
+
+    The result is the call-by-name mechanism (aka <macro-substitution>).
+
+    − Call-by-name originated with Algol-60. − By replacing the function-call with the altered body, call-by-name:
+     <Improves time-efficiency> by eliminating the call and the RTS overhead; but
+     <Decreases space-efficiency> by increasing the size of the program.
+}
+
+At each call to swap(): {
+    The resulting code is ________, but without the overhead of
+pushing a stack-frame, setting parameters, … it runs _____.
+
+}
