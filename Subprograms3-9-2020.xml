@@ -170,14 +170,83 @@ Imperative Examples: {
 
     This allows the compiler to check that in calls: swap(x, y);
     the arguments x and y are compatible with the parameters.
+
+    [Allows compilers to determine if functions are being used correclty]
 }
 
 Subprograms: Lisp and Smalltalk: {
-    
+    A Lisp subprogram definition uses the <defun> function:
+    When evaluated, defun parses
+    the function that follows it and
+    (assuming no errors) creates a
+    symbol table entry for it.
+    [See slides for example in Lisp]
+
+    A Smalltalk subprogram must be <a member of a class>: [for object oriented, namespace for procedure oriented]
+    On an accept event,
+    Smalltalk parses the
+    method and (assuming no
+    errors) creates a symbol
+    table entry for it.
+    [See slides for example in Smalltalk]
 }
 
+Calling Subprograms: {
+    In most languages, a subprogram is called by <naming it>.
+    [C++, Ada, Modula2, FORTRAN examples on slides]
 
+    Lisp functions must be called <as a valid expression> (following an o-parenthesis):
 
+    Smalltalk requires that a message be sent to an object:
+}
+
+Issue: Parameterless Subprograms: {
+    Must parentheses be given at calls to parameterless functions?
+
+    C/C++: yes              doSomething()
+    Ada: no                 doSomething;
+    Modula-2: no            doSomething;
+    Fortran: no             CALL doSomething
+    Lisp: yes, but...       (doSomething)
+    Smalltalk: No, but...   obj doSomething
+}
+
+Activations: {
+    An activation <is a call to a subprogram>  and involves 3 steps:
+    - Space for the subprogram’s data values is allocated on a special run-time stack;
+    - The caller’s arguments are associated with the subprogram’s parameters;
+    - Control is transferred from the caller to the starting address of the subprogram. 
+
+    On Unix systems, the run-time stack grows “downward”
+
+    The space for one subprogram’s
+    data is called a stack frame, or <activation record>.
+    [See stack on slides]
+}
+
+Why a Stack?: {
+    [See slides for example!]
+
+    The call-sequence uses <Last In First Out (LIFO)> behavior, so a stack is the appropriate data structure.
+    Each activation’s parameters (n) and locals must be kept distinct.
+
+    A stack is necessary in <any language that supports recursion>.
+}
+
+Memory Layout: {
+    On Unix systems, a program’s data
+    space is laid out something like this:
+
+    •Space for static/global variables
+    •The run-time stack for locals, 
+    •The heap for dynamically allocated variables.
+
+    This flexible design uses memory efficiently:
+    A typical program only runs out of memory if
+    − its stack overruns its heap (_____________________), or 
+    − its heap overruns its stack (___________________).
+
+}
 
 
 
