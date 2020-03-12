@@ -1,0 +1,95 @@
+Script started on 2020-03-12 14:55:36-0400
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ cat ArrayUtil.java
+/* ArrayUtil.java is a driver for proj06 array utilites.
+ *
+ * Student Name: Duncan Van Keulen
+ * Date: 3-12-2020
+ *
+ * Precondition: theArray, is an array of double values.
+ * Output: the average of the numbers in theArray.
+ ***************************************************************/
+
+import java.io.*;
+import java.util.Scanner;
+
+public class ArrayUtil {
+    public static void main (String[] args) {
+        
+        Scanner keyboard = new Scanner(System.in);
+        
+        // Prompt user for array size and set size to it
+        System.out.print("How values in the array?: ");
+        int size = keyboard.nextInt();
+        
+        double[] theArray = new double[size];
+
+        System.out.println("Enter the values of the array: ");
+        readArray(theArray, keyboard);
+
+        System.out.println("The values of the array are: ");
+        printArray(theArray, size);
+
+        keyboard.close();
+    }
+    /*
+   * printArray() prints out the values in an array separated by new lines
+   * anArray: The double array to be printed
+   * itsSize: An integer representing the size of the array
+   *****************************************************/
+    public static void printArray(double[] anArray, int itsSize) {
+        for (int i = 0; i < itsSize; i++) {
+            System.out.println(anArray[i] + "\n");
+        }
+    }
+    
+    /*
+   * readArray() reads in the values in an array
+   * anArray: The double array to be filled with values
+   * Scanner in: The scanner to read values into the array
+   *****************************************************/
+    public static void readArray(double[] anArray, Scanner in) {
+        for (int i = 0; i < anArray.length; i++) {
+            anArray[i] = in.nextDouble();
+        }
+    }
+}
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ javac -deprecation ArrayUtil.java 
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ java ArrayUtil 
+How values in the array?: 0
+Enter the values of the array: 
+The values of the array are: 
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ java ArrayUtil 
+How values in the array?: 5
+Enter the values of the array: 
+1
+2
+3
+4
+5
+The values of the array are: 
+1.0
+
+2.0
+
+3.0
+
+4.0
+
+5.0
+
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ java ArrayUtil 
+How values in the array?: 3
+Enter the values of the array: 
+100000
+123456789
+987654321
+The values of the array are: 
+100000.0
+
+1.23456789E8
+
+9.87654321E8
+
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ exit
+
+Script done on 2020-03-12 14:56:24-0400
