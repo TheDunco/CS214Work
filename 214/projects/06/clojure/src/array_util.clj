@@ -14,62 +14,70 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; fill_array() fills an array with values from the user
 ;;; Receive: the array to be filled
+;;; Recieve: istSize: The size of the array to be filled
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn fill_array [anArray itsSize]
   (loop [count 0]
     (if 
-      (< count itsSize)  ;; condition
+      ;; condition
+      (< count itsSize)
+      ;; then
       (do
-        (print "Enter the values of the array: ") (flush)                
-        (aset anArray count (double (read)))  ;; then
+        (print "Enter the values of the array: ") (flush)
+        ;; set the values of the array to user input                
+        (aset anArray count (double (read)))
       )
       ;; else nothing
     )
     (when (< count itsSize)
       (recur (inc count))
     )
-  
   )
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; print_array() prints out the values in an array
 ;;; Receive: the array to be printed
+;;; Recieve: istSize: The size of the array to be printed
 ;;;;;;;;;;;;;;;;;;;;;;;;;s;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn print_array [anArray itsSize] 
   (loop [count 0]
-    (if (< count itsSize)
+    (if 
+      ;; condition
+      (< count itsSize)
+      ;; then
       (println (aget anArray count))
       ;; else nothing
     )
-  (when (< count itsSize)
-    (recur (inc count))
+    (when (< count itsSize)
+      (recur (inc count))
+    )
   )
-    
-  )
-
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; main function
-;;; Input: 
-;;; Output: 
+;;; Input: The vals of the array by the user
+;;; Output: The values contained in the array
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn -main []
-  
   (print "Enter the size of the array: ") (flush)
   (let
     [
+      ;; get itsSize from the user
       itsSize (double (read))
-      anArray (double-array itsSize) ;; make an array of length itsSize
+
+      ;; make an array of length itsSize
+      anArray (double-array itsSize) 
     ]
+    ;; fill the array by calling the fill_array function
     (fill_array anArray itsSize)
+
+    ;; print the values of the array
     (print "The values in the array are: \n")
     (print_array anArray itsSize)
   )
-
-
 )
