@@ -16,7 +16,7 @@
 def readArray(anArray, itsSize)
     i = 0
     until i >= itsSize do
-        anArray.push(gets.chomp)
+        anArray[i] = gets.to_f
         i = i + 1
     end
     return anArray
@@ -27,12 +27,12 @@ end
 # Receive: anArray, an array of numbers
 ################################################
 
-def printArray(anArray)
-    anArray.each do |num|
-        puts num
-    end
+def printArray(anArray, itsSize)
+    anArray.each { |element| puts element}
 end
 
+
+# Main driver
 def main
     # Get size
     print("Enter the size of the array: ")
@@ -42,7 +42,7 @@ def main
     print("Enter the values of the array: ")
     theArray = readArray(theArray, itsSize)
     puts("The values of the array are...")
-    printArray(theArray)
+    printArray(theArray, itsSize)
 
 end
 

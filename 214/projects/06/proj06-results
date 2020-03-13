@@ -1,0 +1,401 @@
+Script started on 2020-03-12 14:55:36-0400
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ cat ArrayUtil.java
+/* ArrayUtil.java is a driver for proj06 array utilites.
+ *
+ * Student Name: Duncan Van Keulen
+ * Date: 3-12-2020
+ *
+ * Precondition: theArray, is an array of double values.
+ * Output: the average of the numbers in theArray.
+ ***************************************************************/
+
+import java.io.*;
+import java.util.Scanner;
+
+public class ArrayUtil {
+    public static void main (String[] args) {
+        
+        Scanner keyboard = new Scanner(System.in);
+        
+        // Prompt user for array size and set size to it
+        System.out.print("How values in the array?: ");
+        int size = keyboard.nextInt();
+        
+        double[] theArray = new double[size];
+
+        System.out.println("Enter the values of the array: ");
+        readArray(theArray, keyboard);
+
+        System.out.println("The values of the array are: ");
+        printArray(theArray, size);
+
+        keyboard.close();
+    }
+    /*
+   * printArray() prints out the values in an array separated by new lines
+   * anArray: The double array to be printed
+   * itsSize: An integer representing the size of the array
+   *****************************************************/
+    public static void printArray(double[] anArray, int itsSize) {
+        for (int i = 0; i < itsSize; i++) {
+            System.out.println(anArray[i] + "\n");
+        }
+    }
+    
+    /*
+   * readArray() reads in the values in an array
+   * anArray: The double array to be filled with values
+   * Scanner in: The scanner to read values into the array
+   *****************************************************/
+    public static void readArray(double[] anArray, Scanner in) {
+        for (int i = 0; i < anArray.length; i++) {
+            anArray[i] = in.nextDouble();
+        }
+    }
+}
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ javac -deprecation ArrayUtil.java 
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ java ArrayUtil 
+How values in the array?: 0
+Enter the values of the array: 
+The values of the array are: 
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ java ArrayUtil 
+How values in the array?: 5
+Enter the values of the array: 
+1
+2
+3
+4
+5
+The values of the array are: 
+1.0
+
+2.0
+
+3.0
+
+4.0
+
+5.0
+
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ java ArrayUtil 
+How values in the array?: 3
+Enter the values of the array: 
+100000
+123456789
+987654321
+The values of the array are: 
+100000.0
+
+1.23456789E8
+
+9.87654321E8
+
+]0;djv78@gold21: ~/CS214Work/214/projects/06/java[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/java[00m$ exit
+
+Script done on 2020-03-12 14:56:24-0400
+Script started on 2020-03-12 15:48:28-0400
+]0;djv78@gold21: ~/CS214Work/214/projects/06/ada[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/ada[00m$ cat array_util.adb
+-- array_util.adb implements a driver and funcitons for reading 
+--      and printing arrays of values
+--
+-- Input: User must input size and values of arrays
+-- 
+-- Output: The values input to the array will be printed back wiht newlines
+--
+-- By: Duncan Van Keulen
+-- Date: 3-5-2020
+--------------------------------------------------------------
+
+with Ada.Float_Text_IO, Ada.Text_IO, Ada.Integer_Text_IO;
+use Ada.Float_Text_IO, Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure array_util is
+
+    type Vector is array ( Positive range <> ) of Float;
+
+    its_size : Integer;
+
+----------------------------------------------
+-- Fill_Array fills an array with values from the user
+-- Receive: anArray, an empty array
+----------------------------------------------
+procedure Fill_Array(an_array : in out Vector; its_size : in Integer) is
+    val : Float;
+begin
+    for i in 1..its_size loop
+        Get(val);
+        an_array(i) := val;
+    end loop;
+    
+end Fill_Array;
+
+----------------------------------------------
+-- Print_Array prints the values in an array separated by newlines
+-- Receive: anArray, an array with values
+-- Precondiiton: anArray must have values
+----------------------------------------------
+procedure Print_Array(an_array : in Vector; its_size : in Integer) is
+begin
+    for i in 1..its_size loop
+        Put(an_array(i));
+        Put_Line("");
+    end loop;
+
+end Print_Array;
+
+begin
+    Put("Enter the size of the array: ");
+    Get(its_size);
+
+    declare
+        an_array : Vector(1..its_size); -- declaring an empty array
+    begin
+        Put("Enter the array values: ");
+        Fill_Array(an_array, its_size);
+        Print_Array(an_array, its_size);
+    end;
+
+
+
+end array_util;
+
+
+]0;djv78@gold21: ~/CS214Work/214/projects/06/ada[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/ada[00m$ gnatmake array_util.adb 
+gnatmake: "array_util" up to date.
+]0;djv78@gold21: ~/CS214Work/214/projects/06/ada[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/ada[00m$ ./array_util 
+Enter the size of the array: 0
+Enter the array values: 
+]0;djv78@gold21: ~/CS214Work/214/projects/06/ada[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/ada[00m$ ./array_util 
+Enter the size of the array: 5
+Enter the array values: 12 
+2
+3
+4
+5
+ 1.00000E+00
+ 2.00000E+00
+ 3.00000E+00
+ 4.00000E+00
+ 5.00000E+00
+]0;djv78@gold21: ~/CS214Work/214/projects/06/ada[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/ada[00m$ ./array_util 
+Enter the size of the array: 3
+Enter the array values: 100000
+123456789
+987654321
+ 1.00000E+05
+ 1.23457E+08
+ 9.87654E+08
+]0;djv78@gold21: ~/CS214Work/214/projects/06/ada[01;32mdjv78@gold21[00m:[01;34m~/CS214Work/214/projects/06/ada[00m$ exit
+
+Script done on 2020-03-12 15:49:25-0400
+Script started on 2020-03-13 11:29:24-0400
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ cat src/array_util.clj 
+;;;; array_util.clj provides functions for filling in and printing arrays
+;;;;
+;;;; Input: values from the user
+;;;; Output: values will be printed back
+;;;;
+;;;; Usage: clojure -m array_util
+;;;;
+;;;; By: Duncan Van Keulen
+;;;; Date: 2-12-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns array_util)      ; the name of the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; fill_array() fills an array with values from the user
+;;; Receive: the array to be filled
+;;; Recieve: istSize: The size of the array to be filled
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn fill_array [anArray itsSize]
+  (loop [count 0]
+    (if 
+      ;; condition
+      (< count itsSize)
+      ;; then
+      (do
+        (print "Enter the values of the array: ") (flush)
+        ;; set the values of the array to user input                
+        (aset anArray count (double (read)))
+      )
+      ;; else nothing
+    )
+    (when (< count itsSize)
+      (recur (inc count))
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; print_array() prints out the values in an array
+;;; Receive: the array to be printed
+;;; Recieve: istSize: The size of the array to be printed
+;;;;;;;;;;;;;;;;;;;;;;;;;s;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn print_array [anArray itsSize] 
+  (loop [count 0]
+    (if 
+      ;; condition
+      (< count itsSize)
+      ;; then
+      (println (aget anArray count))
+      ;; else nothing
+    )
+    (when (< count itsSize)
+      (recur (inc count))
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; main function
+;;; Input: The vals of the array by the user
+;;; Output: The values contained in the array
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn -main []
+  (print "Enter the size of the array: ") (flush)
+  (let
+    [
+      ;; get itsSize from the user
+      itsSize (double (read))
+
+      ;; make an array of length itsSize
+      anArray (double-array itsSize) 
+    ]
+    ;; fill the array by calling the fill_array function
+    (fill_array anArray itsSize)
+
+    ;; print the values of the array
+    (print "The values in the array are: \n")
+    (print_array anArray itsSize)
+  )
+)
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ clojure-m[K[K -m arrayu[K_util
+Enter the size of the array: 5
+Enter the values of the array: 1
+Enter the values of the array: 2
+Enter the values of the array: 3
+Enter the values of the array: 4
+Enter the values of the array: 5
+The values in the array are: 
+1.0
+2.0
+3.0
+4.0
+5.0
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ clojure -m array_util
+Enter the size of the array: 2
+Enter the values of the array: 1
+Enter the values of the array: 2
+The values in the array are: 
+1.0
+2.0
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ clojure -m array_util
+Enter the size of the array: 3
+Enter the values of the array: 123456789
+Enter the values of the array: 987654321
+Enter the values of the array: 5.5
+The values in the array are: 
+1.23456789E8
+9.87654321E8
+5.5
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ exit
+
+Script done on 2020-03-13 11:30:19-0400
+Script started on 2020-03-13 12:01:21-0400
+]0;djv78@gold14: ~/CS214Work/214/projects/06/ruby[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/ruby[00m$ cat array_util.rb 
+# array_util.rb implements filling an array with user vals and printing that array
+# 
+# Input: user values into the array
+# Output: the values of the array
+#
+# By: Duncan Van Keulen
+# Date: 3-12-2020
+########################################################
+
+###############################################
+# readArray() reads in values from a user and puts them in an array
+# Receive: anArray, an array of numbers
+# Recieve: itsSize, the size of the array
+################################################
+
+def readArray(anArray, itsSize)
+    i = 0
+    until i >= itsSize do
+        anArray[i] = gets.to_f
+        i = i + 1
+    end
+    return anArray
+end
+
+###############################################
+# printArray() outputs the contents of the array separated by newlines
+# Receive: anArray, an array of numbers
+################################################
+
+def printArray(anArray, itsSize)
+    anArray.each { |element| puts element}
+end
+
+
+# Main driver
+def main
+    # Get size
+    print("Enter the size of the array: ")
+    itsSize = gets.to_f
+
+    theArray = Array.new(itsSize){}
+    print("Enter the values of the array: ")
+    theArray = readArray(theArray, itsSize)
+    puts("The values of the array are...")
+    printArray(theArray, itsSize)
+
+end
+
+main
+]0;djv78@gold14: ~/CS214Work/214/projects/06/ruby[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/ruby[00m$ ruby array_util.rb 
+Enter the size of the array: 5
+Enter the values of the array: 1
+2
+3
+4
+5
+The values of the array are...
+1.0
+2.0
+3.0
+4.0
+5.0
+]0;djv78@gold14: ~/CS214Work/214/projects/06/ruby[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/ruby[00m$ ruby array_util.rb 
+Enter the size of the array: 2
+Enter the values of the array: 1
+2
+The values of the array are...
+1.0
+2.0
+]0;djv78@gold14: ~/CS214Work/214/projects/06/ruby[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/ruby[00m$ ruby array_util.rb 
+Enter the size of the array: 3
+Enter the values of the array: 123456789
+987654321
+5.5
+The values of the array are...
+123456789.0
+987654321.0
+5.5
+]0;djv78@gold14: ~/CS214Work/214/projects/06/ruby[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/ruby[00m$ exit
+
+Enjoy playing pacman ig
+
+__________________|      |____________________________________________
+     ,--.    ,--.          ,--.   ,--.
+    |oo  | _  \  `.       | oo | |  oo|
+o  o|~~  |(_) /   ;       | ~~ | |  ~~|o  o  o  o  o  o  o  o  o  o  o
+    |/\/\|   '._,'        |/\/\| |/\/\|
+__________________        ____________________________________________
+                  |      |
+
+
+Script done on 2020-03-13 12:03:58-0400
