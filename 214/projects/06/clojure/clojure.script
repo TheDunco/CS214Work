@@ -1,0 +1,91 @@
+Script started on 2020-03-13 11:17:15-0400
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ cat src/cl[K[Karray_util.clj 
+;;;; array_util.clj provides functions for filling in and printing arrays
+;;;;
+;;;; Input: values from the user
+;;;; Output: values will be printed back
+;;;;
+;;;; Usage: clojure -m array_util
+;;;;
+;;;; By: Duncan Van Keulen
+;;;; Date: 2-12-2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns array_util)      ; the name of the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; fill_array() fills an array with values from the user
+;;; Receive: the array to be filled
+;;; Recieve: itsSize: The size of the array to be filled
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn fill_array [anArray itsSize]
+  (loop [count 0]
+    (if 
+      (< count itsSize)  ;; condition
+      (do
+        (print "Enter the values of the array: ") (flush)                
+        (aset anArray count (double (read)))  ;; then
+      )
+      ;; else nothing
+    )
+    (when (< count itsSize)
+      (recur (inc count))
+    )
+  
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; print_array() prints out the values in an array
+;;; Receive: the array to be printed
+;;; Recieve: itsSize: the size of the array to be filled
+;;;;;;;;;;;;;;;;;;;;;;;;;s;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn print_array [anArray itsSize] 
+  (loop [count 0] ;; loop with count starting at 0
+    (if (< count itsSize) ;; condition
+      (println (aget anArray count)) ;; then
+      ;; else nothing
+    )
+  (when (< count itsSize)
+    (recur (inc count))
+  )
+    
+  )
+
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; main function
+;;; Input: Array size and values from the user
+;;; Output: the values contained in the array
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+`
+(defn -main []
+  (print "Enter the size of the array: ") (flush)
+  (let
+    [
+      itsSize (double (read))        ;; get itsSize from the user
+      anArray (double-array itsSize) ;; make an array of length itsSize
+    ]
+    (fill_array anArray itsSize)     ;; call the fill_array function to fill array with user vals
+    (println "The values in the array are: ")
+    (print_array anArray itsSize)    ;; call print array to print the array
+  )
+)
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ c[Kclojure -m array_util.[K
+Execution error (NullPointerException) at clojure.main/main (main.java:40).
+null
+
+Full report at:
+/tmp/clojure-990121379662841575.edn
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ clojure -m array_util.clj
+Execution error (FileNotFoundException) at clojure.main/main (main.java:40).
+Could not locate array_util/clj__init.class, array_util/clj.clj or array_util/clj.cljc on classpath. Please check that namespaces with dashes use underscores in the Clojure file name.
+
+Full report at:
+/tmp/clojure-9234916811640551485.edn
+]0;djv78@gold14: ~/CS214Work/214/projects/06/clojure[01;32mdjv78@gold14[00m:[01;34m~/CS214Work/214/projects/06/clojure[00m$ exit
+
+Script done on 2020-03-13 11:17:53-0400

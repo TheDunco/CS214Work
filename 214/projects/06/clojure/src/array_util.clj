@@ -16,12 +16,41 @@
 ;;; Receive: the array to be filled
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+(defn fill_array [anArray itsSize]
+  (loop [count 0]
+    (if 
+      (< count itsSize)  ;; condition
+      (do
+        (print "Enter the values of the array: ") (flush)                
+        (aset anArray count (double (read)))  ;; then
+      )
+      ;; else nothing
+    )
+    (when (< count itsSize)
+      (recur (inc count))
+    )
+  
+  )
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; print_array() prints out the values in an array
 ;;; Receive: the array to be printed
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;s;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn print_array [anArray itsSize] 
+  (loop [count 0]
+    (if (< count itsSize)
+      (println (aget anArray count))
+      ;; else nothing
+    )
+  (when (< count itsSize)
+    (recur (inc count))
+  )
+    
+  )
+
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; main function
@@ -31,10 +60,15 @@
 
 (defn -main []
   
-  (print "Enter the size of the array: ")
+  (print "Enter the size of the array: ") (flush)
   (let
-    itsSize (read)
-    (fill_array itsSize)
+    [
+      itsSize (double (read))
+      anArray (double-array itsSize) ;; make an array of length itsSize
+    ]
+    (fill_array anArray itsSize)
+    (print "The values in the array are: \n")
+    (print_array anArray itsSize)
   )
 
 
