@@ -362,3 +362,12 @@ At each call to swap(): {
 pushing a stack-frame, setting parameters, … it runs _____.
 
 }
+
+Parameter Passing: {
+    Parameters are allocated space <within the subprograms activation rerord> on the runtime stack
+    Four general mechanisms are call by...
+    <value> <referece> <copy-restore> <name>
+}
+
+Call-by-Value Parameters: {
+}
