@@ -1,0 +1,57 @@
+Script started on 2020-04-02 11:32:02-0400
+]0;djv78@gold02: ~/CS214Work/214/labs/07/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/java[00m$ cat NameTester.java
+/* NameTester.java is a 'driver' to test class Name.
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Student: Duncan Van Keulen
+ * Date: 3-31-2020
+ ************************************************************/
+
+public class NameTester {
+    public static void main(String[] args) {
+        Name aName = new Name("John", "Paul", "Jones");
+        
+        assert aName.getFirst().equals("John") ;
+        assert aName.getMiddle().equals("Paul") ;
+        assert aName.getLast().equals("Jones") ;
+        
+        System.out.println(aName);
+        assert aName.toString().equals("John Paul Jones");
+
+        System.out.println("All tests passed!");
+    }
+}
+
+class Name {
+    private String myFirst, myMiddle, myLast;
+
+    public Name(String first, String middle, String last) {
+        myFirst = first;
+        myMiddle = middle;
+        myLast = last;
+    }
+
+    public String getFirst(){
+        return myFirst;
+    }
+
+    public String getMiddle(){
+        return myMiddle;
+    }
+
+    public String getLast(){
+        return myLast;
+    }
+
+    public String toString(){
+        return myFirst + ' ' + myMiddle + ' ' + myLast;
+    }
+
+};
+]0;djv78@gold02: ~/CS214Work/214/labs/07/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/java[00m$ make N[Kjava
+make: Nothing to be done for 'java'.
+]0;djv78@gold02: ~/CS214Work/214/labs/07/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/java[00m$ java Nae[K[KameTester
+John Paul Jones
+All tests passed!
+]0;djv78@gold02: ~/CS214Work/214/labs/07/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/java[00m$ exit
+
+Script done on 2020-04-02 11:32:31-0400
