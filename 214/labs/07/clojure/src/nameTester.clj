@@ -33,7 +33,9 @@
 ;;; Return: the firstName string in aName.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Replace this line with the definition of getFirst()
+(defn getFirst [^Name aName]
+  (:firstName aName)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; getMiddle() extracts the middle name of a name object.
@@ -41,15 +43,18 @@
 ;;; Return: the middleName string in aName.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Replace this line with the definition of getMiddle()
-
+(defn getMiddle [^Name aName]
+  (:middleName aName)
+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; getLast() extracts the last name of a name object.
 ;;; Receive: aName, a Name. 
 ;;; Return: the lastName string in aName.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Replace this line with the definition of getLast()
+(defn getLast [^Name aName]
+  (:lastName aName)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; getFullName() returns a full name in F-M-L order. 
@@ -57,16 +62,20 @@
 ;;; Return: firstName, middleName, lastName,
 ;;;           separated by spaces. 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 
-; Replace this line with a definition of toString()
+
+(defn toString [^Name aName]
+  (str (getFirst aName) " " (getMiddle aName) " " (getLast aName))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; printName() displays a name object.
 ;;; Receive: aName, a Name.
 ;;; Output: the strings in aName.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 
-; Replace this line with a definition of printName()
+
+(defn printName [^Name aName] 
+  (println (toString aName))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; A simple driver to test our Name functions. 
@@ -83,27 +92,27 @@
     ;; ----- SECTION 1 -----
     (println)
     (print name1) (println)
-    ; (assert (= (getFirst name1) "John") "getFirst(1) failed")
-    ; (assert (= (getMiddle name1) "Paul") "getMiddle(1) failed")
-    ; (assert (= (getLast name1) "Jones") "getLast(1) failed")
-    ; (assert (= (toString name1) "John Paul Jones") "toString(1) failed")
-    ; (printName name1) (println)
+    (assert (= (getFirst name1) "John") "getFirst(1) failed")
+    (assert (= (getMiddle name1) "Paul") "getMiddle(1) failed")
+    (assert (= (getLast name1) "Jones") "getLast(1) failed")
+    (assert (= (toString name1) "John Paul Jones") "toString(1) failed")
+    (printName name1) (println)
     ;; ----- SECTION 2 -----
     (println)
     (print name2) (println)
-    ; (assert (= (getFirst name2) "Jane") "getFirst(2) failed")
-    ; (assert (= (getMiddle name2) "Penelope") "getMiddle(2) failed")
-    ; (assert (= (getLast name2) "Jones") "getLast(2) failed")
-    ; (assert (= (toString name2) "Jane Penelope Jones") "toString(2) failed")
-    ; (printName name2) (println)
+    (assert (= (getFirst name2) "Jane") "getFirst(2) failed")
+    (assert (= (getMiddle name2) "Penelope") "getMiddle(2) failed")
+    (assert (= (getLast name2) "Jones") "getLast(2) failed")
+    (assert (= (toString name2) "Jane Penelope Jones") "toString(2) failed")
+    (printName name2) (println)
     ;; ----- SECTION 3 -----
     (println)
     (print name3) (println)
-    ; (assert (= (getFirst name3) "Jinx") "getFirst(3) failed")
-    ; (assert (= (getMiddle name3) "Joy") "getMiddle(3) failed")
-    ; (assert (= (getLast name3) "Jones") "getLast(3) failed")
-    ; (assert (= (toString name3) "Jinx Joy Jones") "toString(3) failed")
-    ; (printName name3) (println)
+    (assert (= (getFirst name3) "Jinx") "getFirst(3) failed")
+    (assert (= (getMiddle name3) "Joy") "getMiddle(3) failed")
+    (assert (= (getLast name3) "Jones") "getLast(3) failed")
+    (assert (= (toString name3) "Jinx Joy Jones") "toString(3) failed")
+    (printName name3) (println)
 
     (println "\nAll tests passed!\n")
   )
