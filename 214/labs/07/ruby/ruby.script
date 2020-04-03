@@ -1,0 +1,54 @@
+Script started on 2020-04-02 14:22:15-0400
+]0;djv78@gold02: ~/CS214Work/214/labs/07/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ruby[00m$ cat NameTester.rb 
+# NameTester.rb tests class Name and its operations
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# Date: 4-2-2020
+####################################################
+
+require 'test/unit/assertions'   # needed for assert
+include Test::Unit::Assertions
+
+class Name 
+
+   def initialize(first, middle, last)
+      @first, @middle, @last = first, middle, last
+   end
+
+   # accessor methods
+   attr_reader :first, :middle, :last
+
+   def fullName()
+      first +  ' ' + middle + ' ' + last
+   end
+
+   def print
+      puts(fullName())
+      return fullName()
+   end
+
+
+end
+
+
+def testName
+   name = Name.new("John", "Paul", "Jones")
+
+   assert name.first == "John", "first failed"
+   assert name.middle == "Paul", "middle failed"
+   assert name.last == "Jones", "last failed"
+   assert name.fullName == "John Paul Jones", "fullName failed"
+   assert name.print == "John Paul Jones", "print failed"
+   
+   print "All tests passed!\n"
+end
+
+testName
+
+]0;djv78@gold02: ~/CS214Work/214/labs/07/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ruby[00m$ rub7[Ky NameTester.rb 
+John Paul Jones
+All tests passed!
+]0;djv78@gold02: ~/CS214Work/214/labs/07/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ruby[00m$ exit
+
+Script done on 2020-04-02 14:22:37-0400
