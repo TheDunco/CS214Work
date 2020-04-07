@@ -1,0 +1,104 @@
+Script started on 2020-04-06 21:48:30-0400
+]0;djv78@gold04: ~/CS214Work/214/projects/07/ruby[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/projects/07/ruby[00m$ cat NameTester.rb 
+# NameTester.rb tests class Name and its operations
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# For Proj07
+# Date: 4-6-2020
+####################################################
+
+require 'test/unit/assertions'   # needed for assert
+include Test::Unit::Assertions
+
+class Name 
+
+   def initialize(first, middle, last)
+      @first, @middle, @last = first, middle, last
+   end
+
+   # accessor methods
+   attr_reader :first, :middle, :last
+
+   # setter methods
+   attr_writer :first, :middle, :last
+
+   def fullName()
+      first +  ' ' + middle + ' ' + last
+   end
+
+   def print
+      puts(fullName())
+      return fullName()
+   end
+
+   def lfmi
+      return last + ", " + first + " " + middle[0] + ".";
+   end
+
+   # Change the values by reading them in from the keyboard
+   def read
+      @first = gets.chomp
+      @middle = gets.chomp
+      @last = gets.chomp
+   end
+end
+
+
+def testName
+   # Test the getters
+   name = Name.new("John", "Paul", "Jones")
+
+   assert name.first == "John", "first failed"
+   assert name.middle == "Paul", "middle failed"
+   assert name.last == "Jones", "last failed"
+   assert name.fullName == "John Paul Jones", "fullName failed"
+   assert name.print == "John Paul Jones", "print failed"
+
+   # Setters and LFMI tests
+   name.first = "Phillip"
+   name.middle = "Joseph"
+   name.last = "Wheelwright"
+
+   assert name.first == "Phillip"
+   assert name.middle == "Joseph"
+   assert name.last == "Wheelwright"
+   assert name.lfmi == "Wheelwright, Phillip J."
+
+   # Read test
+   name.read
+   name.print
+   assert name.first == "Jane"
+   assert name.middle == "Renee"
+   assert name.last == "Doe"
+   
+   print "All tests passed!\n"
+end
+
+testName
+
+]0;djv78@gold04: ~/CS214Work/214/projects/07/ruby[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/projects/07/ruby[00m$ ruby name[KNameTester.rb 
+John Paul Jones
+Jane
+Renee
+Doe
+Jane Renee Doe
+All tests passed!
+]0;djv78@gold04: ~/CS214Work/214/projects/07/ruby[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/projects/07/ruby[00m$ ruby NameTester.rb 
+John Paul Jones
+Han  enry
+B Bloo
+Blah
+Henry Bloo Blah
+[1mTraceback[m (most recent call last):
+	7: from NameTester.rb:76:in `<main>'
+	6: from NameTester.rb:69:in `testName'
+	5: from /usr/lib/ruby/vendor_ruby/test/unit/assertions.rb:130:in `assert'
+	4: from /usr/lib/ruby/vendor_ruby/test/unit/assertions.rb:1636:in `_wrap_assertion'
+	3: from /usr/lib/ruby/vendor_ruby/test/unit/assertions.rb:163:in `block in assert'
+	2: from /usr/lib/ruby/vendor_ruby/test/unit/assertions.rb:53:in `assert_block'
+	1: from /usr/lib/ruby/vendor_ruby/test/unit/assertions.rb:1631:in `_wrap_assertion'
+/usr/lib/ruby/vendor_ruby/test/unit/assertions.rb:55:in `block in assert_block': [1m<false> is not true. ([1;4mTest::Unit::AssertionFailedError[m[1m)
+[m]0;djv78@gold04: ~/CS214Work/214/projects/07/ruby[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/projects/07/ruby[00m$ exit
+
+Script done on 2020-04-06 21:49:04-0400

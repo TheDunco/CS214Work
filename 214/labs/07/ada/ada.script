@@ -1,5 +1,5 @@
-Script started on 2020-04-02 11:29:06-0400
-]0;djv78@gold02: ~/CS214Work/214/labs/07/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ada[00m$ cat name_s[Ktester.adb
+Script started on 2020-04-06 17:37:38-0400
+]0;djv78@gold02: ~/CS214Work/214/labs/07/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ada[00m$ cat name_s[Ktester.adb
 -- namer.adb "test-drives" the Name type.
 -- Begun by: Prof. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen 
@@ -105,6 +105,6 @@ make: Nothing to be done for 'ada'.
 ]0;djv78@gold02: ~/CS214Work/214/labs/07/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ada[00m$ ./name_tester 
 John     Paul     Jones   
 All tests passed!
-]0;djv78@gold02: ~/CS214Work/214/labs/07/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ada[00m$ exit
+]0;djv78@gold02: ~/CS214Work/214/labs/07/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/labs/07/ada[00m$ cd [K[K[Kexit
 
-Script done on 2020-04-02 11:29:50-0400
+Script done on 2020-04-06 17:38:17-0400

@@ -1,0 +1,95 @@
+V "GNAT Lib v7"
+M P W=b
+A -gnata
+P SS ZX
+
+RN
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U name_tester%b		name_tester.adb		8cafeb2b NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W system.assertions%s	s-assert.adb		s-assert.ali
+W system.concat_5%s	s-conca5.adb		s-conca5.ali
+W system.concat_6%s	s-conca6.adb		s-conca6.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+
+D ada.ads		20170106103348 76789da1 ada%s
+D a-except.ads		20151016123252 291912d5 ada.exceptions%s
+D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
+D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
+D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
+D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
+D interfac.ads		20160502101001 5ab55268 interfaces%s
+D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
+D name_tester.adb	20200406235623 b4c21eff name_tester%b
+D system.ads		20170510173650 4635ec04 system%s
+D s-assert.ads		20140225151544 cd8d2c94 system.assertions%s
+D s-conca5.ads		20140225151544 875e432e system.concat_5%s
+D s-conca6.ads		20140225151544 d2c72db2 system.concat_6%s
+D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
+D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
+D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
+D s-secsta.ads		20170112134946 9751b57e system.secondary_stack%s
+D s-soflin.ads		20151020124036 14e1eb6c system.soft_links%s
+D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
+D s-stalib.ads		20151112104907 09bd3940 system.standard_library%s
+D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
+D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20160502101423 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 10|8r6 8r23
+X 6 a-textio.ads
+49K13*Text_IO 471e16 10|8w10 8r27
+166U14*New_Line 10|162s17 179s31
+240U14*Get 10|149s5 150s5 151s5
+242U14*Put 10|85s5 179s5
+X 10 name_tester.adb
+10U11*name_tester 10b11 181l5 181t16
+12i5 NAME_SIZE{integer} 16r51
+14R10 Name 17e19 19r9 31r30 48r32 53r33 58r31 71r35 83r28 95r37 107r38 119r36
+. 132r28 147r33
+16a13 MyFirst{string} 35m13 50r20 97m13 149m17
+16a22 MyMiddle{string} 36m13 55r20 109m13 135r19 135r36 150m17
+16a32 MyLast{string} 37m13 60r20 121m13 151m17
+19r1 aName{14R10} 155m10 157r29 158r30 159r28 160r32 162r9 165m14 165r14
+. 166m15 166r15 167m13 167r13 168r30 169r30 170r28 172m10 172r10 173r30 174r30
+. 175r28 176r25 177r32
+31U11 Init 31b11 31<16 32>5 32>12 32>20 38l5 38t9 155s5
+31r16 TheName{14R10} 35m5 36m5 37m5
+32a5 First{string} 35r24
+32a12 Middle{string} 36r25
+32a20 Last{string} 37r23
+48V10 getFirst{string} 48b10 48>19 51l5 51t13 73s12 134s38 157s20 168s21
+. 173s21
+48r19 TheName{14R10} 50r12
+53V10 getMiddle{string} 53b10 53>20 56l5 56t14 73s38 158s20 169s20 174s20
+53r20 TheName{14R10} 55r12
+58V10 getLast{string} 58b10 58>18 61l5 61t12 73s65 134s12 159s20 170s20 175s20
+58r18 TheName{14R10} 60r12
+71V10 getFullName{string} 71b10 71>22 74l5 74t16 85s9 160s20 177s20
+71r22 TheName{14R10} 73r21 73r48 73r73
+83U11 Put 83b11 83>15 86l5 86t8 162s5
+83r15 TheName{14R10} 85r21
+95U11 setFirst 95b11 95=20 95>43 98l5 98t13 165s5
+95r20 TheName{14R10} 97m5
+95a43 NewName{string} 97r24
+107U11 setMiddle 107b11 107=21 107>44 110l5 110t14 166s5
+107r21 TheName{14R10} 109m5
+107a44 NewName{string} 109r25
+119U11 setLast 119b11 119=19 119>42 122l5 122t12 167s5
+119r19 TheName{14R10} 121m5
+119a42 NewName{string} 121r23
+132V10 lfmi{string} 132b10 132>15 136l5 136t9 176s20
+132r15 TheName{14R10} 134r20 134r47 135r11 135r28
+147U11 read 147b11 147=16 152l5 152t9 172s5
+147r16 TheName{14R10} 149m9 149r9 150m9 150r9 151m9 151r9
+
