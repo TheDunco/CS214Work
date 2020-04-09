@@ -1,21 +1,20 @@
 V "GNAT Lib v7"
 M P W=b
 A -gnata
+A -mtune=generic
+A -march=x86-64
 P SS ZX
 
 RN
 RV NO_IO
 RV NO_SECONDARY_STACK
-RV NO_STANDARD_STORAGE_POOLS
-RV NO_DYNAMIC_SIZED_OBJECTS
 RV SPARK_05
 
-U name_tester%b		name_tester.adb		6b203bab NE OO SU IL
+U name_tester%b		name_tester.adb		cf0a9467 NE OO SU IL
 W ada%s			ada.ads			ada.ali
-W ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+W name_package%s	name_package.adb	name_package.ali
 W system.assertions%s	s-assert.adb		s-assert.ali
-W system.concat_5%s	s-conca5.adb		s-conca5.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 
 D ada.ads		20170106103348 76789da1 ada%s
@@ -27,10 +26,10 @@ D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D interfac.ads		20160502101001 5ab55268 interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
-D name_tester.adb	20200409161447 534dce7f name_tester%b
+D name_package.ads	20200409164641 568f9bc2 name_package%s
+D name_tester.adb	20200409164227 a1e8fa71 name_tester%b
 D system.ads		20170510173650 4635ec04 system%s
 D s-assert.ads		20140225151544 cd8d2c94 system.assertions%s
-D s-conca5.ads		20140225151544 875e432e system.concat_5%s
 D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
 D s-exctab.ads		20140225151139 54135002 system.exception_table%s
 D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
@@ -44,32 +43,21 @@ D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20160502101423 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
 X 1 ada.ads
-16K9*Ada 20e8 10|7r6 7r23
+16K9*Ada 20e8 11|8r6 8r23
 X 6 a-textio.ads
-49K13*Text_IO 471e16 10|7w10 7r27
-166U14*New_Line 10|99s17 100s31
-242U14*Put 10|87s5 100s5
-X 10 name_tester.adb
-9U11*name_tester 9b11 102l5 102t16
-11i5 NAME_SIZE{integer} 15r51
-13R10 Name 16e19 18r9 30r30 50r32 55r33 60r31 73r35 85r28
-15a13 MyFirst{string} 34m13 52r20
-15a22 MyMiddle{string} 35m13 57r20
-15a32 MyLast{string} 36m13 62r20
-18r1 aName{13R10} 92m10 94r29 95r30 96r28 97r32 99r9
-30U11 Init 30b11 30<16 31>5 31>12 31>20 37l5 37t9 92s5
-30r16 TheName{13R10} 34m5 35m5 36m5
-31a5 First{string} 34r24
-31a12 Middle{string} 35r25
-31a20 Last{string} 36r23
-50V10 getFirst{string} 50b10 50>19 53l5 53t13 75s12 94s20
-50r19 TheName{13R10} 52r12
-55V10 getMiddle{string} 55b10 55>20 58l5 58t14 75s38 95s20
-55r20 TheName{13R10} 57r12
-60V10 getLast{string} 60b10 60>18 63l5 63t12 75s65 96s20
-60r18 TheName{13R10} 62r12
-73V10 getFullName{string} 73b10 73>22 76l5 76t16 87s9 97s20
-73r22 TheName{13R10} 75r21 75r48 75r73
-85U11 Put 85b11 85>15 88l5 88t8 99s5
-85r15 TheName{13R10} 87r21
+49K13*Text_IO 471e16 11|8w10 8r27
+166U14*New_Line 11|27s15 28s29
+242U14*Put 11|28s3
+X 10 name_package.ads
+10K9*Name_Package 121e17 11|9w6 9r24 13r11
+12R6*Name 119e15 11|13r24
+24U11*Init 11|17s3
+38V10*getFirst{string} 11|19s18
+40V10*getMiddle{string} 11|21s18
+42V10*getLast{string} 11|23s18
+52V10*getFullName{string} 11|25s18
+61U11*Put 11|27s3
+X 11 name_tester.adb
+11U11*name_tester 11b11 29l5 29t16
+13r3 aName{10|12R6} 17m8 19r27 21r28 23r26 25r30 27r7
 

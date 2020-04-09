@@ -1,22 +1,15 @@
--- namer.adb "test-drives" the Name type.
--- Begun by: Prof. Adams, CS 214 at Calvin College.
--- Completed by: Duncan Van Keulen 
--- For Proj07
--- Date: 4-6-2020
-----------------------------------------------
+-- name_package.ads declares the Name type and its operations.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: Duncan Van Keulen
+-- Date: 2/9/2020
+--------------------------------------------------------------
 
 with Ada.Text_IO; use Ada.Text_IO;
 
-procedure name_tester is
+package Name_Package is
 
-    NAME_SIZE : constant Integer := 8;
-
-    type Name is 
-        record
-            MyFirst, MyMiddle, MyLast : String(1..NAME_SIZE);
-        end record;
-
-aName : Name ;
+type Name is private;
 
 ----------------------------------------------
 -- Init initializes a Name variable          -
@@ -28,14 +21,8 @@ aName : Name ;
 --               Middle, and Last.           -
 ----------------------------------------------
 
-procedure Init(TheName : out Name;
-    First, Middle, Last : in String) is    
-
-begin
-    TheName.MyFirst := First;
-    TheName.MyMiddle := Middle;
-    TheName.MyLast := Last;
-end Init;
+procedure Init(Nm : out Name;
+    First, Middle, Last : in String);
 
 
 ----------------------------------------------
@@ -48,20 +35,11 @@ end Init;
 --         and theName.myLast respectively.  -
 ----------------------------------------------
 
-function getFirst(TheName : in Name) return String is
-begin
-    return TheName.myFirst;
-end getFirst;
+function getFirst(Nm : in Name) return String;
 
-function getMiddle(TheName : in Name) return String is
-begin
-    return TheName.myMiddle;
-end getMiddle;
+function getMiddle(Nm : in Name) return String;
 
-function getLast(TheName : in Name) return String is
-begin
-    return TheName.myLast;
-end getLast;
+function getLast(Nm : in Name) return String;
 
 
 -----------------------------------------------
@@ -71,10 +49,7 @@ end getLast;
 -- Return: a String representation of theName -
 -----------------------------------------------
 
-function getFullName(TheName : in Name) return String is
-begin
-    return getFirst(TheName) & ' ' & getMiddle(TheName) & ' ' & getLast(TheName);
-end getFullName;
+function getFullName(Nm : in Name) return String;
 
 ----------------------------------------------
 -- Put(Name) displays a Name value.          -
@@ -83,10 +58,7 @@ end getFullName;
 -- Output: theName, to the screen.           -
 ----------------------------------------------
 
-procedure Put(TheName : in Name) is
-begin
-    Put(getFullName(TheName));
-end Put;
+procedure Put(Nm : in Name);
 
 ----------------------------------------------
 -- setFirst(Name) sets Name.myFirst          -
@@ -95,10 +67,7 @@ end Put;
 -- POST: TheName.first will be updated       -
 ----------------------------------------------
 
-procedure setFirst(TheName : in out Name; NewName : in String) is
-begin
-    TheName.MyFirst := NewName;
-end setFirst;
+procedure setFirst(TheName : in out Name; NewName : in String);
 
 ----------------------------------------------
 -- setMiddle(Name) sets Name.myMiddle        -
@@ -107,10 +76,7 @@ end setFirst;
 -- POST: TheName.middle will be updated      -
 ----------------------------------------------
 
-procedure setMiddle(TheName : in out Name; NewName : in String) is
-begin
-    TheName.MyMiddle := NewName;
-end setMiddle;
+procedure setMiddle(TheName : in out Name; NewName : in String);
 
 ----------------------------------------------
 -- setLast(Name) sets Name.myLast            -
@@ -119,10 +85,7 @@ end setMiddle;
 -- POST: TheName.last will be updated        -
 ----------------------------------------------
 
-procedure setLast(TheName : in out Name; NewName : in String) is
-begin
-    TheName.MyLast := NewName;
-end setLast;
+procedure setLast(TheName : in out Name; NewName : in String);
 
 -----------------------------------------------
 -- lfmi(Name) retrieves Name as a String      -
@@ -132,11 +95,7 @@ end setLast;
 -- Return: a String representation of theName -
 -----------------------------------------------
 
-function lfmi(TheName : in Name) return String is
-begin
-    return getLast(TheName) & ", " & getFirst(TheName) & " " 
-        & TheName.MyMiddle(TheName.MyMiddle'first) & ".";
-end lfmi;
+function lfmi(TheName : in Name) return String;
 
 ----------------------------------------------
 -- read(Name) sets MyFirst, MyMiddle, MyLast -
@@ -147,41 +106,17 @@ end lfmi;
 --      the keyboard                         -
 ----------------------------------------------
 
-procedure read(TheName : in out Name) is
-begin
-    Get(TheName.MyFirst);
-    Get(TheName.MyMiddle);
-    Get(TheName.MyLast);
-end read;
+procedure read(TheName : in out Name);
 
 
--- begin testing Name
-begin
-    Init(aName, "John    ", "Paul    ", "Jones   ");
+private
 
-    pragma Assert( getFirst(aName) = "John    ", "getFirst() failed");
-    pragma Assert( getMiddle(aName) = "Paul    ", "getMiddle() failed");
-    pragma Assert( getLast(aName) = "Jones   ", "getLast() failed");
-    pragma Assert( getFullName(aName) = "John     Paul     Jones   ", "getFullName() failed");
+NAME_SIZE : constant Integer := 8;
 
-    Put(aName); New_line;
+type Name is 
+    record
+        MyFirst, MyMiddle, MyLast : String(1..NAME_SIZE);
+    end record;
 
-    -- "Setter" testers
-    setFirst(aName, "Phillip ");
-    setMiddle(aName, "Joseph  ");
-    setLast(aName, "Bray    ");
-    pragma Assert(  getFirst(aName) = "Phillip ", "setFirst() failed");
-    pragma Assert( getMiddle(aName) = "Joseph  ", "setMiddle() failed");
-    pragma Assert( getLast(aName) = "Bray    ", "setLast() failed");
-
-    read(aName);
-    pragma Assert(  getFirst(aName) = "Jane    ", "setFirst() failed");
-    pragma Assert( getMiddle(aName) = "Renee   ", "setMiddle() failed");
-    pragma Assert( getLast(aName) = "Doe     ", "setLast() failed");
-    pragma Assert( lfmi(aName) = "Doe     , Jane     R.");
-    pragma Assert( getFullName(aName) = "Jane     Renee    Doe     ", "getFullName() failed");
-
-    Put("All tests passed!"); New_line;
-
-end name_tester;
+end Name_Package;
 

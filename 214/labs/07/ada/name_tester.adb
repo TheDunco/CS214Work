@@ -38,10 +38,13 @@ end Init;
 
 
 ----------------------------------------------
--- getFirst(Name) retrieves Name.myFirst        -
+-- getFirst(Name) retrieves Name.myFirst     -
+-- getMiddle(Name) retrieves Name.myMiddle   -
+-- getLast(Name) retrieves Name.myLast       -
 -- Receive: theName, a Name.                 -
 -- PRE: theName has been initialized.        -
--- Return: theName.myFirst.                  -
+-- Return: theName.myFirst, theName.myMiddle,-
+--         and theName.myLast respectively.  -
 ----------------------------------------------
 
 function getFirst(TheName : in Name) return String is
