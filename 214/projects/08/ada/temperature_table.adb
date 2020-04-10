@@ -3,3 +3,6 @@
 -- Completed by: Duncan Van Keulen
 -- Date: 4/9/2020
 ---------------------------------------------------------
+
+with Temperature;
+use Temperature;

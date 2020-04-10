@@ -28,13 +28,13 @@ function toCelsius(Tmp : in Temperature) return Temperature;
 
 function toKelvin(Tmp : in Temperature) return Temperature;
 
-function enterTemperature(degrees : in Float; scale : in character) return Temperature;
+function enterTemperature(Tmp : in Temperature; input : in String;) return Temperature;
 
 function toString(Tmp : in Temperature) return String;
 
 function equals(temp : in Temperature) return boolean;
 
-function lessThan(temp : in Temperature) return boolean;
+function lessThan(temp1 : in Temperature; temp2 : in Temperature;) return boolean;
 
 
 
