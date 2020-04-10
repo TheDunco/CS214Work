@@ -28,7 +28,7 @@ function toCelsius(Tmp : in Temperature) return Temperature;
 
 function toKelvin(Tmp : in Temperature) return Temperature;
 
-function enterTemperature(Tmp : in Temperature; input : in String;) return Temperature;
+function enterTemperature(Tmp : in out Temperature; input : in String;) return Temperature;
 
 function toString(Tmp : in Temperature) return String;
 

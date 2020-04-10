@@ -95,7 +95,7 @@ package body Temperature is
         end case; 
     end toKelvin;
 
-    function enterTemperature(Tmp : in Temperature; input : in String;) return Temperature is
+    function enterTemperature(Tmp : in out Temperature; input : in String;) return Temperature is
         newDeg : Float;
         newScale : character := input(5);
     begin
@@ -112,7 +112,7 @@ package body Temperature is
         return getDegree(Tmp) & " " & getSacle(Tmp);
     end toString;
 
-    function equals(temp : in Temperature) return boolean is
+    function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean is
     begin
         case(getScale(temp1)) is
             when 'F' | 'f' => 
