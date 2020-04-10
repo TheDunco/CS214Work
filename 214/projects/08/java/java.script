@@ -1,0 +1,537 @@
+Script started on 2020-04-09 22:19:41-0400
+]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ ls
+java.script  Temperature.class  Temperature.java  TemperatureTable.class  TemperatureTable.java
+]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ cat Temperature.java
+/* Tempearture.java provides the Temperature class
+* Student: Duncan Van Keulen
+* Date: 4/9/2020
+*************************************************/
+
+public class Temperature {
+    private Double myDegrees;
+    private char myScale;
+
+    /*
+    Temperature constructor
+    In: double degrees: the value of the degrees to be used
+    In: char scale: the temperature scale to use
+    Precondition: Scale must be one of C, K, F/c, k, f
+    Precondition: Degrees must not be below absolute zero in the respective scale
+    Postcondition: Temperature object will be made and instance variables
+                    will be initialized
+    */
+    public Temperature(final double degrees, final char scale) {
+        if(isValidTemperature(degrees, scale)) {
+            myScale = scale;
+            myDegrees = degrees;
+        }
+    }
+
+    /*
+    Empty temperature constructor for use with filling values in later
+    */
+    public Temperature() {
+        myScale = 'C';
+        myDegrees = 0.0;
+    };
+
+    /* 
+    Checker to make sure a temperature is going to be valid
+    In: double degree: the degree of the perspective Temperature
+    In: char scale: the temperature scale of the perspective Temperature
+    Return: Boolean indicating whether or not the temperature is valid. 
+    */
+    public boolean isValidTemperature(double degree, char scale) {
+        // Make sure the temperature scale is one of these
+        switch(scale) {
+            case 'F':
+            case 'f':
+                if(degree >= -460.0) {
+                    return true;
+                }
+            case 'K':
+            case 'k':
+                if (degree >= 0.0) {
+                    return true;
+                }
+            case 'C':
+            case 'c':
+                if (degree >= -273.15) {
+                    return true;
+                }
+            default:
+                return false;
+        }
+    }
+
+    // Accessor for myScale
+    public char getScale() {
+        return myScale;
+    }
+
+    // Accessor of myDegrees
+    public double getDegrees() {
+        return myDegrees;
+    }
+
+    /* 
+    Upwards adjustment for degrees
+    In: Temperature temp: the temperature object of which to raise the degrees by
+    In: double degrees: the amount of degrees to raise the temperature by in it's scale
+    Precondition: temp must be a valid temperature.
+    Returns: A new temperature object with the myDegree incremented by degrees
+    */
+    public Temperature raise(Temperature temp, double degrees) {
+        double newDeg = temp.getDegrees();
+        newDeg += degrees;
+        if(isValidTemperature(newDeg, temp.getScale())){
+            return new Temperature(newDeg, temp.getScale());
+        }
+        else {
+            System.out.println("Couldn't raise temperature");
+            return temp;
+        }
+    }
+
+    /* 
+    Downwards adjustment for degrees
+    In: Temperature temp: the temperature object of which to lower the degrees by
+    In: double degrees: the amount of degrees to lower the temperature by in it's scale
+    Precondition: temp must be a valid temperature.
+    Returns: A new temperature object with the myDegree decremented by degrees
+    */
+    public Temperature lower(Temperature temp, double degrees) {
+
+        double newDeg = temp.getDegrees();
+        newDeg -= degrees;
+
+        if(isValidTemperature(newDeg, temp.getScale())){
+            return new Temperature(newDeg, temp.getScale());
+        }
+        else {
+            System.out.println("Couldn't raise temperature");
+            return temp;
+        }
+    }
+
+    /* 
+    Fahrenheit conversion
+    Converty any temperature scale into Fahrenheit. 
+    Returns: A new Temperature object with the myScale
+            changed to the correct scale and myDegree
+            updated to the correct value for that scale
+    */
+    public Temperature toFahrenheit() {
+        switch(myScale) {
+            case 'F':
+            case 'f':
+                return this;
+            case 'C':
+            case 'c':
+                return new Temperature( ((myDegrees * (9.0/5.0)) + 32.0), 'F');
+            case 'K':
+            case 'k':
+                return new Temperature( (((myDegrees - 273.15) * (9.0/5.0)) + 32.0), 'F' );
+            default:
+                // Invalid temperature scale
+                System.out.println("Could not convert to F");
+                return this;
+        }
+    }
+
+    /* 
+    Celsius conversion
+    Converty any temperature scale into Celsius. 
+    Returns: A new Temperature object with the myScale
+            changed to the correct scale and myDegree
+            updated to the correct value for that scale
+    */
+    public Temperature toCelsius() {
+        switch(myScale) {
+            case 'F':
+            case 'f':
+                return new Temperature( (myDegrees - 32.0) * (5.0/9.0), 'C');
+            case 'C':
+            case 'c':
+                return this;
+            case 'K':
+            case 'k':
+                return new Temperature((myDegrees - 273.15), 'C');
+            default:
+                // Invalid temperature scale
+                System.out.println("Could not convert to C");
+                return this;
+        }
+    }
+
+    /* 
+    Kelvin conversion
+    Converty any temperature scale into Kelvin. 
+    Returns: A new Temperature object with the myScale
+            changed to the correct scale and myDegree
+            updated to the correct value for that scale
+    */
+    public Temperature toKelvin() {
+        switch(myScale) {
+            case 'F':
+            case 'f':
+                return new Temperature( (((myDegrees - 32.0)) * (5.0/9.0) + 273.15), 'K');
+            case 'C':
+            case 'c':
+                return new Temperature( (myDegrees + 273.15), 'K');
+            case 'K':
+            case 'k':
+                return this;
+            default:
+                // Invalid temperature scale
+                System.out.println("Could not convert to K");
+                return this;
+        }
+    }
+
+    /*
+    Ability to set the values of myDegree and myScale with a string input
+    In: String input: the string containing the desired temperature and scale
+    Precondition: input must be in the format <valid numbers> <valid scale>
+                and must be valid for a Temperature object
+    Postcondition: The values of myDegree and myScale will be updated with the input values
+    */
+    public void enterTemperature(String input) {
+        // Strip away nasty white space
+        char[] inputCharArray = input.toCharArray();
+
+        // Set the scale to the last character entered
+        char scale = inputCharArray[input.length() - 1];
+
+        // Set the degrees to everthing before that (in hopes that it's a valid double)
+        double degrees = Double.parseDouble( input.substring(0, input.length() - 1) );
+
+        // Make sure the parsed values would make a valid temperature and set 
+        //      myDegree and myScale
+        if(isValidTemperature(degrees, scale)) {
+            myDegrees = degrees;
+            myScale = scale;
+        }
+        else {
+            System.out.println("Invalid temperature");
+        }
+    }
+
+    /*
+    Convert a temperature object to a string to be displayed (in a table)
+    Returns: A string containing the value of myDegrees rounded to 2 decimal places
+            followed by the letter corresponding to the scale
+    */
+    public String toString() {
+        return String.format(("%.2f " + String.valueOf(myScale)), myDegrees);
+    }
+
+    /*
+    For testing if two Temperature objects have equal temperature (regardless of scale)
+    In: Temperature temp: The Temperature object to compare to this.
+    Precondition: Both temp and this must be valid temperature objects.
+    Returns: a boolean indicating whether or not the two temperatures are equal.
+    */
+    public boolean equals(Temperature temp) {
+        switch(myScale) {
+            case 'F':
+            case 'f':
+                if(temp.toFahrenheit().getDegrees() == myDegrees) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'K':
+            case 'k':
+                if(temp.toKelvin().getDegrees() == myDegrees) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'C':
+            case 'c':
+                if(temp.toCelsius().getDegrees() == myDegrees) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    /*
+    For testing if this Temperature object's degree is less than another
+    In: Temperature temp: The Temperature object to compare to this.
+    Precondition: Both temp and this must be valid temperature objects.
+    Returns: a boolean indicating whether or not temp's degree is less than this's degree.
+    */
+    public boolean lessThan(Temperature temp) {
+        switch(myScale) {
+            case 'F':
+            case 'f':
+                if(temp.toFahrenheit().getDegrees() > myDegrees) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'K':
+            case 'k':
+                if(temp.toKelvin().getDegrees() > myDegrees) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'C':
+            case 'c':
+                if(temp.toCelsius().getDegrees() > myDegrees) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            default:
+                return false;
+        }
+    }
+}
+]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ cat TemperatureTable.java
+/* TempeartureTable.java implements the Temperature
+* class for use in making a temperature table
+* Student: Duncan Van Keulen
+* Date: 4/9/2020
+*************************************************/
+import java.util.Scanner;
+
+public class TemperatureTable {
+    public static void main(String[] args) {
+        
+        Scanner keyboard = new Scanner(System.in);
+        
+        Temperature baseTemp = new Temperature();
+        Temperature limitTemp = new Temperature();
+        double stepValue;
+
+        // Have the user enter...
+        // The starting temperature
+        System.out.println("Input the starting temperature: ");
+        baseTemp.enterTemperature(keyboard.nextLine());
+        
+        // The limit temperature
+        System.out.println("Input the limit temperature: ");
+        limitTemp.enterTemperature(keyboard.nextLine());
+
+        // The step value
+        System.out.println("Input the step value: ");
+        stepValue = keyboard.nextDouble();
+
+        // Run through and format the tables while the basetemp is less than the limit temp
+        while(baseTemp.lessThan(limitTemp)) {
+            System.out.printf("%s    %s    %s\n", 
+                    baseTemp.toFahrenheit().toString(), 
+                    baseTemp.toCelsius().toString(),
+                    baseTemp.toKelvin().toString());
+            
+            // Raise the value of baseTemp's degree by the stepValue
+            baseTemp = baseTemp.raise(baseTemp, stepValue);
+        }
+    }
+}]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ javac -deprecation Temperature[K*.java
+]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ java TemperatureTable
+Input the starting temperature: 
+0 F
+Input the limit temperature: 
+200 C
+Input the step value: 
+2.5
+0.00 F    -17.78 C    255.37 K
+2.50 F    -16.39 C    256.76 K
+5.00 F    -15.00 C    258.15 K
+7.50 F    -13.61 C    259.54 K
+10.00 F    -12.22 C    260.93 K
+12.50 F    -10.83 C    262.32 K
+15.00 F    -9.44 C    263.71 K
+17.50 F    -8.06 C    265.09 K
+20.00 F    -6.67 C    266.48 K
+22.50 F    -5.28 C    267.87 K
+25.00 F    -3.89 C    269.26 K
+27.50 F    -2.50 C    270.65 K
+30.00 F    -1.11 C    272.04 K
+32.50 F    0.28 C    273.43 K
+35.00 F    1.67 C    274.82 K
+37.50 F    3.06 C    276.21 K
+40.00 F    4.44 C    277.59 K
+42.50 F    5.83 C    278.98 K
+45.00 F    7.22 C    280.37 K
+47.50 F    8.61 C    281.76 K
+50.00 F    10.00 C    283.15 K
+52.50 F    11.39 C    284.54 K
+55.00 F    12.78 C    285.93 K
+57.50 F    14.17 C    287.32 K
+60.00 F    15.56 C    288.71 K
+62.50 F    16.94 C    290.09 K
+65.00 F    18.33 C    291.48 K
+67.50 F    19.72 C    292.87 K
+70.00 F    21.11 C    294.26 K
+72.50 F    22.50 C    295.65 K
+75.00 F    23.89 C    297.04 K
+77.50 F    25.28 C    298.43 K
+80.00 F    26.67 C    299.82 K
+82.50 F    28.06 C    301.21 K
+85.00 F    29.44 C    302.59 K
+87.50 F    30.83 C    303.98 K
+90.00 F    32.22 C    305.37 K
+92.50 F    33.61 C    306.76 K
+95.00 F    35.00 C    308.15 K
+97.50 F    36.39 C    309.54 K
+100.00 F    37.78 C    310.93 K
+102.50 F    39.17 C    312.32 K
+105.00 F    40.56 C    313.71 K
+107.50 F    41.94 C    315.09 K
+110.00 F    43.33 C    316.48 K
+112.50 F    44.72 C    317.87 K
+115.00 F    46.11 C    319.26 K
+117.50 F    47.50 C    320.65 K
+120.00 F    48.89 C    322.04 K
+122.50 F    50.28 C    323.43 K
+125.00 F    51.67 C    324.82 K
+127.50 F    53.06 C    326.21 K
+130.00 F    54.44 C    327.59 K
+132.50 F    55.83 C    328.98 K
+135.00 F    57.22 C    330.37 K
+137.50 F    58.61 C    331.76 K
+140.00 F    60.00 C    333.15 K
+142.50 F    61.39 C    334.54 K
+145.00 F    62.78 C    335.93 K
+147.50 F    64.17 C    337.32 K
+150.00 F    65.56 C    338.71 K
+152.50 F    66.94 C    340.09 K
+155.00 F    68.33 C    341.48 K
+157.50 F    69.72 C    342.87 K
+160.00 F    71.11 C    344.26 K
+162.50 F    72.50 C    345.65 K
+165.00 F    73.89 C    347.04 K
+167.50 F    75.28 C    348.43 K
+170.00 F    76.67 C    349.82 K
+172.50 F    78.06 C    351.21 K
+175.00 F    79.44 C    352.59 K
+177.50 F    80.83 C    353.98 K
+180.00 F    82.22 C    355.37 K
+182.50 F    83.61 C    356.76 K
+185.00 F    85.00 C    358.15 K
+187.50 F    86.39 C    359.54 K
+190.00 F    87.78 C    360.93 K
+192.50 F    89.17 C    362.32 K
+195.00 F    90.56 C    363.71 K
+197.50 F    91.94 C    365.09 K
+200.00 F    93.33 C    366.48 K
+202.50 F    94.72 C    367.87 K
+205.00 F    96.11 C    369.26 K
+207.50 F    97.50 C    370.65 K
+210.00 F    98.89 C    372.04 K
+212.50 F    100.28 C    373.43 K
+215.00 F    101.67 C    374.82 K
+217.50 F    103.06 C    376.21 K
+220.00 F    104.44 C    377.59 K
+222.50 F    105.83 C    378.98 K
+225.00 F    107.22 C    380.37 K
+227.50 F    108.61 C    381.76 K
+230.00 F    110.00 C    383.15 K
+232.50 F    111.39 C    384.54 K
+235.00 F    112.78 C    385.93 K
+237.50 F    114.17 C    387.32 K
+240.00 F    115.56 C    388.71 K
+242.50 F    116.94 C    390.09 K
+245.00 F    118.33 C    391.48 K
+247.50 F    119.72 C    392.87 K
+250.00 F    121.11 C    394.26 K
+252.50 F    122.50 C    395.65 K
+255.00 F    123.89 C    397.04 K
+257.50 F    125.28 C    398.43 K
+260.00 F    126.67 C    399.82 K
+262.50 F    128.06 C    401.21 K
+265.00 F    129.44 C    402.59 K
+267.50 F    130.83 C    403.98 K
+270.00 F    132.22 C    405.37 K
+272.50 F    133.61 C    406.76 K
+275.00 F    135.00 C    408.15 K
+277.50 F    136.39 C    409.54 K
+280.00 F    137.78 C    410.93 K
+282.50 F    139.17 C    412.32 K
+285.00 F    140.56 C    413.71 K
+287.50 F    141.94 C    415.09 K
+290.00 F    143.33 C    416.48 K
+292.50 F    144.72 C    417.87 K
+295.00 F    146.11 C    419.26 K
+297.50 F    147.50 C    420.65 K
+300.00 F    148.89 C    422.04 K
+302.50 F    150.28 C    423.43 K
+305.00 F    151.67 C    424.82 K
+307.50 F    153.06 C    426.21 K
+310.00 F    154.44 C    427.59 K
+312.50 F    155.83 C    428.98 K
+315.00 F    157.22 C    430.37 K
+317.50 F    158.61 C    431.76 K
+320.00 F    160.00 C    433.15 K
+322.50 F    161.39 C    434.54 K
+325.00 F    162.78 C    435.93 K
+327.50 F    164.17 C    437.32 K
+330.00 F    165.56 C    438.71 K
+332.50 F    166.94 C    440.09 K
+335.00 F    168.33 C    441.48 K
+337.50 F    169.72 C    442.87 K
+340.00 F    171.11 C    444.26 K
+342.50 F    172.50 C    445.65 K
+345.00 F    173.89 C    447.04 K
+347.50 F    175.28 C    448.43 K
+350.00 F    176.67 C    449.82 K
+352.50 F    178.06 C    451.21 K
+355.00 F    179.44 C    452.59 K
+357.50 F    180.83 C    453.98 K
+360.00 F    182.22 C    455.37 K
+362.50 F    183.61 C    456.76 K
+365.00 F    185.00 C    458.15 K
+367.50 F    186.39 C    459.54 K
+370.00 F    187.78 C    460.93 K
+372.50 F    189.17 C    462.32 K
+375.00 F    190.56 C    463.71 K
+377.50 F    191.94 C    465.09 K
+380.00 F    193.33 C    466.48 K
+382.50 F    194.72 C    467.87 K
+385.00 F    196.11 C    469.26 K
+387.50 F    197.50 C    470.65 K
+390.00 F    198.89 C    472.04 K
+]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ java TemperatureTable
+Input the starting temperature: 
+0 K
+Input the limit temperature: 
+212 F
+Input the step value: 
+20.0
+-459.67 F    -273.15 C    0.00 K
+-423.67 F    -253.15 C    20.00 K
+-387.67 F    -233.15 C    40.00 K
+-351.67 F    -213.15 C    60.00 K
+-315.67 F    -193.15 C    80.00 K
+-279.67 F    -173.15 C    100.00 K
+-243.67 F    -153.15 C    120.00 K
+-207.67 F    -133.15 C    140.00 K
+-171.67 F    -113.15 C    160.00 K
+-135.67 F    -93.15 C    180.00 K
+-99.67 F    -73.15 C    200.00 K
+-63.67 F    -53.15 C    220.00 K
+-27.67 F    -33.15 C    240.00 K
+8.33 F    -13.15 C    260.00 K
+44.33 F    6.85 C    280.00 K
+80.33 F    26.85 C    300.00 K
+116.33 F    46.85 C    320.00 K
+152.33 F    66.85 C    340.00 K
+188.33 F    86.85 C    360.00 K
+]0;djv78@gold06: ~/CS214Work/214/projects/08/java[01;32mdjv78@gold06[00m:[01;34m~/CS214Work/214/projects/08/java[00m$ exit
+
+Script done on 2020-04-09 22:21:30-0400
