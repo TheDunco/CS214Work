@@ -62,14 +62,35 @@ end lowerTemperature;
 
 function toFahrenheit(Tmp : in Temperature) return Temperature is
 begin
+    case(Scale)
+        when 'F' | 'f' => return Tmp;
+        when 'C' | 'c' => return Temperature( ((myDegrees * (9.0/5.0) + 32.0), 'F'));
+        when 'K' | 'k' => return Temperature( (((Degree - 273.15) * (9.0/5.0)) + 32.0), 'F');
+        when others => return Tmp;
+        Put("Could not convert to F");
+    end case;
 end toFahrenheit;
 
 function toCelsius(Tmp : in Temperature) return Temperature is
 begin
+    case(Scale)
+        when 'F' | 'f' => return Temperature( (Degree -32.0) * (5.0/9.0), 'C' );
+        when 'C' | 'c' => return Tmp
+        when 'K' | 'k' => return Temperature( (Degree - 273.15), 'C' );
+        when others => return Tmp;
+        Put("Could not convert to C");
+    end case;
 end toCelsius;
 
 function toKelvin(Tmp : in Temperature) return Temperature is
 begin
+    case(Scale)
+        when 'F' | 'f' => return Temperature( (((Degree - 32.0)) * (5.0/9.0) + 273.15), 'K');
+        when 'C' | 'c' => return Temperature( ((Degrees + 273.15, 'K'));
+        when 'K' | 'k' => return Tmp;
+        when others => return Tmp;
+        Put("Could not convert to K");
+    end case; 
 end toKelvin;
 
 function enterTemperature(degrees : in Float; scale : in character) return Temperature is
