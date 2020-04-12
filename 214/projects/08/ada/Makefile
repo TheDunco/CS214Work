@@ -1,7 +1,7 @@
 # Makefile for GNAT (Ada) compilation
 
 TARGET = temperature_table
-PACKAGE = temperature
+PACKAGE = temperature_package
 
 CC = gcc
 CFLAGS = -c -gnata

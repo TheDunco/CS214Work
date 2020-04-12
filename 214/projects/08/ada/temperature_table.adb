@@ -4,5 +4,14 @@
 -- Date: 4/9/2020
 ---------------------------------------------------------
 
-with Temperature;
-use Temperature;
+with Temperature_Package;
+use Temperature_Package;
+
+procedure temperature_table is
+
+    aTemp : Temperature_Package.Temperature;
+
+begin
+    Init(aTemp, 0.0, 'C');
+
+end temperature_table;

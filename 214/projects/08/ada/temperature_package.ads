@@ -6,7 +6,7 @@
 
 with Ada.Text_IO; use Ada.Text_IO;
 
-package Temperature is
+package Temperature_Package is
 
 type Temperature is private;
 
@@ -28,13 +28,21 @@ function toCelsius(Tmp : in Temperature) return Temperature;
 
 function toKelvin(Tmp : in Temperature) return Temperature;
 
-function enterTemperature(Tmp : in out Temperature; input : in String;) return Temperature;
+function enterTemperature(Tmp : in out Temperature; input : in String) return Temperature;
 
 function toString(Tmp : in Temperature) return String;
 
-function equals(temp : in Temperature) return boolean;
+function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean;
 
-function lessThan(temp1 : in Temperature; temp2 : in Temperature;) return boolean;
+function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean;
 
+private
 
+type Temperature is
+    record
+        myDegree : Float;
+        myScale : character;
+    end record;
+
+end Temperature_Package;
 
