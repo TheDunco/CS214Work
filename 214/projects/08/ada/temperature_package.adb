@@ -129,13 +129,16 @@ package body Temperature_Package is
         return Tmp;
     end toKelvin;
 
-    function enterTemperature(Tmp : in out Temperature; input : in String) return Temperature is
+    function enterTemperature(Tmp : in Temperature; input : in String) return Temperature is
         newDeg : Float;
-        newScale : character := input(5);
+        newScale : character := input(input'Last);
+        updatedTemp : Temperature;
+        numRange : Integer := (input'Last) - 2;
     begin
-        newDeg := input(1..4);
+        newDeg := Float'Value(input(input'First..numRange));
         if isValidTemperature(newDeg, newScale) then
-            return Temperature(newDeg, newScale);
+            Init(updatedTemp, newDeg, newScale);
+            return updatedTemp;
         else 
             Put("Invalid values provided");
         end if;
