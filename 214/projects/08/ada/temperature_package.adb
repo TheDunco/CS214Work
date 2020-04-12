@@ -129,7 +129,7 @@ package body Temperature_Package is
         return Tmp;
     end toKelvin;
 
-    function enterTemperature(Tmp : in Temperature; input : in String) return Temperature is
+    procedure enterTemperature(Tmp : out Temperature; input : in String) is
         newDeg : Float;
         newScale : character := input(input'Last);
         updatedTemp : Temperature;
@@ -137,17 +137,18 @@ package body Temperature_Package is
     begin
         newDeg := Float'Value(input(input'First..numRange));
         if isValidTemperature(newDeg, newScale) then
-            Init(updatedTemp, newDeg, newScale);
-            return updatedTemp;
+            Tmp.myScale := newScale;
+            Tmp.myDegree := newDeg;
         else 
             Put("Invalid values provided");
         end if;
     end enterTemperature;
 
-    function toString(Tmp : in Temperature) return String is
+    procedure display(Tmp : in Temperature) is
     begin
-        return getDegree(Tmp) & " " & getScale(Tmp);
-    end toString;
+        Put(getDegree(Tmp));
+        Put(getScale(Tmp));
+    end display;
 
     function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean is
     begin

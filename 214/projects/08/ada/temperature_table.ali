@@ -7,17 +7,30 @@ P ZX
 
 RN
 RV NO_FLOATING_POINT
+RV NO_IO
 RV SPARK_05
 
-U temperature_table%b	temperature_table.adb	82a0b0b6 NE OO SU IL
+U temperature_table%b	temperature_table.adb	bfcc35c0 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.fixed%s	a-strfix.adb		a-strfix.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
 W temperature_package%s	temperature_package.adb	temperature_package.ali
 
 D ada.ads		20170106103348 76789da1 ada%s
+D a-charac.ads		20070912115821 2d3ec45b ada.characters%s
+D a-chlat1.ads		20140225151544 66457d31 ada.characters.latin_1%s
 D a-except.ads		20151016123252 291912d5 ada.exceptions%s
+D a-flteio.ads		20070406091342 e18a47a0 ada.float_text_io%s
 D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
 D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
+D a-string.ads		20070406091342 90ac6797 ada.strings%s
+D a-strfix.ads		20101008130255 d07c346e ada.strings.fixed%s
+D a-strmap.ads		20140611123156 e8bb714a ada.strings.maps%s
 D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
+D a-tiflio.ads		20140717063513 56fbda09 ada.text_io.float_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D interfac.ads		20160502101001 5ab55268 interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
@@ -33,13 +46,33 @@ D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
 D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20160502101423 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
-D temperature_package.ads  20200412010111 9da384ca temperature_package%s
-D temperature_table.adb	20200411231044 1f03347c temperature_table%b
-X 22 temperature_package.ads
-9K9*Temperature_Package 47e24 23|7w6 8r5 12r13
-11R6*Temperature 45e15 23|12r33
-13U11*Init 23|15s5
-X 23 temperature_table.adb
-10U11*temperature_table 10b11 17l5 17t22
-12r5 aTemp{22|11R6} 15m10
+D temperature_package.ads  20200412021455 9854b10b temperature_package%s
+D temperature_table.adb	20200412022534 2e0302d1 temperature_table%b
+X 1 ada.ads
+16K9*Ada 20e8 30|8r6 8r23 9r6 9r29 10r6 10r29
+X 5 a-flteio.ads
+20K13*Float_Text_IO[13|46] 30|10w10 10r33
+X 8 a-string.ads
+16K13*Strings 35e16 30|9r10 9r33
+X 9 a-strfix.ads
+18K21*Fixed 251e22 30|9w18 9r41
+X 12 a-textio.ads
+49K13*Text_IO 471e16 30|8w10 8r27
+166U14*New_Line 30|46s9
+242U14*Put 30|37s5 42s9 44s9
+X 29 temperature_package.ads
+9K9*Temperature_Package 47e24 30|7w6 7r31
+11R10*Temperature 45e19 30|14r27
+13U15*enterTemperature 30|33s5 34s5
+15U15*display 30|41s9 43s9 45s9
+25V14*raiseTemperature{11R10} 30|41s30 43s27 45s27
+29V14*toFahrenheit{11R10} 30|41s17
+31V14*toCelsius{11R10} 30|43s17 45s17
+37V14*lessThan{boolean} 30|38s11
+X 30 temperature_table.adb
+12U11*temperature_table 12b11 53l5 53t22
+14r5 baseTemp{29|11R10} 33m22 38r20 41r47 43r44 45r44
+14r15 limitTemp{29|11R10} 34m22 38r30
+16f5 stepValue{float} 35m5 48r34
+17f5 iterValue{float} 41r57 43r54 45r54 48m9 48r22
 

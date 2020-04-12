@@ -2,24 +2,23 @@ V "GNAT Lib v7"
 A -gnata
 A -mtune=generic
 A -march=x86-64
-P SS ZX
+P ZX
 
 RN
 RV NO_FLOATING_POINT
 RV NO_IO
-RV NO_SECONDARY_STACK
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV SPARK_05
 
-U temperature_package%b	temperature_package.adb	7f557001 NE OO PK
+U temperature_package%b	temperature_package.adb	af63bbc2 NE OO PK
 W ada%s			ada.ads			ada.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 W ada.strings%s		a-string.ads		a-string.ali
 W ada.strings.fixed%s	a-strfix.adb		a-strfix.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
-W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.val_real%s	s-valrea.adb		s-valrea.ali
 
-U temperature_package%s	temperature_package.ads	13a3d971 EE NE OO PK
+U temperature_package%s	temperature_package.ads	a03944df EE NE OO PK
 W ada%s			ada.ads			ada.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 
@@ -44,16 +43,16 @@ D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
 D s-exctab.ads		20140225151139 54135002 system.exception_table%s
 D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
 D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
-D s-secsta.ads		20170112134946 9751b57e system.secondary_stack%s
 D s-soflin.ads		20151020124036 14e1eb6c system.soft_links%s
 D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
 D s-stalib.ads		20151112104907 09bd3940 system.standard_library%s
 D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
 D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20160502101423 34867c83 system.unsigned_types%s
+D s-valrea.ads		20150106102044 fe297711 system.val_real%s
 D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
-D temperature_package.ads  20200412002034 2bce2ca5 temperature_package%s
-D temperature_package.adb  20200412002319 5d00dabe temperature_package%b
+D temperature_package.ads  20200412021455 9854b10b temperature_package%s
+D temperature_package.adb  20200412020743 3eac8cd3 temperature_package%b
 X 1 ada.ads
 16K9*Ada 20e8 30|7r6 7r23 31|7r6 7r23 8r6 8r29 9r6 9r29
 X 5 a-flteio.ads
@@ -64,61 +63,68 @@ X 9 a-strfix.ads
 18K21*Fixed 251e22 31|8w18 8r41
 X 12 a-textio.ads
 49K13*Text_IO 471e16 30|7w10 7r27 31|7w10 7r27
-242U14*Put 31|19s13 55s13 69s13 88s13 107s13 126s13
+208U14*Put 31|150s9
+242U14*Put 31|19s13 55s13 69s13 88s13 107s13 126s13 143s13
+X 13 a-tiflio.ads
+68U14*Put 31|149s9[5|20]
 X 30 temperature_package.ads
-9K9*Temperature_Package 41E6 47l5 47e24 31|11b14 205l5 205t24
-11R6*Temperature 13r26 17r28 19r29 21r37 21r77 23r37 23r77 25r32 25r52 27r29
-. 27r49 29r28 29r48 31r40 31r79 33r28 35r28 35r52 37r30 37r54 41c6 45e15
-. 31|13r30 36r32 41r33 46r41 46r81 48r19 60r41 60r81 62r19 74r36 74r56 75r15
-. 94r33 94r53 95r15 113r32 113r52 114r19 132r44 132r83 147r32 155r32 155r56
-. 184r34 184r58
-13U11*Init 13<16 13>39 13>58 31|13b15 21l9 21t13 52s13 66s13 81s17 84s17
+9K9*Temperature_Package 41E10 47l5 47e24 31|11b14 203l5 203t24
+11R10*Temperature 13r42 15r32 17r30 21r32 23r33 25r41 25r81 27r41 27r81 29r36
+. 29r56 31r33 31r53 33r32 33r52 35r32 35r56 37r34 37r58 41c10 45e19 31|13r30
+. 36r32 41r33 46r41 46r81 48r19 60r41 60r81 62r19 74r36 74r56 75r15 94r33
+. 94r53 95r15 113r32 113r52 114r19 132r42 135r23 147r32 153r32 153r56 182r34
+. 182r58
+13U15*enterTemperature 13<32 13>55 31|132b15 145l9 145t25
+13r32 Tmp{11R10} 31|132b32 140m13 141m13
+13a55 input{string} 31|132b55 134r33 134r39 136r32 138r31 138r37
+15U15*display 15>23 31|147b15 151l9 151t16
+15r23 Tmp{11R10} 31|147b23 149r23 150r22
+17U15*Init 17<20 17>43 17>62 31|13b15 21l9 21t13 52s13 66s13 81s17 84s17
 . 99s17 104s17 118s17 121s17
-13r16 Tmp{11R6} 31|13b20 16m13 17m13
-13f39 Degree{float} 31|13b43 15r31 16r29
-13e58 Scale{character} 31|13b62 15r39 17r28
-15V10*isValidTemperature{boolean} 15>29 15>48 31|15s12 23b14 34l9 34t27 51s12
-. 65s12
-15f29 Degree{float} 31|23b33 26r34 27r34 28r34
-15e48 Scale{character} 31|23b52 25r14
-17V10*getScale{character} 17>19 31|36b14 39l9 39t17 51s39 52s35 65s39 66s35
-. 77s14 97s14 116s14 157s14 186s14
-17r19 Tmp{11R6} 31|36b23 38r16
-19V10*getDegree{float} 19>20 31|41b14 44l9 44t18 47s27 61s27 81s33 84s34
-. 99s32 104s32 118s33 121s32 159s16 159s49 166s16 166s45 173s16 173s46 188s16
-. 188s49 193s16 193s45 198s16 198s46
-19r20 Tmp{11R6} 31|41b24 43r16
-21V10*raiseTemperature{11R6} 21>27 21>50 31|46b14 58l9 58t25
-21r27 temp{11R6} 31|46b31 47r37 51r48 52r44 56r20
-21f50 degrees{float} 31|46b54 50r28
-23V10*lowerTemperature{11R6} 23>27 23>50 31|60b14 72l9 72t25
-23r27 temp{11R6} 31|60b31 61r37 65r48 66r44 70r20
-23f50 degrees{float} 31|60b54 64r28
-25V10*toFahrenheit{11R6} 25>23 31|74b14 92l9 92t21 159s26 188s26 188s59
-25r23 Tmp{11R6} 31|74b27 77r23 79r24 81r43 84r44 87r24 91r16
-27V10*toCelsius{11R6} 27>20 31|94b14 111l9 111t18 173s26 198s26 198s56
-27r20 Tmp{11R6} 31|94b24 97r23 99r42 102r24 104r42 106r35 110r16
-29V10*toKelvin{11R6} 29>19 31|113b14 130l9 130t17 166s26 193s26 193s55
-29r19 Tmp{11R6} 31|113b23 116r23 118r43 121r42 124r24 125r35 129r16
-31V10*enterTemperature{11R6} 31=27 31>53 31|132b14 135l9 135t25
-31r27 Tmp{11R6} 31|132b31 134r16
-31a53 input{string} 31|132b57
-33V10*toString{string} 33>19 31|147b14 150l9 150t17
-33r19 Tmp{11R6} 31|147b23
-35V10*equals{boolean} 35>17 35>41 31|155b14 182l9 182t15
-35r17 temp1{11R6} 31|155b21 157r23 159r39 166r35 173r36
-35r41 temp2{11R6} 31|155b45 159r59 166r55 173r56
-37V10*lessThan{boolean} 37>19 37>43 31|184b14 203l9 203t17
-37r19 temp1{11R6} 31|184b23 186r23 188r39 193r35 198r36
-37r43 temp2{11R6} 31|184b47 188r72 193r64 198r66
-43f9*myDegree{float} 31|16m17 43r20
-44e9*myScale{character} 31|17m17 38r20
+17r20 Tmp{11R10} 31|13b20 16m13 17m13
+17f43 Degree{float} 31|13b43 15r31 16r29
+17e62 Scale{character} 31|13b62 15r39 17r28
+19V14*isValidTemperature{boolean} 19>33 19>52 31|15s12 23b14 34l9 34t27 51s12
+. 65s12 139s12
+19f33 Degree{float} 31|23b33 26r34 27r34 28r34
+19e52 Scale{character} 31|23b52 25r14
+21V14*getScale{character} 21>23 31|36b14 39l9 39t17 51s39 52s35 65s39 66s35
+. 77s14 97s14 116s14 150s13 155s14 184s14
+21r23 Tmp{11R10} 31|36b23 38r16
+23V14*getDegree{float} 23>24 31|41b14 44l9 44t18 47s27 61s27 81s33 84s34
+. 99s32 104s32 118s33 121s32 149s13 157s16 157s49 164s16 164s45 171s16 171s46
+. 186s16 186s49 191s16 191s45 196s16 196s46
+23r24 Tmp{11R10} 31|41b24 43r16
+25V14*raiseTemperature{11R10} 25>31 25>54 31|46b14 58l9 58t25
+25r31 temp{11R10} 31|46b31 47r37 51r48 52r44 56r20
+25f54 degrees{float} 31|46b54 50r28
+27V14*lowerTemperature{11R10} 27>31 27>54 31|60b14 72l9 72t25
+27r31 temp{11R10} 31|60b31 61r37 65r48 66r44 70r20
+27f54 degrees{float} 31|60b54 64r28
+29V14*toFahrenheit{11R10} 29>27 31|74b14 92l9 92t21 157s26 186s26 186s59
+29r27 Tmp{11R10} 31|74b27 77r23 79r24 81r43 84r44 87r24 91r16
+31V14*toCelsius{11R10} 31>24 31|94b14 111l9 111t18 171s26 196s26 196s56
+31r24 Tmp{11R10} 31|94b24 97r23 99r42 102r24 104r42 106r35 110r16
+33V14*toKelvin{11R10} 33>23 31|113b14 130l9 130t17 164s26 191s26 191s55
+33r23 Tmp{11R10} 31|113b23 116r23 118r43 121r42 124r24 125r35 129r16
+35V14*equals{boolean} 35>21 35>45 31|153b14 180l9 180t15
+35r21 temp1{11R10} 31|153b21 155r23 157r39 164r35 171r36
+35r45 temp2{11R10} 31|153b45 157r59 164r55 171r56
+37V14*lessThan{boolean} 37>23 37>47 31|182b14 201l9 201t17
+37r23 temp1{11R10} 31|182b23 184r23 186r39 191r35 196r36
+37r47 temp2{11R10} 31|182b47 186r72 191r64 196r66
+43f13*myDegree{float} 31|16m17 43r20 141m17
+44e13*myScale{character} 31|17m17 38r20 140m17
 X 31 temperature_package.adb
 47f9 newDeg{float} 50m9 50r19 51r31 52r27
-48r9 newTemp{30|11R6} 52m18 53r20
+48r9 newTemp{30|11R10} 52m18 53r20
 61f9 newDeg{float} 64m9 64r19 65r31 66r27
-62r9 newTemp{30|11R6} 66m18 67r20
-75r5 newTemp{30|11R6} 81m22 82r24 84m22 85r24
-95r5 newTemp{30|11R6} 99m22 100r24 104m22 105r24
-114r9 newTemp{30|11R6} 118m22 119r24 121m22 122r24
+62r9 newTemp{30|11R10} 66m18 67r20
+75r5 newTemp{30|11R10} 81m22 82r24 84m22 85r24
+95r5 newTemp{30|11R10} 99m22 100r24 104m22 105r24
+114r9 newTemp{30|11R10} 118m22 119r24 121m22 122r24
+133f9 newDeg{float} 138m9 139r31 141r29
+134e9 newScale{character} 139r39 140r28
+135r9 updatedTemp{30|11R10}
+136i9 numRange{integer} 138r50
 

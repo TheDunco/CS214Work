@@ -8,41 +8,41 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 package Temperature_Package is
 
-type Temperature is private;
+    type Temperature is private;
 
-procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character);
+    procedure enterTemperature(Tmp : out Temperature; input : in String);
 
-function isValidTemperature(Degree : in Float; Scale : in character) return boolean;
+    procedure display(Tmp : in Temperature);
 
-function getScale(Tmp : in Temperature) return character;
+    procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character);
 
-function getDegree(Tmp : in Temperature) return Float;
+    function isValidTemperature(Degree : in Float; Scale : in character) return boolean;
 
-function raiseTemperature(temp : in Temperature; degrees : in Float) return Temperature;
+    function getScale(Tmp : in Temperature) return character;
 
-function lowerTemperature(temp : in Temperature; degrees : in Float) return Temperature;
+    function getDegree(Tmp : in Temperature) return Float;
 
-function toFahrenheit(Tmp : in Temperature) return Temperature;
+    function raiseTemperature(temp : in Temperature; degrees : in Float) return Temperature;
 
-function toCelsius(Tmp : in Temperature) return Temperature;
+    function lowerTemperature(temp : in Temperature; degrees : in Float) return Temperature;
 
-function toKelvin(Tmp : in Temperature) return Temperature;
+    function toFahrenheit(Tmp : in Temperature) return Temperature;
 
-function enterTemperature(Tmp : in Temperature; input : in String) return Temperature;
+    function toCelsius(Tmp : in Temperature) return Temperature;
 
-function toString(Tmp : in Temperature) return String;
+    function toKelvin(Tmp : in Temperature) return Temperature;
 
-function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean;
+    function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean;
 
-function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean;
+    function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean;
 
-private
+    private
 
-type Temperature is
-    record
-        myDegree : Float;
-        myScale : character;
-    end record;
+    type Temperature is
+        record
+            myDegree : Float;
+            myScale : character;
+        end record;
 
 end Temperature_Package;
 
