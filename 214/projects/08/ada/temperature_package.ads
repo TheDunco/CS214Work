@@ -10,21 +10,21 @@ package Temperature_Package is
 
     type Temperature is private;
 
-    procedure enterTemperature(Tmp : out Temperature; input : in String);
+    procedure enterTemperature(Tmp : in out Temperature);
 
     procedure display(Tmp : in Temperature);
 
     procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character);
+
+    procedure raiseTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature);
+    
+    procedure lowerTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature);
 
     function isValidTemperature(Degree : in Float; Scale : in character) return boolean;
 
     function getScale(Tmp : in Temperature) return character;
 
     function getDegree(Tmp : in Temperature) return Float;
-
-    function raiseTemperature(temp : in Temperature; degrees : in Float) return Temperature;
-
-    function lowerTemperature(temp : in Temperature; degrees : in Float) return Temperature;
 
     function toFahrenheit(Tmp : in Temperature) return Temperature;
 

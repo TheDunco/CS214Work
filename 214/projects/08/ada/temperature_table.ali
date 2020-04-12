@@ -10,7 +10,7 @@ RV NO_FLOATING_POINT
 RV NO_IO
 RV SPARK_05
 
-U temperature_table%b	temperature_table.adb	bfcc35c0 NE OO SU IL
+U temperature_table%b	temperature_table.adb	05cb6ec2 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 W ada.strings%s		a-string.ads		a-string.ali
@@ -46,8 +46,8 @@ D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
 D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20160502101423 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
-D temperature_package.ads  20200412021455 9854b10b temperature_package%s
-D temperature_table.adb	20200412022534 2e0302d1 temperature_table%b
+D temperature_package.ads  20200412212853 a8562c3d temperature_package%s
+D temperature_table.adb	20200412213628 a406c4e5 temperature_table%b
 X 1 ada.ads
 16K9*Ada 20e8 30|8r6 8r23 9r6 9r29 10r6 10r29
 X 5 a-flteio.ads
@@ -58,21 +58,27 @@ X 9 a-strfix.ads
 18K21*Fixed 251e22 30|9w18 9r41
 X 12 a-textio.ads
 49K13*Text_IO 471e16 30|8w10 8r27
-166U14*New_Line 30|46s9
-242U14*Put 30|37s5 42s9 44s9
+166U14*New_Line 30|23s5 27s5 31s5 44s5 52s9
+242U14*Put 30|21s5 25s5 29s5 37s5 38s5 39s5 40s5 41s5 42s5 43s5
+X 13 a-tiflio.ads
+57U14*Get 30|30s5[5|20]
 X 29 temperature_package.ads
-9K9*Temperature_Package 47e24 30|7w6 7r31
-11R10*Temperature 45e19 30|14r27
-13U15*enterTemperature 30|33s5 34s5
-15U15*display 30|41s9 43s9 45s9
-25V14*raiseTemperature{11R10} 30|41s30 43s27 45s27
-29V14*toFahrenheit{11R10} 30|41s17
-31V14*toCelsius{11R10} 30|43s17 45s17
-37V14*lessThan{boolean} 30|38s11
+9K9*Temperature_Package 47e24 30|7w6 7r31 14r37
+11R10*Temperature 45e19 30|14r57
+13U15*enterTemperature 30|22s5 26s5
+15U15*display 30|49s9 50s9 51s9
+17U15*Init 30|34s5
+19U15*raiseTemperature 30|54s9
+25V14*getScale{character} 30|34s41
+27V14*getDegree{float} 30|34s20
+29V14*toFahrenheit{11R10} 30|49s17
+31V14*toCelsius{11R10} 30|50s17
+33V14*toKelvin{11R10} 30|51s17
+37V14*lessThan{boolean} 30|46s11
 X 30 temperature_table.adb
-12U11*temperature_table 12b11 53l5 53t22
-14r5 baseTemp{29|11R10} 33m22 38r20 41r47 43r44 45r44
-14r15 limitTemp{29|11R10} 34m22 38r30
-16f5 stepValue{float} 35m5 48r34
-17f5 iterValue{float} 41r57 43r54 45r54 48m9 48r22
+12U11*temperature_table 12b11 59l5 59t22
+14r5 baseTemp{29|11R10} 22m22 22r22 34r30 34r50
+14r15 limitTemp{29|11R10} 26m22 26r22 46r30
+14r26 stepTemp{29|11R10} 34m10 46r20 49r30 50r27 51r26 54r26 54m47
+16f5 stepValue{float} 30m9 54r36
 

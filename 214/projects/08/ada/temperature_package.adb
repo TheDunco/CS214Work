@@ -10,6 +10,12 @@ with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 
 package body Temperature_Package is
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
     procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character) is
     begin
         if isValidTemperature(Degree, Scale) then
@@ -19,6 +25,13 @@ package body Temperature_Package is
             Put("Invalid temperature values");
         end if;
     end Init;
+
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
 
     function isValidTemperature(Degree : in Float; Scale : in character) return boolean is
     begin
@@ -33,44 +46,71 @@ package body Temperature_Package is
 
     end isValidTemperature;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function getScale(Tmp : in Temperature) return character is
     begin
         return Tmp.myScale;
     end getScale;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function getDegree(Tmp : in Temperature) return Float is
     begin
         return Tmp.myDegree;
     end getDegree;
 
-    function raiseTemperature(temp : in Temperature; degrees : in Float) return Temperature is
-        newDeg : Float := getDegree(temp);
-        newTemp : Temperature;
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
+    procedure raiseTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature) is
     begin
-        newDeg := newDeg + degrees;
-        if isValidTemperature(newDeg, getScale(temp)) then 
-            Init(newTemp, newDeg, getScale(temp)); 
-            return newTemp;
+        if isValidTemperature(getDegree(temp) + degrees, getScale(temp)) then 
+            Init(temp2, getDegree(temp) + degrees, getScale(temp)); 
         else
             Put("Couldn't raise temperature");
-            return temp;
+            Init(temp2, getDegree(temp), getScale(temp));
         end if;
     end raiseTemperature;
 
-    function lowerTemperature(temp : in Temperature; degrees : in Float) return Temperature is
-        newDeg : Float := getDegree(temp);
-        newTemp : Temperature;
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
+    procedure lowerTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature) is
     begin
-        newDeg := newDeg - degrees;
-        if isValidTemperature(newDeg, getScale(temp)) then 
-            Init(newTemp, newDeg, getScale(temp)); 
-            return newTemp;
+        if isValidTemperature(getDegree(temp) - degrees, getScale(temp)) then 
+            Init(temp2, getDegree(temp) - degrees, getScale(temp)); 
         else
-            Put("Couldn't lower temperature");
-            return temp;
+            Put("Couldn't raise temperature");
+            Init(temp2, getDegree(temp), getScale(temp));
         end if;
     end lowerTemperature;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function toFahrenheit(Tmp : in Temperature) return Temperature is
     newTemp : Temperature;
     begin
@@ -91,6 +131,13 @@ package body Temperature_Package is
         return Tmp;
     end toFahrenheit;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function toCelsius(Tmp : in Temperature) return Temperature is
     newTemp : Temperature;
     begin
@@ -110,6 +157,13 @@ package body Temperature_Package is
         return Tmp;
     end toCelsius;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function toKelvin(Tmp : in Temperature) return Temperature is
         newTemp : Temperature;
     begin
@@ -129,46 +183,68 @@ package body Temperature_Package is
         return Tmp;
     end toKelvin;
 
-    procedure enterTemperature(Tmp : out Temperature; input : in String) is
-        newDeg : Float;
-        newScale : character := input(input'Last);
-        updatedTemp : Temperature;
-        numRange : Integer := (input'Last) - 2;
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
+    procedure enterTemperature(Tmp : in out Temperature) is
+    SPACE : String := " ";
+    degree : Float;
+    scale : character;
     begin
-        newDeg := Float'Value(input(input'First..numRange));
-        if isValidTemperature(newDeg, newScale) then
-            Tmp.myScale := newScale;
-            Tmp.myDegree := newDeg;
+        Get(degree);
+        Get(SPACE);
+        get(scale);
+        if isValidTemperature(degree, scale) then
+            Init(Tmp, degree, scale);
         else 
             Put("Invalid values provided");
         end if;
     end enterTemperature;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     procedure display(Tmp : in Temperature) is
     begin
-        Put(getDegree(Tmp));
+        Put(getDegree(Tmp), 10, 5, 0);
+        Put(" ");
         Put(getScale(Tmp));
     end display;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean is
     begin
         case(getScale(temp1)) is
             when 'F' | 'f' => 
-            if getDegree(toFahrenheit(temp1)) = getDegree(temp2) then
+            if getDegree(toFahrenheit(temp1)) = getDegree(toFahrenheit(temp2)) then
                 return true;
             else
                 return false;
             end if;
 
             when 'K' | 'k' => 
-            if getDegree(toKelvin(temp1)) = getDegree(temp2) then
+            if getDegree(toKelvin(temp1)) = getDegree(toKelvin(temp2)) then
                 return true;
             else
                 return false;
             end if;
 
             when 'C' | 'c' => 
-            if getDegree(toCelsius(temp1)) = getDegree(temp2) then
+            if getDegree(toCelsius(temp1)) = getDegree(toCelsius(temp2)) then
                 return true;
             else
                 return false;
@@ -179,22 +255,35 @@ package body Temperature_Package is
         return false;
     end equals;
 
+    ----------------------------------------------
+    -- 
+    -- Receive: 
+    -- PRE:
+    -- Return: 
+    ----------------------------------------------
+    
     function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean is
     begin
         case(getScale(temp1)) is
             when 'F' | 'f' => 
             if getDegree(toFahrenheit(temp1)) < getDegree(toFahrenheit(temp2)) then
                 return true;
+            else
+                return false;
             end if;
 
             when 'K' | 'k' => 
             if getDegree(toKelvin(temp1)) < getDegree(toKelvin(temp2)) then
                 return true;
+            else
+                return false;
             end if;
 
             when 'C' | 'c' => 
             if getDegree(toCelsius(temp1)) < getDegree(toCelsius(temp2)) then
                 return true;
+            else
+                return false;
             end if;
             when others => return false;
         end case;
