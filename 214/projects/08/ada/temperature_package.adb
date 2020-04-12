@@ -11,10 +11,10 @@ with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 package body Temperature_Package is
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- Init initializes a temperature record
+    -- Receive: Scale : character - the scale of the temperature
+    -- Recieve: Degree : Float - the degrees in that scale
+    -- Post: Tmp's myDegree and myScale values will be initialized
     ----------------------------------------------
     procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character) is
     begin
@@ -27,18 +27,26 @@ package body Temperature_Package is
     end Init;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- isValidTemperature determines if a Degree and Scale
+    --      will constitute a valid temperature
+    -- Receive: Degree : Float - the desired degree of the temperature
+    -- Receive: Scale : character - the desired scale of the temperature
+    -- Return: A boolean indicating whether the desired temperature is valid
     ----------------------------------------------
 
     function isValidTemperature(Degree : in Float; Scale : in character) return boolean is
     begin
         case(Scale) is
-            when 'F' | 'f' => if Degree >= -460.0 then return true; else return false; end if;
-            when 'C' | 'c' => if Degree >= -273.15 then return true; else return false; end if;
-            when 'K' | 'k' => if Degree >= 0.0 then return true; else return false; end if;
+            -- If the scale is F
+            when 'F' | 'f' =>   if Degree >= -460.0 then return true; 
+                                else return false; end if;
+            -- If the scale is C
+            when 'C' | 'c' =>   if Degree >= -273.15 then return true; 
+                                else return false; end if;
+            -- If the scale is K
+            when 'K' | 'k' =>   if Degree >= 0.0 then 
+                                return true; else return false; end if;
+
             when others => return false;
         end case;
 
@@ -47,10 +55,10 @@ package body Temperature_Package is
     end isValidTemperature;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- getScale is an accessor for a temperature's scale
+    -- Receive: Tmp : Temperature - the temperature to retrive scale from
+    -- PRE: Tmp must be initialized
+    -- Return: a character - the scale of the temperature
     ----------------------------------------------
     
     function getScale(Tmp : in Temperature) return character is
@@ -59,10 +67,10 @@ package body Temperature_Package is
     end getScale;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- getDegree is an accessor for a temperature's degree
+    -- Receive: Tmp : Temperature - the temperature to retrive degree from
+    -- PRE: Tmp must be initialized
+    -- Return: a Float - the degree of the temperature
     ----------------------------------------------
     
     function getDegree(Tmp : in Temperature) return Float is
@@ -71,12 +79,15 @@ package body Temperature_Package is
     end getDegree;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- raiseTemperature raises a temperature by an amount in degrees
+    -- Receive: temp : Temperature - the temperature to raise
+    -- Recieve: temp2 : Temperature - the out temperature that will have the raised values
+    -- Recieve: degrees : Float - the number of degrees to raise the temperature by
+    -- PRE: both temperature objects must be initialized
+    -- PRE: raising must constitute a valid temperature object
+    -- POST: temp2 will have degree of temp1 + degrees
     ----------------------------------------------
-    
+
     procedure raiseTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature) is
     begin
         if isValidTemperature(getDegree(temp) + degrees, getScale(temp)) then 
@@ -88,10 +99,13 @@ package body Temperature_Package is
     end raiseTemperature;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- lowerTemperature lowers a temperature by an amount in degrees
+    -- Receive: temp : Temperature - the temperature to lower
+    -- Recieve: temp2 : Temperature - the out temperature that will have the lowered values
+    -- Recieve: degrees : Float - the number of degrees to lower the temperature by
+    -- PRE: both temperature objects must be initialized
+    -- PRE: raising must constitute a valid temperature object
+    -- POST: temp2 will have degree of temp1 - degrees
     ----------------------------------------------
     
     procedure lowerTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature) is
@@ -105,10 +119,10 @@ package body Temperature_Package is
     end lowerTemperature;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- toFahrenheit converts a temperature to the Fahrenheit scale
+    -- Receive: Tmp : Temperature
+    -- PRE: Tmp must be initialized
+    -- Return: A new Temperature with degree and scale changed to Fahrenheit
     ----------------------------------------------
     
     function toFahrenheit(Tmp : in Temperature) return Temperature is
@@ -132,10 +146,10 @@ package body Temperature_Package is
     end toFahrenheit;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- toCelsius converts a temperature to the Celsius scale
+    -- Receive: Tmp : Temperature
+    -- PRE: Tmp must be initialized
+    -- Return: A new Temperature with degree and scale changed to Celsius
     ----------------------------------------------
     
     function toCelsius(Tmp : in Temperature) return Temperature is
@@ -158,10 +172,10 @@ package body Temperature_Package is
     end toCelsius;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- toKelvin converts a temperature to the Kelvin scale
+    -- Receive: Tmp : Temperature
+    -- PRE: Tmp must be initialized
+    -- Return: A new Temperature with degree and scale changed to Kelvin
     ----------------------------------------------
     
     function toKelvin(Tmp : in Temperature) return Temperature is
@@ -184,10 +198,12 @@ package body Temperature_Package is
     end toKelvin;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- enterTemperature grabs values from the user and initializes 
+    --      a new Temeprature object based on those values
+    -- Receive: Tmp : temperature
+    -- PRE: Temperature should be initialized
+    -- PRE: Entered values must be in the format "#'s F|C|K"
+    -- POST: Tmp will be initialized with the user entered temperature values
     ----------------------------------------------
     
     procedure enterTemperature(Tmp : in out Temperature) is
@@ -206,10 +222,10 @@ package body Temperature_Package is
     end enterTemperature;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- display allows a temeprature object to be displayed to the terminal
+    -- Receive: Tmp : Temperature - the temperature object to display
+    -- PRE: Tmp must be initialized
+    -- POST: Tmps degree and scale will be Put to the terminal
     ----------------------------------------------
     
     procedure display(Tmp : in Temperature) is
@@ -220,10 +236,11 @@ package body Temperature_Package is
     end display;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- equals allows checking if two Temperatures are equal, regardless of scale
+    -- Receive: temp1 : Temperature - the lhs temperature
+    -- Recieve: temp2 : Temperature - the rhs temperature
+    -- PRE: temp1 and temp2 must be initialized
+    -- Return: a boolean indicating whether or not temp1 = temp2
     ----------------------------------------------
     
     function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean is
@@ -256,10 +273,11 @@ package body Temperature_Package is
     end equals;
 
     ----------------------------------------------
-    -- 
-    -- Receive: 
-    -- PRE:
-    -- Return: 
+    -- lessThan allows checking if one Temperature is less than another, regardless of scale
+    -- Receive: temp1 : Temperature - the lhs temperature
+    -- Recieve: temp2 : Temperature - the rhs temperature
+    -- PRE: temp1 and temp2 must be initialized
+    -- Return: a boolean indicating whether or not temp1 = temp2
     ----------------------------------------------
     
     function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean is
