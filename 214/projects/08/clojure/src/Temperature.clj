@@ -75,7 +75,7 @@
       input (read-line)
       splicedInput (str/split input #" ")
       inputDegree (Float/parseFloat (first splicedInput))
-      inputScale (get (second splicedInput) 0)\
+      inputScale (get (second splicedInput) 0)
     ]
     (if (isValidTemperature inputDegree inputScale)
       (->Temperature inputDegree inputScale)
@@ -88,6 +88,8 @@
 )
 
 (defn raiseTemperature [^Temperature temp degree]
+  ; (println getDegree temp)
+  ; (println getScale temp)
   (if (isValidTemperature (+ (getDegree temp) degree) (getScale temp)) 
     ;; True
     (make-Temperature (+ (getDegree temp) degree) (getScale temp))

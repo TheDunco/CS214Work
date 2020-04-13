@@ -13,28 +13,28 @@
 
 (defn -main [] 
 	;; Get the baseTemp from the user
-	(println "Enter the base temperature: ")
+	(print "Enter the base temperature: ")
 	(let [ baseTemp (enterTemperature) ]
 
 		;; Get the limitTemp from the user
-		(println "Enter the limit temperature: ")
+		(print "Enter the limit temperature: ")
 		(let [ limitTemp (enterTemperature) ]
 
 			;; Get the stepValue from the user
-			(println "Enter the step value: ")
+			(print "Enter the step value: ")
 			(let [ stepValue (read) ]
 				(newline) (println "      Fahrenheit          Celsius         Kelvin") (newline)
 				
 				(loop [i 0] 
 					;; Loop while the baseTemp is less than or equal to the limitTemp
 					(when (or (lessThan (raiseTemperature baseTemp i) limitTemp) 
-								(equals (raise baseTemp i) limitTemp))
+								(equals (raiseTemperature baseTemp i) limitTemp))
 						(print "		")
-						(displayTemperature (raise (toFahrenheit baseTemp) i))
+						(displayTemperature (raiseTemperature (toFahrenheit baseTemp) i))
 						(print "		")
-						(displayTemperature (raise (toCelsius baseTemp) i))
+						(displayTemperature (raiseTemperature (toCelsius baseTemp) i))
 						(print "		")
-						(displayTemperature (raise (toKelvin baseTemp) i))
+						(displayTemperature (raiseTemperature (toKelvin baseTemp) i))
 						(newline)
 						;; Recurse (loop) with i + stepvalue
 						(recur (+ i stepValue))
