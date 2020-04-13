@@ -28,13 +28,16 @@
 				(loop [stepTemp baseTemp]
 					;; Loop while the baseTemp is less than or equal to the limitTemp
 					(when (lessThan stepTemp limitTemp) 
+
+						;; Display table
 						(displayTemperature (toFahrenheit stepTemp))
 						(print "		")
 						(displayTemperature (toCelsius stepTemp))
 						(print "		")
 						(displayTemperature (toKelvin stepTemp))
 						(newline) (flush)
-						
+
+						;; Recurse with the temperature raised in the base scale
 						(recur (raiseTemperature stepTemp stepValue))
 					);; end when
 					

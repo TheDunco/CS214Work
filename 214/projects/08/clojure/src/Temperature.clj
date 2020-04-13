@@ -11,17 +11,47 @@
 ;; Define a Temperature record with degree and scale attributes
 (defrecord Temperature [myDegree myScale])
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; make-Temperature constructs a Temperature from a float and a character 
+;;; Receive: degree : the degree of the temperature
+;;; Recieve: scale : the scale that that degree is in
+;;; Return: the Temperature (degree scale)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn make-Temperature [degree scale]
   (->Temperature degree scale)
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getDegree returns the degree of the recieved temperature object
+;;; Receive: temp : a temperature
+;;; PRE: temp MUST be a temperature that's initialized
+;;; Return: the myDegree attribute of that temp object
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn getDegree [^Temperature temp] 
   (:myDegree temp)
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getScale returns the scale of the recieved temperature object
+;;; Receive: temp : a temperature
+;;; PRE: temp MUST be a temperature that's initialized
+;;; Return: the myScale attribute of that temp object
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn getScale [^Temperature temp]
   (:myScale temp)
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; isValidTemperature determines if a degree and scale would 
+;;;     constitute a valid Temperature
+;;; Receive: degree : the deree of the desired Temperature
+;;; Recieve: scale : the scale of the desired Temperature
+;;; Return: a boolean indicating whether or not the values provided
+;;;     constitute a valid Temperature
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn isValidTemperature [degree scale] 
   (cond
@@ -34,6 +64,13 @@
     :else false
   )   
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; toFahrenheit converts a temperature to Fahrenheit from an arbitrary scale
+;;; Receive: temp : the temperature to be converted
+;;; Precondition: temp MUST be a Temperature and must be initialized
+;;; Return: A new Temperature record with converted degree and scale
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn toFahrenheit [^Temperature temp]
   (cond
@@ -53,6 +90,13 @@
   )
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; toCelsius converts a temperature to Celsius from an arbitrary scale
+;;; Receive: temp : the temperature to be converted
+;;; Precondition: temp MUST be a Temperature and must be initialized
+;;; Return: A new Temperature record with converted degree and scale
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn toCelsius [^Temperature temp]
   (cond
     ;; From Fahrenheit
@@ -70,6 +114,13 @@
     :else false
   )
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; toKelvin converts a temperature to Kelvin from an arbitrary scale
+;;; Receive: temp : the temperature to be converted
+;;; Precondition: temp MUST be a Temperature and must be initialized
+;;; Return: A new Temperature record with converted degree and scale
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn toKelvin [^Temperature temp] 
   (cond
@@ -89,10 +140,19 @@
   )
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; enterTemperature allows a Temperature record's values to be 
+;;;     entered by the user
+;;; Recieve: degree and scale to be read in as input
+;;; Precondition: the input degree and scale must consitute a
+;;;     valid Temperature object
+;;; Return: a new Temperature record with the user entered values
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn enterTemperature []
   (let 
     [
-      input (read-line)
+      input (read-line) ;; get the input from the user
       splicedInput (str/split input #" ")
       inputDegree (Float/parseFloat (first splicedInput))
       inputScale (get (second splicedInput) 0)
@@ -104,9 +164,27 @@
   )
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; dispalyTemperature prints a Temperature record to the screen
+;;; Receive: temp : a Temperature
+;;; Precondition: temp MUST be an initialized Temperature record
+;;; Postcondition: the Temperature will be conveniently formatted
+;;;     and printed to the screen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn displayTemperature [^Temperature temp]
   (print (format "%.5f"(getDegree temp)) " " (getScale temp))
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; raiseTemperature raises a temperature's degree attribute by
+;;;     the input degrees
+;;; Receive: temp : a Temperature record
+;;; Recieve: degree : a float - the desired degrees to raise by
+;;; Precondition: temp MUST be an initialized Temperature record
+;;; Precondition: raising by degrees must consitute a valid Temperature
+;;; Return: a new temperature with updated degrees
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn raiseTemperature [^Temperature temp degree]
   (if (isValidTemperature (+ (getDegree temp) degree) (getScale temp)) 
@@ -117,6 +195,16 @@
   )  
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; lowerTemperature lowers a temperature's degree attribute by
+;;;     the input degrees
+;;; Receive: temp : a Temperature record
+;;; Recieve: degree : a float - the desired degrees to lower by
+;;; Precondition: temp MUST be an initialized Temperature record
+;;; Precondition: raising by degrees must consitute a valid Temperature
+;;; Return: a new temperature with updated degrees
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn lowerTemperature [^Temperature temp degree]
   (if (isValidTemperature (- (getDegree temp) degree) (getScale temp)) 
     ;; True
@@ -126,6 +214,14 @@
   )  
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; equals allows checking if two Temperatures are equal regardless of scale
+;;; Receive: temp1 : Temperature - the lhs of the = operation
+;;; Recieve: temp2 : Temprature - the rhs of the = operation
+;;; Precondition: temp1 & temp2 MUST be initialized Temperature records
+;;; Return: a boolean indicating whether or not the temperatures are equal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn equals [^Temperature temp1 ^Temperature temp2]
   (if (= (getDegree (toFahrenheit temp1)) (getDegree (toFahrenheit temp2)))
     ;; True-Section
@@ -134,6 +230,14 @@
       false ;; return false
   )
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; lessThan allows checking if one Temperature is less than another regardless of scale
+;;; Receive: temp1 : Temperature - the lhs of the < operation
+;;; Recieve: temp2 : Temprature - the rhs of the < operation
+;;; Precondition: temp1 & temp2 MUST be initialized Temperature records
+;;; Return: a boolean indicating if temp1 < temp2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn lessThan [^Temperature temp1 ^Temperature temp2]
   (if (< (getDegree (toFahrenheit temp1)) (getDegree (toFahrenheit temp2)))
