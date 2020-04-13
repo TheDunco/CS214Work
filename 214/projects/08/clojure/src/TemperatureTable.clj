@@ -25,18 +25,17 @@
 			(let [ stepValue (read) ]
 				(newline) (println "Fahrenheit              Celsius                 Kelvin") (newline)
 				
-				(loop [i 0] 
+				(loop [stepTemp baseTemp]
 					;; Loop while the baseTemp is less than or equal to the limitTemp
-					(when (or (lessThan (raiseTemperature baseTemp i) limitTemp) 
-								(equals (raiseTemperature baseTemp i) limitTemp))
-						(displayTemperature (raiseTemperature (toFahrenheit baseTemp) i))
+					(when (lessThan stepTemp limitTemp) 
+						(displayTemperature (toFahrenheit stepTemp))
 						(print "		")
-						(displayTemperature (raiseTemperature (toCelsius baseTemp) i))
+						(displayTemperature (toCelsius stepTemp))
 						(print "		")
-						(displayTemperature (raiseTemperature (toKelvin baseTemp) i))
+						(displayTemperature (toKelvin stepTemp))
 						(newline) (flush)
-						;; Recurse (loop) with i + stepvalue
-						(recur (+ i stepValue))
+						
+						(recur (raiseTemperature stepTemp stepValue))
 					);; end when
 					
 				);; end loop

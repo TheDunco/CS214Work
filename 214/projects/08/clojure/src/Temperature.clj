@@ -6,10 +6,9 @@
 ;; Date: 4/12/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require '[clojure.string :as str]) ;; include the Temperature module
 
-(require '[clojure.string :as str])
-
-
+;; Define a Temperature record with degree and scale attributes
 (defrecord Temperature [myDegree myScale])
 
 (defn make-Temperature [degree scale]
@@ -32,42 +31,60 @@
     (= \c scale) (if (< degree -273.15) false true)
     (= \K scale) (if (< degree 0.0) false true)
     (= \k scale) (if (< degree 0.0) false true)
-    :else true
+    :else false
   )   
 )
 
 (defn toFahrenheit [^Temperature temp]
   (cond
-    (= \F (getScale temp)) (make-Temperature (getDegree temp) \F)
-    (= \f (getScale temp)) (make-Temperature (getDegree temp) \F)
+    ;; From Fahrenheit
+    (= \F (getScale temp)) temp ;; no conversion needed
+    (= \f (getScale temp)) temp ;; no conversion needed
+
+    ;; From Celsius
     (= \C (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (getDegree temp)) 32.0) \F)
     (= \c (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (getDegree temp)) 32.0) \F)
+
+    ;; From Kelvin
     (= \K (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (- (getDegree temp) 273.15)) 32.0) \F)
     (= \k (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (- (getDegree temp) 273.15)) 32.0) \F)
+
     :else false
   )
 )
 
 (defn toCelsius [^Temperature temp]
   (cond
+    ;; From Fahrenheit
     (= \F (getScale temp)) (make-Temperature (* (/ 5.0 9.0) (- (getDegree temp) 32.0)) \C)
     (= \f (getScale temp)) (make-Temperature (* (/ 5.0 9.0) (- (getDegree temp) 32.0)) \C)
-    (= \C (getScale temp)) (make-Temperature (getDegree temp) \C)
-    (= \c (getScale temp)) (make-Temperature (getDegree temp) \C)
+
+    ;; From Celsius
+    (= \C (getScale temp)) temp ;; no conversion needed
+    (= \c (getScale temp)) temp ;; no conversion needed
+
+    ;; From Kelvin
     (= \K (getScale temp)) (make-Temperature (- (getDegree temp) 273.15) \C)
     (= \k (getScale temp)) (make-Temperature (- (getDegree temp) 273.15) \C)
+
     :else false
   )
 )
 
 (defn toKelvin [^Temperature temp] 
   (cond
+    ;; From Fahrenheit
     (= \F (getScale temp)) (make-Temperature (+ (* (- (getDegree temp) 32.0) (/ 5.0 9.0)) 273.15) \K)
     (= \f (getScale temp)) (make-Temperature (+ (* (- (getDegree temp) 32.0) (/ 5.0 9.0)) 273.15) \K)
+
+    ;; From Celsius
     (= \C (getScale temp)) (make-Temperature (+ (getDegree temp) 273.15) \K)
     (= \c (getScale temp)) (make-Temperature (+ (getDegree temp) 273.15) \K)
-    (= \K (getScale temp)) (make-Temperature (getDegree temp) \K)
-    (= \k (getScale temp)) (make-Temperature (getDegree temp) \K)
+
+    ;; From Kelvin
+    (= \K (getScale temp)) temp ;; no conversion needed
+    (= \k (getScale temp)) temp ;; no conversion needed
+
     :else false
   )
 )
