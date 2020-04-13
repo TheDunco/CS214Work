@@ -1,0 +1,549 @@
+Script started on 2020-04-12 18:48:47-0400
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ cat temperature_P[Kpackage.adb[Ks
+-- temperature.ads declares the Temperature type and its operations.
+--
+-- By: Duncan Van Keulen
+-- Date: 4/9/2020
+--------------------------------------------------------------
+
+with Ada.Text_IO; use Ada.Text_IO;
+
+package Temperature_Package is
+
+    type Temperature is private;
+
+    procedure enterTemperature(Tmp : in out Temperature);
+
+    procedure display(Tmp : in Temperature);
+
+    procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character);
+
+    procedure raiseTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature);
+    
+    procedure lowerTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature);
+
+    function isValidTemperature(Degree : in Float; Scale : in character) return boolean;
+
+    function getScale(Tmp : in Temperature) return character;
+
+    function getDegree(Tmp : in Temperature) return Float;
+
+    function toFahrenheit(Tmp : in Temperature) return Temperature;
+
+    function toCelsius(Tmp : in Temperature) return Temperature;
+
+    function toKelvin(Tmp : in Temperature) return Temperature;
+
+    function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean;
+
+    function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean;
+
+    private
+
+    type Temperature is
+        record
+            myDegree : Float;
+            myScale : character;
+        end record;
+
+end Temperature_Package;
+
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ cat temperature_package.adb
+-- temperature.adb defines operations for the Temperature type.
+--
+-- By: Duncan Van Keulen
+-- Date: 4/9/2020
+---------------------------------------------------------
+
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Strings.Fixed; use Ada.Strings.Fixed;
+with Ada.Float_Text_IO; use Ada.Float_Text_IO;
+
+package body Temperature_Package is
+
+    ----------------------------------------------
+    -- Init initializes a temperature record
+    -- Receive: Scale : character - the scale of the temperature
+    -- Recieve: Degree : Float - the degrees in that scale
+    -- Post: Tmp's myDegree and myScale values will be initialized
+    ----------------------------------------------
+    procedure Init(Tmp : out Temperature; Degree : in Float; Scale : in character) is
+    begin
+        if isValidTemperature(Degree, Scale) then
+            Tmp.MyDegree := Degree;
+            Tmp.MyScale := Scale;
+        else
+            Put("Invalid temperature values");
+        end if;
+    end Init;
+
+    ----------------------------------------------
+    -- isValidTemperature determines if a Degree and Scale
+    --      will constitute a valid temperature
+    -- Receive: Degree : Float - the desired degree of the temperature
+    -- Receive: Scale : character - the desired scale of the temperature
+    -- Return: A boolean indicating whether the desired temperature is valid
+    ----------------------------------------------
+
+    function isValidTemperature(Degree : in Float; Scale : in character) return boolean is
+    begin
+        case(Scale) is
+            -- If the scale is F
+            when 'F' | 'f' =>   if Degree >= -460.0 then return true; 
+                                else return false; end if;
+            -- If the scale is C
+            when 'C' | 'c' =>   if Degree >= -273.15 then return true; 
+                                else return false; end if;
+            -- If the scale is K
+            when 'K' | 'k' =>   if Degree >= 0.0 then 
+                                return true; else return false; end if;
+
+            when others => return false;
+        end case;
+
+        return false;
+
+    end isValidTemperature;
+
+    ----------------------------------------------
+    -- getScale is an accessor for a temperature's scale
+    -- Receive: Tmp : Temperature - the temperature to retrive scale from
+    -- PRE: Tmp must be initialized
+    -- Return: a character - the scale of the temperature
+    ----------------------------------------------
+    
+    function getScale(Tmp : in Temperature) return character is
+    begin
+        return Tmp.myScale;
+    end getScale;
+
+    ----------------------------------------------
+    -- getDegree is an accessor for a temperature's degree
+    -- Receive: Tmp : Temperature - the temperature to retrive degree from
+    -- PRE: Tmp must be initialized
+    -- Return: a Float - the degree of the temperature
+    ----------------------------------------------
+    
+    function getDegree(Tmp : in Temperature) return Float is
+    begin
+        return Tmp.myDegree;
+    end getDegree;
+
+    ----------------------------------------------
+    -- raiseTemperature raises a temperature by an amount in degrees
+    -- Receive: temp : Temperature - the temperature to raise
+    -- Recieve: temp2 : Temperature - the out temperature that will have the raised values
+    -- Recieve: degrees : Float - the number of degrees to raise the temperature by
+    -- PRE: both temperature objects must be initialized
+    -- PRE: raising must constitute a valid temperature object
+    -- POST: temp2 will have degree of temp1 + degrees
+    ----------------------------------------------
+
+    procedure raiseTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature) is
+    begin
+        if isValidTemperature(getDegree(temp) + degrees, getScale(temp)) then 
+            Init(temp2, getDegree(temp) + degrees, getScale(temp)); 
+        else
+            Put("Couldn't raise temperature");
+            Init(temp2, getDegree(temp), getScale(temp));
+        end if;
+    end raiseTemperature;
+
+    ----------------------------------------------
+    -- lowerTemperature lowers a temperature by an amount in degrees
+    -- Receive: temp : Temperature - the temperature to lower
+    -- Recieve: temp2 : Temperature - the out temperature that will have the lowered values
+    -- Recieve: degrees : Float - the number of degrees to lower the temperature by
+    -- PRE: both temperature objects must be initialized
+    -- PRE: raising must constitute a valid temperature object
+    -- POST: temp2 will have degree of temp1 - degrees
+    ----------------------------------------------
+    
+    procedure lowerTemperature(temp : in Temperature; degrees : in Float; temp2 : out Temperature) is
+    begin
+        if isValidTemperature(getDegree(temp) - degrees, getScale(temp)) then 
+            Init(temp2, getDegree(temp) - degrees, getScale(temp)); 
+        else
+            Put("Couldn't raise temperature");
+            Init(temp2, getDegree(temp), getScale(temp));
+        end if;
+    end lowerTemperature;
+
+    ----------------------------------------------
+    -- toFahrenheit converts a temperature to the Fahrenheit scale
+    -- Receive: Tmp : Temperature
+    -- PRE: Tmp must be initialized
+    -- Return: A new Temperature with degree and scale changed to Fahrenheit
+    ----------------------------------------------
+    
+    function toFahrenheit(Tmp : in Temperature) return Temperature is
+    newTemp : Temperature;
+    begin
+        case(getScale(Tmp)) is
+            when 'F' | 'f' => 
+                return Tmp;
+            when 'C' | 'c' => 
+                Init(newTemp, ((getDegree(Tmp) * (9.0/5.0)) + 32.0), 'F');
+                return newTemp;
+            when 'K' | 'k' => 
+                Init(newTemp, (((getDegree(Tmp) - 273.15) * (9.0/5.0)) + 32.0), 'F');
+                return newTemp;
+            when others =>
+                return Tmp;
+            Put("Could not convert to F");
+        end case;
+        -- to stop it complaining about missing return
+        return Tmp;
+    end toFahrenheit;
+
+    ----------------------------------------------
+    -- toCelsius converts a temperature to the Celsius scale
+    -- Receive: Tmp : Temperature
+    -- PRE: Tmp must be initialized
+    -- Return: A new Temperature with degree and scale changed to Celsius
+    ----------------------------------------------
+    
+    function toCelsius(Tmp : in Temperature) return Temperature is
+    newTemp : Temperature;
+    begin
+        case(getScale(Tmp)) is
+            when 'F' | 'f' => 
+                Init(newTemp, (getDegree(Tmp) - 32.0) * (5.0/9.0), 'C' );
+                return newTemp;
+            when 'C' | 'c' => 
+                return Tmp;
+            when 'K' | 'k' =>
+                Init(newTemp, (getDegree(Tmp) - 273.15), 'C' );
+                return newTemp;
+            when others => return Tmp;
+            Put("Could not convert to C");
+        end case;
+        -- to stop it complaining about missing return
+        return Tmp;
+    end toCelsius;
+
+    ----------------------------------------------
+    -- toKelvin converts a temperature to the Kelvin scale
+    -- Receive: Tmp : Temperature
+    -- PRE: Tmp must be initialized
+    -- Return: A new Temperature with degree and scale changed to Kelvin
+    ----------------------------------------------
+    
+    function toKelvin(Tmp : in Temperature) return Temperature is
+        newTemp : Temperature;
+    begin
+        case(getScale(Tmp)) is
+            when 'F' | 'f' => 
+                Init(newTemp, ((getDegree(Tmp) - 32.0) * (5.0/9.0) + 273.15), 'K');
+                return newTemp;
+            when 'C' | 'c' => 
+                Init(newTemp, (getDegree(Tmp) + 273.15), 'K');
+                return newTemp;
+            when 'K' | 'k' => 
+                return Tmp;
+            when others => return Tmp;
+            Put("Could not convert to K");
+        end case; 
+        -- to stop it complaining about missing return
+        return Tmp;
+    end toKelvin;
+
+    ----------------------------------------------
+    -- enterTemperature grabs values from the user and initializes 
+    --      a new Temeprature object based on those values
+    -- Receive: Tmp : temperature
+    -- PRE: Temperature should be initialized
+    -- PRE: Entered values must be in the format "#'s F|C|K"
+    -- POST: Tmp will be initialized with the user entered temperature values
+    ----------------------------------------------
+    
+    procedure enterTemperature(Tmp : in out Temperature) is
+    SPACE : String := " ";
+    degree : Float;
+    scale : character;
+    begin
+        Get(degree);
+        Get(SPACE);
+        get(scale);
+        if isValidTemperature(degree, scale) then
+            Init(Tmp, degree, scale);
+        else 
+            Put("Invalid values provided");
+        end if;
+    end enterTemperature;
+
+    ----------------------------------------------
+    -- display allows a temeprature object to be displayed to the terminal
+    -- Receive: Tmp : Temperature - the temperature object to display
+    -- PRE: Tmp must be initialized
+    -- POST: Tmps degree and scale will be Put to the terminal
+    ----------------------------------------------
+    
+    procedure display(Tmp : in Temperature) is
+    begin
+        Put(getDegree(Tmp), 10, 5, 0);
+        Put(" ");
+        Put(getScale(Tmp));
+    end display;
+
+    ----------------------------------------------
+    -- equals allows checking if two Temperatures are equal, regardless of scale
+    -- Receive: temp1 : Temperature - the lhs temperature
+    -- Recieve: temp2 : Temperature - the rhs temperature
+    -- PRE: temp1 and temp2 must be initialized
+    -- Return: a boolean indicating whether or not temp1 = temp2
+    ----------------------------------------------
+    
+    function equals(temp1 : in Temperature; temp2 : in Temperature) return boolean is
+    begin
+        case(getScale(temp1)) is
+            when 'F' | 'f' => 
+            if getDegree(toFahrenheit(temp1)) = getDegree(toFahrenheit(temp2)) then
+                return true;
+            else
+                return false;
+            end if;
+
+            when 'K' | 'k' => 
+            if getDegree(toKelvin(temp1)) = getDegree(toKelvin(temp2)) then
+                return true;
+            else
+                return false;
+            end if;
+
+            when 'C' | 'c' => 
+            if getDegree(toCelsius(temp1)) = getDegree(toCelsius(temp2)) then
+                return true;
+            else
+                return false;
+            end if;
+            when others => return false;
+        end case;
+        -- to stop it complaining about missing return
+        return false;
+    end equals;
+
+    ----------------------------------------------
+    -- lessThan allows checking if one Temperature is less than another, regardless of scale
+    -- Receive: temp1 : Temperature - the lhs temperature
+    -- Recieve: temp2 : Temperature - the rhs temperature
+    -- PRE: temp1 and temp2 must be initialized
+    -- Return: a boolean indicating whether or not temp1 = temp2
+    ----------------------------------------------
+    
+    function lessThan(temp1 : in Temperature; temp2 : in Temperature) return boolean is
+    begin
+        case(getScale(temp1)) is
+            when 'F' | 'f' => 
+            if getDegree(toFahrenheit(temp1)) < getDegree(toFahrenheit(temp2)) then
+                return true;
+            else
+                return false;
+            end if;
+
+            when 'K' | 'k' => 
+            if getDegree(toKelvin(temp1)) < getDegree(toKelvin(temp2)) then
+                return true;
+            else
+                return false;
+            end if;
+
+            when 'C' | 'c' => 
+            if getDegree(toCelsius(temp1)) < getDegree(toCelsius(temp2)) then
+                return true;
+            else
+                return false;
+            end if;
+            when others => return false;
+        end case;
+    end lessThan;
+
+end Temperature_Package;]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ cat temperature_table.adb
+-- name_package.adb defines operations for the Name type.
+--
+-- Completed by: Duncan Van Keulen
+-- Date: 4/9/2020
+---------------------------------------------------------
+
+with Temperature_Package; use Temperature_Package;
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Strings.Fixed; use Ada.Strings.Fixed;
+with Ada.Float_Text_IO; use Ada.Float_Text_IO;
+
+procedure temperature_table is
+
+    baseTemp, limitTemp, stepTemp : Temperature_Package.Temperature;
+--    baseString, limitString : String := "100 C";
+    stepValue : Float;
+
+begin
+
+    -- Input the temperatures
+    Put("[Base] Enter degrees and scale: ");
+    enterTemperature(baseTemp);
+    New_Line;
+
+    Put("[Limit] Enter degrees and scale: ");
+    enterTemperature(limitTemp);
+    New_Line;
+    
+    Put("[Step] Enter the step value: ");
+    Get(stepValue);
+    New_Line;
+
+    -- Initialize the stepper temp to the base temp
+    Init(stepTemp, getDegree(baseTemp), getScale(baseTemp));
+
+    -- Header
+    Put("         ");
+    Put("Fahrenheit");
+    Put("         ");
+    Put("Celsius");
+    Put("         ");
+    Put("Kelvin");
+    Put("         ");
+    New_Line;
+
+    while(lessThan(stepTemp, limitTemp))
+    loop
+
+        display(toFahrenheit(stepTemp));
+        display(toCelsius(stepTemp));
+        display(toKelvin(stepTemp));
+        New_Line;
+    
+        raiseTemperature(stepTemp, stepValue, stepTemp);
+
+    end loop;
+
+
+end temperature_table;
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ make
+gcc -c -gnata temperature_package.adb
+gnatbind temperature_table.ali
+gnatlink temperature_table.ali
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ make
+make: 'temperature_table' is up to date.
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ ./temperature_table 
+[Base] Enter degrees and scale: 0 F
+
+[Limit] Enter degrees and scale: 100 C
+
+[Step] Enter the step value: 2.5
+
+         Fahrenheit         Celsius         Kelvin         
+         0.00000 F       -17.77778 C       255.37222 K
+         2.50000 F       -16.38889 C       256.76111 K
+         5.00000 F       -15.00000 C       258.14999 K
+         7.50000 F       -13.61111 C       259.53888 K
+        10.00000 F       -12.22222 C       260.92776 K
+        12.50000 F       -10.83333 C       262.31665 K
+        15.00000 F        -9.44444 C       263.70554 K
+        17.50000 F        -8.05556 C       265.09445 K
+        20.00000 F        -6.66667 C       266.48334 K
+        22.50000 F        -5.27778 C       267.87222 K
+        25.00000 F        -3.88889 C       269.26111 K
+        27.50000 F        -2.50000 C       270.64999 K
+        30.00000 F        -1.11111 C       272.03888 K
+        32.50000 F         0.27778 C       273.42776 K
+        35.00000 F         1.66667 C       274.81665 K
+        37.50000 F         3.05556 C       276.20554 K
+        40.00000 F         4.44444 C       277.59445 K
+        42.50000 F         5.83333 C       278.98334 K
+        45.00000 F         7.22222 C       280.37222 K
+        47.50000 F         8.61111 C       281.76111 K
+        50.00000 F        10.00000 C       283.14999 K
+        52.50000 F        11.38889 C       284.53888 K
+        55.00000 F        12.77778 C       285.92776 K
+        57.50000 F        14.16667 C       287.31665 K
+        60.00000 F        15.55556 C       288.70554 K
+        62.50000 F        16.94444 C       290.09445 K
+        65.00000 F        18.33333 C       291.48334 K
+        67.50000 F        19.72222 C       292.87222 K
+        70.00000 F        21.11111 C       294.26111 K
+        72.50000 F        22.50000 C       295.64999 K
+        75.00000 F        23.88889 C       297.03888 K
+        77.50000 F        25.27778 C       298.42776 K
+        80.00000 F        26.66667 C       299.81665 K
+        82.50000 F        28.05556 C       301.20557 K
+        85.00000 F        29.44445 C       302.59445 K
+        87.50000 F        30.83333 C       303.98334 K
+        90.00000 F        32.22223 C       305.37222 K
+        92.50000 F        33.61111 C       306.76111 K
+        95.00000 F        35.00000 C       308.14999 K
+        97.50000 F        36.38889 C       309.53888 K
+       100.00000 F        37.77778 C       310.92776 K
+       102.50000 F        39.16667 C       312.31665 K
+       105.00000 F        40.55556 C       313.70557 K
+       107.50000 F        41.94445 C       315.09445 K
+       110.00000 F        43.33334 C       316.48334 K
+       112.50000 F        44.72223 C       317.87222 K
+       115.00000 F        46.11111 C       319.26111 K
+       117.50000 F        47.50000 C       320.64999 K
+       120.00000 F        48.88889 C       322.03888 K
+       122.50000 F        50.27778 C       323.42776 K
+       125.00000 F        51.66667 C       324.81665 K
+       127.50000 F        53.05556 C       326.20557 K
+       130.00000 F        54.44445 C       327.59445 K
+       132.50000 F        55.83334 C       328.98334 K
+       135.00000 F        57.22223 C       330.37222 K
+       137.50000 F        58.61111 C       331.76111 K
+       140.00000 F        60.00000 C       333.14999 K
+       142.50000 F        61.38889 C       334.53888 K
+       145.00000 F        62.77778 C       335.92776 K
+       147.50000 F        64.16667 C       337.31665 K
+       150.00000 F        65.55556 C       338.70557 K
+       152.50000 F        66.94445 C       340.09445 K
+       155.00000 F        68.33334 C       341.48334 K
+       157.50000 F        69.72223 C       342.87222 K
+       160.00000 F        71.11111 C       344.26111 K
+       162.50000 F        72.50000 C       345.64999 K
+       165.00000 F        73.88889 C       347.03888 K
+       167.50000 F        75.27778 C       348.42776 K
+       170.00000 F        76.66667 C       349.81665 K
+       172.50000 F        78.05556 C       351.20557 K
+       175.00000 F        79.44445 C       352.59445 K
+       177.50000 F        80.83334 C       353.98334 K
+       180.00000 F        82.22223 C       355.37222 K
+       182.50000 F        83.61111 C       356.76111 K
+       185.00000 F        85.00001 C       358.14999 K
+       187.50000 F        86.38889 C       359.53888 K
+       190.00000 F        87.77778 C       360.92776 K
+       192.50000 F        89.16667 C       362.31665 K
+       195.00000 F        90.55556 C       363.70557 K
+       197.50000 F        91.94445 C       365.09445 K
+       200.00000 F        93.33334 C       366.48334 K
+       202.50000 F        94.72223 C       367.87222 K
+       205.00000 F        96.11111 C       369.26111 K
+       207.50000 F        97.50001 C       370.64999 K
+       210.00000 F        98.88889 C       372.03888 K
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ ./temperature_table 
+[Base] Enter degrees and scale: 0 K
+
+[Limit] Enter degrees and scale: 212 F
+
+[Step] Enter the step value: 20.0
+
+         Fahrenheit         Celsius         Kelvin         
+      -459.66998 F      -273.14999 C         0.00000 K
+      -423.66998 F      -253.14999 C        20.00000 K
+      -387.66998 F      -233.14999 C        40.00000 K
+      -351.66998 F      -213.14999 C        60.00000 K
+      -315.66998 F      -193.14999 C        80.00000 K
+      -279.66998 F      -173.14999 C       100.00000 K
+      -243.66998 F      -153.14999 C       120.00000 K
+      -207.66998 F      -133.14999 C       140.00000 K
+      -171.66998 F      -113.14999 C       160.00000 K
+      -135.66998 F       -93.14999 C       180.00000 K
+       -99.66998 F       -73.14999 C       200.00000 K
+       -63.66998 F       -53.14999 C       220.00000 K
+       -27.66999 F       -33.14999 C       240.00000 K
+         8.33001 F       -13.14999 C       260.00000 K
+        44.33001 F         6.85001 C       280.00000 K
+        80.33001 F        26.85001 C       300.00000 K
+       116.33001 F        46.85001 C       320.00000 K
+       152.33002 F        66.85001 C       340.00000 K
+       188.33000 F        86.85001 C       360.00000 K
+]0;djv78@gold02: ~/CS214Work/214/projects/08/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/08/ada[00m$ exit
+
+Script done on 2020-04-12 18:52:46-0400
