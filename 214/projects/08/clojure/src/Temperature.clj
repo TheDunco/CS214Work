@@ -44,6 +44,7 @@
     (= \c (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (getDegree temp)) 32.0) \F)
     (= \K (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (- (getDegree temp) 273.15)) 32.0) \F)
     (= \k (getScale temp)) (make-Temperature (+ (* (/ 9.0 5.0) (- (getDegree temp) 273.15)) 32.0) \F)
+    :else false
   )
 )
 
@@ -60,13 +61,15 @@
 )
 
 (defn toKelvin [^Temperature temp] 
-  (= \F (getScale temp)) (make-Temperature (* (/ 5.0 9.0) (+ (getDegree temp) 459.67)) \K)
-	(= \f (getScale temp)) (make-Temperature (* (/ 5.0 9.0) (+ (getDegree temp) 459.67)) \K)
-	(= \C (getScale temp)) (make-Temperature (+ (getDegree temp) 273.15) \K)
-	(= \c (getScale temp)) (make-Temperature (+ (getDegree temp) 273.15) \K)
-	(= \K (getScale temp)) (make-Temperature (getDegree temp) \K)
-	(= \k (getScale temp)) (make-Temperature (getDegree temp) \K)
-	:else false
+  (cond
+    (= \F (getScale temp)) (make-Temperature (+ (* (- (getDegree temp) 32.0) (/ 5.0 9.0)) 273.15) \K)
+    (= \f (getScale temp)) (make-Temperature (+ (* (- (getDegree temp) 32.0) (/ 5.0 9.0)) 273.15) \K)
+    (= \C (getScale temp)) (make-Temperature (+ (getDegree temp) 273.15) \K)
+    (= \c (getScale temp)) (make-Temperature (+ (getDegree temp) 273.15) \K)
+    (= \K (getScale temp)) (make-Temperature (getDegree temp) \K)
+    (= \k (getScale temp)) (make-Temperature (getDegree temp) \K)
+    :else false
+  )
 )
 
 (defn enterTemperature []
@@ -79,22 +82,21 @@
     ]
     (if (isValidTemperature inputDegree inputScale)
       (->Temperature inputDegree inputScale)
-      (println "Couldn't enter temperature")
+      (do (println "Couldn't enter temperature") (flush))
     )
   )
 )
+
 (defn displayTemperature [^Temperature temp]
   (print (format "%.5f"(getDegree temp)) " " (getScale temp))
 )
 
 (defn raiseTemperature [^Temperature temp degree]
-  ; (println getDegree temp)
-  ; (println getScale temp)
   (if (isValidTemperature (+ (getDegree temp) degree) (getScale temp)) 
     ;; True
     (make-Temperature (+ (getDegree temp) degree) (getScale temp))
     ;; False
-    (print "Could not raise temperature")
+    (do (print "Could not raise temperature") (flush))
   )  
 )
 
@@ -103,7 +105,7 @@
     ;; True
     (make-Temperature (- (getDegree temp) degree) (getScale temp))
     ;; False
-    (print "Could not lower temperature")
+    (do (print "Could not lower temperature") (flush))
   )  
 )
 
