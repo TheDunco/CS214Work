@@ -2,7 +2,7 @@
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen 
--- Date: 4/16/2020
+-- Date: 4/20/2020
 ------------------------------------------------------------------
 
 package List_Package is

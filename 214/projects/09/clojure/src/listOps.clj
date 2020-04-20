@@ -61,3 +61,21 @@
     )                     ;        the items in aList
   )
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; search() searches a list for a value
+;; Receive: aList, a list of values.  
+;; Recieve: aValue, an integer to be searched for  
+;; PRE: aList is a list 
+;;      values in aList can be compared using >.
+;; Return: the index of the aValue in aList or -1 if not found         
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn search [aList aValue]
+  ()
+  
+  
+  
+  
+  
+)

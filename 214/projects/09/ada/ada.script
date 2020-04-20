@@ -4,7 +4,7 @@ Script started on 2020-04-20 16:13:52-0400
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
--- Date: 4/16/2020
+-- Date: 4/20/2020
 -------------------------------------------------------
 
 with Ada.Text_IO, Ada.Integer_Text_IO;
@@ -135,7 +135,7 @@ end List_Package;
 -- 
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
--- Date: 4/16/2020
+-- Date: 4/20/2020
 -------------------------------------------------- 
  
 with Ada.Text_IO, Ada.Integer_Text_IO, List_Package; 
@@ -219,7 +219,7 @@ end Max;
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen 
--- Date: 4/16/2020
+-- Date: 4/20/2020
 ------------------------------------------------------------------
 
 package List_Package is
@@ -306,7 +306,8 @@ package List_Package is
 
 end List_Package;
 
-]0;djv78@gold03: ~/CS214Work/214/projects/09/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/09/ada[00m$ [K]0;djv78@gold03: ~/CS214Work/214/projects/09/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/09/ada[00m$ make
+]0;djv78@gold03: ~/CS214Work/214/projects/09/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/09/ada[00m$ 
+[K]0;djv78@gold03: ~/CS214Work/214/projects/09/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/09/ada[00m$ make
 gcc -c -Wall max.adb
 gcc -c -Wall list_package.adb
 gnatbind  max.ali
