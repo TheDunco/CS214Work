@@ -10,7 +10,7 @@ use Ada.Text_IO, Ada.Integer_Text_IO, List_Package;
  
 procedure Max is 
                               -- define 3 lists 
-  List1, List2, List3 : List; 
+  List1, List2, List3, List4 : List; 
  
 begin 
   Init(List1);                -- initialize them 
@@ -48,6 +48,36 @@ begin
   Put("The maximum value in list 3 is ");
   Put( Max(List3) );
   New_Line; 
- 
+
+Append(11, List4);
+Append(22, List4);
+Append(44, List4);
+Append(55, List4);
+Append(66, List4);
+Append(77, List4);
+Append(88, List4); 
+Append(00, List4); -- Skip 99
+
+-- test the search funciton
+Put("The position of 99 in list1 is: ");
+Put(search(list1, 99));
+New_Line;
+
+Put("The position of 99 in list2 is: ");
+Put(search(list2, 99));
+New_Line;
+
+Put("The position of 99 in list3 is: ");
+Put(search(list3, 99));
+New_Line;
+
+
+
+Put("The position of 99 in list4 is: ");
+if search(list4, 99) = -1 then
+  Put("Number not found, -1 recieved");
+end if;
+New_Line;
+
 end Max; 
 

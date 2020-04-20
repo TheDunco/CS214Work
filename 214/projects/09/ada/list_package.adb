@@ -103,5 +103,29 @@ package body List_Package is
     return Max_Value;
   end Max;
 
+  ---------------------------------------
+  -- Search a list for a value by       -
+  --    traversing said list
+  -- Receive: aList, a List.            -
+  -- Recieve: A_Value, an ingeger; the  -
+  --    value to search/traverse for    -
+  -- Return: the index of the value in  -
+  --    the list if found, -1 otherwise - 
+  ---------------------------------------
+  function Search(A_List : in List; A_Value : in Integer) return Integer is
+    Temp_Ptr : Node_Ptr := A_List.Its_First;
+  begin
+    for i in 1..Length(A_List) loop
+
+      if Temp_Ptr.Its_Value = A_Value then
+        return i;
+      end if;
+
+      Temp_Ptr := Temp_Ptr.Its_Next;
+
+    end loop;
+      return -1; -- if this was reached, the value was not found
+  end Search;
+
 end List_Package;
 

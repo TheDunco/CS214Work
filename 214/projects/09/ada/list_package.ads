@@ -59,6 +59,16 @@ package List_Package is
 
   function Max(A_List : in List) return Integer;
 
+  ---------------------------------------
+  -- Search a list for a value          -
+  -- Receive: aList, a List.            -
+  -- Recieve: A_Value, an ingeger; the  -
+  --    value to search/traverse for    -
+  -- Return: the index of the value in  -
+  --    the list if found, -1 otherwise - 
+  ---------------------------------------
+  function Search(A_List : in List; A_Value : in Integer) return Integer;
+
   private
 
     type List_Node;
@@ -69,6 +79,7 @@ package List_Package is
       Its_Value : Integer;
       Its_Next : Node_Ptr;
     end record;
+
 
   type List is record
     Its_First : Node_Ptr;

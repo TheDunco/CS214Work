@@ -1,7 +1,7 @@
 /* Max.java finds the maximum values in Java linked lists.
  *
  * Begun by: Dr. Adams, CS 214 at Calvin College.
- * Completed by: Duncan Van Keulen
+ * Completed by: Duncan Van Keulen, extended for project 09
  * Date: 4/20/2020
  */
 
@@ -48,7 +48,7 @@ public class Max {
     System.out.println("Max of list3: " + Collections.max(list3));
 
     // test the search method by searching for 99...
-    System.out.println("The position of 99 in list1 is: " + search(list1, 99));
+    System.out.println("\nThe position of 99 in list1 is: " + search(list1, 99));
     System.out.println("The position of 99 in list2 is: " + search(list2, 99));
     System.out.println("The position of 99 in list3 is: " + search(list3, 99));
 
@@ -63,7 +63,11 @@ public class Max {
     list4.add(88);
     list4.add(00);
 
-    System.out.println("The position of 99 in the list4 (should fail) is: " + search(list4, 99));
+    System.out.print("The position of 99 in list4 (should return -1) is... ");
+    if(search(list4, 99) == -1) {
+      System.out.println("Requested value not found: search returned (" + search(list4, 99) + ")");
+    }
+
 
   }
 
@@ -83,17 +87,18 @@ public class Max {
     System.out.print('\n');
   }
 
+  /*
+  * search() traverses and searches a LinkedList for a value
+  * @param: aList, a LinkedList<Integer>
+  * @param: aValue, an integer; the value to be searched for
+  * Return: The location of the value in the list, or -1 if not found
+  */
   public static int search(LinkedList<Integer> aList, int aValue) {
     for(int i = 0; i < aList.size(); i++) {
-      if(aValue == aList.get(i)){
+      if(aValue == aList.get(i)) {
         return i;
       }
-      else {
-        System.out.println("List does not contain requested value");
-        return -1;
-      }
     }
-    
     return -1;
   }
 }
