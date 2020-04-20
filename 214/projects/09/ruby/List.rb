@@ -2,7 +2,7 @@
 #
 # Begun by: Dr. Adams, for CS 214 at Calvin College.
 # Completed by: Duncan Van Keulen
-# Date: 4/16/2020
+# Date: 4/20/2020
 #######################################################
 
 require 'test/unit/assertions'
@@ -71,6 +71,23 @@ class List
          temp = temp.next
       end 
       return maxValue
+   end
+
+   # Search for a value in a list
+   # Return: the index of item, or -1 if not found
+
+   def search(value)
+      temp = @first
+      i = 0
+      while (temp != nil)
+         if (temp.value == value)
+            return i
+         else
+            i = i + 1
+            temp = temp.next
+         end
+      end
+      return -1
    end
 
    class Node

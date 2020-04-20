@@ -7,7 +7,7 @@
 ;;
 ;; Begun by: Dr. Adams, CS 214 at Calvin College.
 ;; Completed by: Duncan Van Keulen
-;; Date: 4/16/2020
+;; Date: 4/20/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns max)
@@ -25,8 +25,10 @@
       list2 (list 55 66 77 88 99)    ; max is last value
       list3 (list 55 77 99 88 66)    ; max is middle value
       emptyList '()                  ; list is empty
+      list4 (list 11 22 33 44 55 66 77 88) ; 99 not present
     ]
 
+    ;; Test max function
     (println)
     (println "list1: " list1)        ; print list1,
     (println "list2: " list2)        ;   list2,
@@ -47,7 +49,20 @@
     (println "The max of an empty list using listMax2 is is: " (listMax2 emptyList))
     (println)
 
-    
-  )
-)
+    ;; Test search function
+
+    (println "The position of 99 in list1 is: " (search list1 99))
+    (println)
+    (println "The position of 99 in list2 is: " (search list2 99))
+    (println)
+    (println "The position of 99 in list3 is: " (search list3 99))
+    (println)
+    (print "The position of 99 in list4 is: " ) (flush)
+    (if (= (search list4 99) -1) 
+      (print "99 not present in list, -1 returned")
+    )
+    (flush)
+    (println)
+  ) ;; let
+) ;; main
 

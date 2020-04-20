@@ -2,7 +2,7 @@
 ;;
 ;; Begun by: Prof. Adams, CS 214 at Calvin College.
 ;; Completed by: Duncan Van Keulen
-;; Date: 4/16/2020
+;; Date: 4/20/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -72,10 +72,31 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn search [aList aValue]
-  ()
-  
-  
-  
-  
-  
+  (if (list? aList)
+    (if (empty? aList) 
+      ;; True
+      -1 ; if the list is empty, we didn't find the value
+      ;; false
+      (loop 
+        [
+        tempList aList
+        i 0 
+        ]
+
+        (if (= aValue (first tempList))
+          ;; True
+          i ; return i indicating the index of the value
+          ;; False
+          (do 
+            (if (empty? tempList)
+              ;; True
+              -1 
+              ;; False
+              (recur (rest tempList) (inc i))
+            ) ;; (if (emtpy? tempList))
+          ) ;; if false do...
+        ) ;; if val = first of tempList
+      ) ;; loop
+    ) ;; ending if empty?
+  ) ;; ending if list?
 )
