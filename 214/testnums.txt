@@ -15,7 +15,7 @@ ruby FileName
 
 mkdir java ; mkdir ada ; mkdir clojure ; cd clojure ; mkdir src ; ls ; cd .. ; mkdir ruby ; ls
 
-cat java/java.script ada/ada.script clojure/clojure.script ruby/ruby.script > proj09-results
+cat java/java.script ada/ada.script clojure/clojure.script ruby/ruby.script > lab10-results
 
 
 2, 2, 2 should say it's negative
