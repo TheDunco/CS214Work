@@ -17,6 +17,10 @@ package body Duck_Package is
  -- Return: "Quack!"                                -
  ----------------------------------------------------
 
+    function Call(A_Duck : in Duck_Type) return String is
+    begin
+        return "Quack!";
+    end Call;
 
  ------------------------------------------------------------
  -- Determine type of a Duck (Over-rides Bird.Type_Name()) -
@@ -24,5 +28,9 @@ package body Duck_Package is
  -- Return: "Duck".                                        -
  -----------------------------------------------------------
 
+    function Type_Name(A_Duck : in Duck_Type) return String is
+    begin
+        return "Duck";
+    end Type_Name;
 
 end Duck_Package;

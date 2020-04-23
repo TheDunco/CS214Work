@@ -7,6 +7,7 @@
 
 package Bird_Package is
 
+type Bird_Type is tagged private;
 
  ----------------------------------------------------
  -- initialization                                  -
@@ -15,11 +16,15 @@ package Bird_Package is
  -- Return: a Bird_Type whose My_Name = Name.       -
  ----------------------------------------------------
 
+procedure Init(A_Bird : out Bird_Type; Name : in String);
+
  ----------------------------------------------------
  -- Name accessor                                   -
  -- Receive: A_Bird, a Bird_Type.                   -
  -- Return: A_Bird.My_Name.                         -
  ----------------------------------------------------
+
+function  Name(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- A Bird's Call                                   -
@@ -27,11 +32,15 @@ package Bird_Package is
  -- Return: a default bird-call ("Squawk!").        -
  ----------------------------------------------------
 
+function  Call(A_Bird : in Bird_Type) return String;
+
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
  -- Receive: A_Bird, a Bird_Type.                   -
  -- Return: "Bird".                                 -
  ----------------------------------------------------
+
+function  Type_Name(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- Output a Bird                                   -
@@ -39,6 +48,13 @@ package Bird_Package is
  -- Output: Everything known about A_Bird           -
  ----------------------------------------------------
 
+procedure Put(A_Bird : in Bird_Type'Class);
+
 private
+
+type Bird_Type is
+    tagged record
+        My_Name : String(1..6);
+    end record;
 
 end Bird_Package;

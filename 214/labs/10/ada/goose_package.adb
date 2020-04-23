@@ -14,6 +14,10 @@ package body Goose_Package is
  -- Return: "Honk!"                                 -
  ----------------------------------------------------
 
+    function Call(A_Goose : in Goose_Type) return String is
+    begin
+        return "Honk!";
+    end Call;
 
  -----------------------------------------------------
  -- Determine type of a Goose                        -
@@ -22,5 +26,9 @@ package body Goose_Package is
  -- Return: "Goose".                                 -
  -----------------------------------------------------
 
+    function Type_Name(A_Goose : in Goose_Type) return String is
+    begin
+        return "Goose";
+    end Type_Name;
 
 end Goose_Package;

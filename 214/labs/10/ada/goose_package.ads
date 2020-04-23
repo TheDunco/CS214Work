@@ -10,7 +10,7 @@ with Bird_Package; use Bird_Package;
 
 package Goose_Package is
 
- type Goose_Type is new Bird_Type with private;
+    type Goose_Type is new Bird_Type with private;
 
 
  ----------------------------------------------------
@@ -19,6 +19,7 @@ package Goose_Package is
  -- Return: "Honk!"                                 -
  ----------------------------------------------------
 
+    function  Call(A_Goose : in Goose_Type) return String;
 
  -----------------------------------------------------
  -- Determine type of a Goose                        -
@@ -27,7 +28,13 @@ package Goose_Package is
  -- Return: "Goose".                                 -
  -----------------------------------------------------
 
-private
+    function  Type_Name(A_Goose : in Goose_Type) return String;
 
+    private
+
+    type Goose_Type is new Bird_Type with
+        record
+            null;
+        end record;
 
 end Goose_Package;
