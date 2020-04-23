@@ -10,6 +10,7 @@ with Bird_Package; use Bird_Package;
 
 package Owl_Package is
 
+    type Owl_Type is new Bird_Type with private;
 
  ----------------------------------------------------
  -- A Owl's Call (Over-rides Bird.Call())           -
@@ -17,6 +18,7 @@ package Owl_Package is
  -- Return: "Whoo!"                                 -
  ----------------------------------------------------
 
+function  Call(An_Owl : in Owl_Type) return String;
 
  -----------------------------------------------------
  -- Determine type of a Owl                          -
@@ -25,7 +27,13 @@ package Owl_Package is
  -- Return: "Owl".                                   -
  -----------------------------------------------------
 
-private
+    function  Type_Name(An_Owl : Owl_Type) return String;
 
+    private
+    
+    type Owl_Type is new Bird_Type with
+        record
+            null;
+        end record;
 
 end Owl_Package;
