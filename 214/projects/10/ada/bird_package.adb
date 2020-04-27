@@ -2,7 +2,7 @@
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
--- Date: 4/23/2020
+-- Date: 4/27/2020
 ---------------------------------------------------
 
 with Ada.Text_IO;
@@ -40,11 +40,21 @@ package body Bird_Package is
  -- Return: a default bird-call ("Squawk!").        -
  ----------------------------------------------------
 
-
     function Call(A_Bird : in Bird_Type) return String is
     begin
         return "Squawwwwwwk!";
     end Call;
+
+ ----------------------------------------------------
+ -- A Bird's Movement                               -
+ -- Receive: A_Bird, a Bird_Type                    -
+ -- Return: a default bird movement("existed")      -
+ ----------------------------------------------------
+
+function Movement(A_Bird : in Bird_Type) return String is
+begin
+    return "existed";
+end Movement;
 
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
@@ -62,14 +72,15 @@ package body Bird_Package is
  -- Receive: A_Bird, a Bird or subclass of Bird.    -
  -- Output: Everything known about A_Bird           -
  ----------------------------------------------------
- 
 
     procedure Put(A_Bird : in Bird_Type'Class) is
     begin
         Put( Name(A_Bird) );
         Put( ' ' );
         Put( Type_Name(A_Bird) );
-        Put( " says " );
+        Put( " just ");
+        Put( Movement(A_Bird) );
+        Put( " and said ");
         Put( Call(A_Bird) );
     end Put; 
 

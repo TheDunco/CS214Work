@@ -10,16 +10,16 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_ELABORATION_CODE
 RV SPARK_05
 
-U duck_package%b	duck_package.adb	c5709b38 NE OO PK
+U duck_package%b	duck_package.adb	975279db NE OO PK
 W ada%s			ada.ads			ada.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 
-U duck_package%s	duck_package.ads	560cd9f8 EE OO PF PK
+U duck_package%s	duck_package.ads	2f2249f0 EE OO PF PK
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
-W bird_package%s	bird_package.adb	bird_package.ali
+W flying_bird%s		flying_bird.adb		flying_bird.ali
 W system%s		system.ads		system.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 W system.storage_elements%s  s-stoele.adb	s-stoele.ali
@@ -32,9 +32,10 @@ D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bird_package.ads	20200423170609 c278ef0e bird_package%s
-D duck_package.ads	20200423170430 947436f6 duck_package%s
-D duck_package.adb	20200423170038 6969581a duck_package%b
+D bird_package.ads	20200427231301 a5a39756 bird_package%s
+D duck_package.ads	20200427233328 c656d415 duck_package%s
+D duck_package.adb	20200427231847 6969581a duck_package%b
+D flying_bird.ads	20200427234943 e9749de5 flying_bird%s
 D interfac.ads		20160502101001 5ab55268 interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
 D system.ads		20170510173650 4635ec04 system%s
@@ -58,16 +59,18 @@ X 1 ada.ads
 X 6 a-textio.ads
 49K13*Text_IO 471e16 11|9w10 10r9
 X 9 bird_package.ads
-8K9*Bird_Package 60e17 10|9w6 9r24
-10R6*Bird_Type 58e15 10|13r23 33r27
 19U11*Init
 27V11*Name{string}
 X 10 duck_package.ads
-11K9*Duck_Package 33E10 38l5 38e17 11|12b14 36l5 36t17
-13R6*Duck_Type<9|10R6> 9|19p11 27p11 10|21P15 21r32 29P15 29r37 33c10 36e19
-. 11|20r31 31r36
+11K9*Duck_Package 34E10 39l5 39e17 11|12b14 36l5 36t17
+13R6*Duck_Type<12|11R6> 9|19p11 27p11 10|21P15 21r32 29P15 29r37 34c10 37e19
+. 11|20r31 31r36 12|19P10
 21V15*Call{string}<9|35p11> 21>20 11|20b14 23l9 23t13
 21r20 A_Duck{13R6} 11|20b19
-29V15*Type_Name{string}<9|43p11> 29>25 11|31b14 34l9 34t18
+29V15*Type_Name{string}<12|27p11> 29>25 11|31b14 34l9 34t18
 29r25 A_Duck{13R6} 11|31b24
+X 12 flying_bird.ads
+9K9*Flying_Bird 10|9w6 9r23 12|36e16
+11R6*Flying_Bird_Type<9|10R6> 10|13r23 34r27 12|34e19
+19V10*Movement{string}<9|43p10>
 

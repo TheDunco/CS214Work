@@ -544,8 +544,8 @@ end Goose_Package;
 --  and derives Owl from Bird.
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
--- Completed by:
--- Date:
+-- Completed by: Duncan Van Keulen
+-- Date: 4/23/2020
 ---------------------------------------------------
 
 with Bird_Package; use Bird_Package;

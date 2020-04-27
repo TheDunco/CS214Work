@@ -11,6 +11,11 @@ public class Birds {
     System.out.println("\nWelcome to the Bird Park!\n");
 
     Bird bird0 = new Bird();
+    WalkingBird bird01 = new WalkingBird();
+    FlyingBird bird02 = new FlyingBird();
+
+    bird01.print();
+    bird02.print();
 
     Bird bird1 = new Bird("Hawkeye");
     bird1.print();
@@ -33,7 +38,6 @@ public class Birds {
     Kiwi bird7 = new Kiwi("Kathy");
     bird7.print();
     System.out.println();
-
 
   }
 }

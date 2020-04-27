@@ -3,8 +3,11 @@
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
--- Date: 4/23/2020
+-- Date: 4/27/2020
 ---------------------------------------------------
+
+with Ada.Text_IO;
+use Ada.Text_IO;
 
 package body Goose_Package is
 

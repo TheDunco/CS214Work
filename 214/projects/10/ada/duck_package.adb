@@ -3,7 +3,7 @@
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
--- Date: 4/23/2020
+-- Date: 4/27/2020
 ---------------------------------------------------
 
 with Ada.Text_IO;
@@ -22,7 +22,7 @@ package body Duck_Package is
         return "Quack!";
     end Call;
 
- ------------------------------------------------------------
+ -----------------------------------------------------------
  -- Determine type of a Duck (Over-rides Bird.Type_Name()) -
  -- Receive: A_Duck, a Duck_Type.                          -
  -- Return: "Duck".                                        -

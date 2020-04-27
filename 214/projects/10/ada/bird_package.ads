@@ -2,7 +2,7 @@
 --
 -- Begun by: Dr. Adams, for CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
--- Date: 4/23/2020
+-- Date: 4/27/2020
 ---------------------------------------------------
 
 package Bird_Package is
@@ -33,6 +33,14 @@ function  Name(A_Bird : in Bird_Type) return String;
  ----------------------------------------------------
 
 function  Call(A_Bird : in Bird_Type) return String;
+
+ ----------------------------------------------------
+ -- A Bird's Movement                               -
+ -- Receive: A_Bird, a Bird_Type                    -
+ -- Return: a default bird movement("existed")      -
+ ----------------------------------------------------
+
+function Movement(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -

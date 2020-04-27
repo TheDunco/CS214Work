@@ -3,35 +3,45 @@ P SS ZX
 
 RN
 RV NO_DISPATCHING_CALLS
+RV NO_IO
 RV NO_IMPLICIT_CONDITIONALS
 RV NO_SECONDARY_STACK
 RV NO_STANDARD_STORAGE_POOLS
 RV NO_ELABORATION_CODE
 RV SPARK_05
 
-U goose_package%b	goose_package.adb	f46215fb NE OO PK
+U goose_package%b	goose_package.adb	1c431c0e NE OO PK
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 
-U goose_package%s	goose_package.ads	35d72c7f EE OO PF PK
+U goose_package%s	goose_package.ads	da534cac EE OO PF PK
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
-W bird_package%s	bird_package.adb	bird_package.ali
+W flying_bird%s		flying_bird.adb		flying_bird.ali
 W system%s		system.ads		system.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 W system.storage_elements%s  s-stoele.adb	s-stoele.ali
 
 D ada.ads		20170106103348 76789da1 ada%s
 D a-except.ads		20151016123252 291912d5 ada.exceptions%s
+D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
 D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
 D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
+D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bird_package.ads	20200423170609 c278ef0e bird_package%s
-D goose_package.ads	20200423171708 f7afc371 goose_package%s
-D goose_package.adb	20200423171800 03cdd68a goose_package%b
+D bird_package.ads	20200427231301 a5a39756 bird_package%s
+D flying_bird.ads	20200427234943 e9749de5 flying_bird%s
+D goose_package.ads	20200427233318 3327d149 goose_package%s
+D goose_package.adb	20200427231301 17093893 goose_package%b
+D interfac.ads		20160502101001 5ab55268 interfaces%s
+D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
 D system.ads		20170510173650 4635ec04 system%s
+D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
 D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
 D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
 D s-secsta.ads		20170112134946 9751b57e system.secondary_stack%s
 D s-soflin.ads		20151020124036 14e1eb6c system.soft_links%s
@@ -42,17 +52,25 @@ D s-stoele.adb		20140801093848 ed88f8fb system.storage_elements%b
 D s-string.ads		20140225151139 8fe54fb7 system.strings%s
 D s-ststop.ads		20140225151139 e6693757 system.strings.stream_ops%s
 D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
-X 7 bird_package.ads
-8K9*Bird_Package 60e17 8|9w6 9r24
-10R6*Bird_Type 58e15 8|13r28 35r28
+D s-unstyp.ads		20160502101423 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 12|9r6 10r5
+X 6 a-textio.ads
+49K13*Text_IO 471e16 12|9w10 10r9
+X 9 bird_package.ads
 19U11*Init
 27V11*Name{string}
-X 8 goose_package.ads
-11K9*Goose_Package 35E10 40l5 40e18 9|9b14 34l5 34t18
-13R10*Goose_Type<7|10R6> 7|19p11 27p11 8|22P15 22r33 31P15 31r38 35c10 38e19
-. 9|17r32 29r37
-22V15*Call{string}<7|35p11> 22>20 9|17b14 20l9 20t13
-22r20 A_Goose{13R10} 9|17b19
-31V15*Type_Name{string}<7|43p11> 31>25 9|29b14 32l9 32t18
-31r25 A_Goose{13R10} 9|29b24
+X 10 flying_bird.ads
+9K9*Flying_Bird 36e16 11|9w6 9r23
+11R6*Flying_Bird_Type<9|10R6> 34e19 11|13r28 35r28
+19V10*Movement{string}<9|43p10>
+X 11 goose_package.ads
+11K9*Goose_Package 35E10 40l5 40e18 12|12b14 37l5 37t18
+13R10*Goose_Type<10|11R6> 9|19p11 27p11 10|19P10 11|22P15 22r33 31P15 31r38
+. 35c10 38e19 12|20r32 32r37
+22V15*Call{string}<9|35p11> 22>20 12|20b14 23l9 23t13
+22r20 A_Goose{13R10} 12|20b19
+31V15*Type_Name{string}<10|27p11> 31>25 12|32b14 35l9 35t18
+31r25 A_Goose{13R10} 12|32b24
 

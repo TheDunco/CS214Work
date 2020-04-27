@@ -1,4 +1,6 @@
 V "GNAT Lib v7"
+A -mtune=generic
+A -march=x86-64
 P SS ZX
 
 RN
@@ -12,13 +14,13 @@ RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_ELABORATION_CODE
 RV SPARK_05
 
-U bird_package%b	bird_package.adb	c34094bd NE OO PK
+U bird_package%b	bird_package.adb	47ca72ec NE OO PK
 W ada%s			ada.ads			ada.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 
-U bird_package%s	bird_package.ads	c278ef0e EE OO PF PK
+U bird_package%s	bird_package.ads	a5a39756 EE OO PF PK
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
@@ -35,8 +37,8 @@ D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bird_package.ads	20200423170609 c278ef0e bird_package%s
-D bird_package.adb	20200423170213 39558e67 bird_package%b
+D bird_package.ads	20200427231301 a5a39756 bird_package%s
+D bird_package.adb	20200427231637 da04106e bird_package%b
 D interfac.ads		20160502101001 5ab55268 interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
 D system.ads		20170510173650 4635ec04 system%s
@@ -59,22 +61,24 @@ X 1 ada.ads
 16K9*Ada 20e8 10|8r6 9r5
 X 6 a-textio.ads
 49K13*Text_IO 471e16 10|8w10 9r9
-208U14*Put 10|70s9
-242U14*Put 10|69s9 71s9 72s9 73s9
+208U14*Put 10|79s9
+242U14*Put 10|78s9 80s9 81s9 82s9 83s9 84s9
 X 9 bird_package.ads
-8K9*Bird_Package 55E6 60l5 60e17 10|11b14 76l5 76t17
-10R6*Bird_Type 19p11 19r29 27p11 27r28 35p11 35r28 43p11 43r33 51r27 55c6
-. 58e15 10|21r33 32r31 44r31 55r36 67r31
+8K9*Bird_Package 63E6 68l5 68e17 10|11b14 87l5 87t17
+10R6*Bird_Type 19p11 19r29 27p11 27r28 35p11 35r28 43p10 43r31 51p11 51r33
+. 59r27 63c6 66e15 10|21r33 32r31 43r31 54r31 65r36 76r31
 19U11*Init 19<16 19>40 10|21b15 24l9 24t13
 19r16 A_Bird{10R6} 10|21b20 23m9
 19a40 Name{string} 10|21b44 23r27
-27V11*Name{string} 27>16 10|32b14 35l9 35t13 69R14
+27V11*Name{string} 27>16 10|32b14 35l9 35t13 78R14
 27r16 A_Bird{10R6} 10|32b19 34r16
-35V11*Call{string} 35>16 10|44b14 47l9 47t13 73R14
-35r16 A_Bird{10R6} 10|44b19
-43V11*Type_Name{string} 43>21 10|55b14 58l9 58t18 71R14
-43r21 A_Bird{10R6} 10|55b24
-51U11*Put 51>15 10|67b15 74l9 74t12
-51c15 A_Bird<10R6> 10|67b19 69r19 71r24 73r19
-57a9*My_Name{string} 10|23m16 34r23
+35V11*Call{string} 35>16 10|43b14 46l9 46t13 84R14
+35r16 A_Bird{10R6} 10|43b19
+43V10*Movement{string} 43>19 10|54b10 57l5 57t13 82R14
+43r19 A_Bird{10R6} 10|54b19
+51V11*Type_Name{string} 51>21 10|65b14 68l9 68t18 80R14
+51r21 A_Bird{10R6} 10|65b24
+59U11*Put 59>15 10|76b15 85l9 85t12
+59c15 A_Bird<10R6> 10|76b19 78r19 80r24 82r23 84r19
+65a9*My_Name{string} 10|23m16 34r23
 

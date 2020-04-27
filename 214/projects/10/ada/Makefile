@@ -2,8 +2,8 @@
 #  for a 2-level class hierarchy
 
 TARGET = birds
-SUBPACKAGES = duck_package.ali goose_package.ali owl_package.ali
-PACKAGES = bird_package.ali $(SUBPACKAGES)
+SUBPACKAGES = duck_package.ali goose_package.ali owl_package.ali penguin_package.ali ostrich_package.ali kiwi_package.ali
+PACKAGES = bird_package.ali flying_bird.ali walking_bird.ali $(SUBPACKAGES)
 
 CC     = gcc
 CFLAGS = -c 
