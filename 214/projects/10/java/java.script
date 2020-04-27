@@ -1,9 +1,9 @@
-Script started on 2020-04-27 16:50:00-0400
-]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ cat [K[Kls
-Bird.class   Birds.java  FlyingBird.class  Goose.java   Kiwi.java      Ostrich.java   Owl.java       WalkingBird.class
-Bird.java    Duck.class  FlyingBird.java   java.script  Makefile       Ostritch.java  Penguin.class  WalkingBird.java
-Birds.class  Duck.java   Goose.class       Kiwi.class   Ostrich.class  Owl.class      Penguin.java
-]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ cat *.java
+Script started on 2020-04-27 17:16:16-0400
+]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ ls
+Bird.class   Birds.java  FlyingBird.class  Goose.java   Kiwi.java      Ostrich.java  Penguin.class      WalkingBird.java
+Bird.java    Duck.class  FlyingBird.java   java.script  Makefile       Owl.class     Penguin.java
+Birds.class  Duck.java   Goose.class       Kiwi.class   Ostrich.class  Owl.java      WalkingBird.class
+]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ git [Kcat *([K.java
 /* Bird.java provides a Bird class.
  *
  * Begun by: Prof. Adams, for CS 214 at Calvin College.
@@ -19,7 +19,6 @@ public class Bird
   /* default constructor
   * PostCond: myName == "".
   */
-
   public Bird() {
     myName = "";
   }
@@ -29,7 +28,6 @@ public class Bird
   * Receive: name, a String 
   * PostCond: myName == name.
   */
-
   public Bird(String name) {
     myName = name;
   }
@@ -38,7 +36,6 @@ public class Bird
   /* Name accessor
   * Return: myName.
   */
-
   public String getName() {
     return myName;
   }
@@ -63,6 +60,9 @@ public class Bird
                       + " and said " + call() );
   }
 
+  /* A Bird's Movement
+  * Return: a default bird movement ("existed")
+  */
   public String movement() {
     return "existed";
   }
@@ -121,25 +121,24 @@ public class Birds {
 
 public class Duck extends FlyingBird {
     
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
-  */
 
+  /* default constructor
+  */
   public Duck() {
     super();
   }
 
+    /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Duck(String name) {     
     super(name);
   } 
 
-
-
   /* A Duck's Call
   * Return: a duck-call ("Quack!").
   */
-
   public String call() {
     return "Quack!";
   } 
@@ -153,14 +152,23 @@ public class Duck extends FlyingBird {
 
 public class FlyingBird extends Bird {
 
+    /* default constructor
+    */
     public FlyingBird() {
         super();
     }
-
+    
+    /* explicit constructor
+    * Recieve: String name - the name of the FlyingBrid
+    * Post: FlyingBird will be initialized with that name
+    */
     public FlyingBird(String name) {
         super(name);
     }
 
+    /* movement of a flying bird (flying)
+    * Return: a string indicating movement ("flew by")
+    */
     public String movement() {
         return "flew by";
     }
@@ -173,15 +181,17 @@ public class FlyingBird extends Bird {
 
 public class Goose extends FlyingBird {
 
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
-  */
 
+  /*default constructor
+  */
   public Goose() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Goose(String name) {     
     super(name);
   } 
@@ -189,7 +199,6 @@ public class Goose extends FlyingBird {
   /* A Goose's Call
   * Return: a goose-call ("Honk!").
   */
-
   public String call() {
     return "Honk!";
   }
@@ -204,15 +213,17 @@ public class Goose extends FlyingBird {
 
 public class Kiwi extends WalkingBird {
 
-    /* explicit constructor
-    * Receive: name, a String 
-    * PostCond: myName == name.
-    */
 
+    /* default constructor
+    */
     public Kiwi() {
         super();
     }
 
+    /* explicit constructor
+    * Receive: name, a String 
+    * PostCond: myName == name.
+    */
     public Kiwi(String name) {
         super(name);
     }
@@ -220,7 +231,6 @@ public class Kiwi extends WalkingBird {
     /* An Kiwi's Call
     * Return: an Kiwi-call ("Whoo-hoo!").
     */
-
     public String call() {
         return "Sqwee! Sqwee!";
     }
@@ -234,15 +244,17 @@ public class Kiwi extends WalkingBird {
 
 public class Ostrich extends WalkingBird {
 
-    /* explicit constructor
-    * Receive: name, a String 
-    * PostCond: myName == name.
-    */
 
+    /* default constructor
+    */
     public Ostrich() {
         super();
     }
 
+    /* explicit constructor
+    * Receive: name, a String 
+    * PostCond: myName == name.
+    */
     public Ostrich(String name) {
         super(name);
     }
@@ -250,7 +262,6 @@ public class Ostrich extends WalkingBird {
     /* An Ostrich's Call
     * Return: an Ostrich-call ("Whoo-hoo!").
     */
-
     public String call() {
         return "Snork!";
     }
@@ -265,15 +276,17 @@ public class Ostrich extends WalkingBird {
 
 public class Owl extends FlyingBird {
 
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
-  */
 
+  /* default constructor
+  */
   public Owl() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Owl(String name) {
     super(name);
   }
@@ -282,7 +295,6 @@ public class Owl extends FlyingBird {
   /* An Owl's Call
   * Return: an owl-call ("Whoo-hoo!").
   */
-
   public String call() {
     return "Whoo hoo!";
   }
@@ -297,15 +309,16 @@ public class Owl extends FlyingBird {
 
 public class Penguin extends WalkingBird {
 
-    /* explicit constructor
-    * Receive: name, a String 
-    * PostCond: myName == name.
+    /* default constructor
     */
-
     public Penguin() {
         super();
     }
 
+    /* explicit constructor
+    * Receive: name, a String 
+    * PostCond: myName == name.
+    */
     public Penguin(String name) {
         super(name);
     }
@@ -326,18 +339,28 @@ public class Penguin extends WalkingBird {
  ******************************************************/
 
 public class WalkingBird extends Bird {
+
+    /* default constructor
+    */
     public WalkingBird() {
         super();
     }
 
+    /* Explicit constructor
+    * Recieve: String name - the name of the walking bird
+    * Post: WalkingBird will be initialized with that name
+    */
     public WalkingBird(String name) {
         super(name);
     }
 
+    /* the movement of a walking bird
+    * Return: A string representing the movement of a walking bird (walking)
+    */
     public String movement() {
         return "walked by";
     }
-}]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ make
+}]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ l[Kmake
 javac -deprecation Birds.java
 ]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ java Birds
 
@@ -353,4 +376,4 @@ Kathy Kiwi just walked by and said Sqwee! Sqwee!
 
 ]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ exit
 
-Script done on 2020-04-27 16:50:36-0400
+Script done on 2020-04-27 17:16:56-0400

@@ -7,15 +7,17 @@
 
 public class Goose extends FlyingBird {
 
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
-  */
 
+  /*default constructor
+  */
   public Goose() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Goose(String name) {     
     super(name);
   } 
@@ -23,7 +25,6 @@ public class Goose extends FlyingBird {
   /* A Goose's Call
   * Return: a goose-call ("Honk!").
   */
-
   public String call() {
     return "Honk!";
   }

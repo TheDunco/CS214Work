@@ -13,7 +13,6 @@ public class Bird
   /* default constructor
   * PostCond: myName == "".
   */
-
   public Bird() {
     myName = "";
   }
@@ -23,7 +22,6 @@ public class Bird
   * Receive: name, a String 
   * PostCond: myName == name.
   */
-
   public Bird(String name) {
     myName = name;
   }
@@ -32,7 +30,6 @@ public class Bird
   /* Name accessor
   * Return: myName.
   */
-
   public String getName() {
     return myName;
   }
@@ -41,7 +38,6 @@ public class Bird
   /* A Bird's Call
   * Return: a default bird-call ("Squawk!").
   */
-
   public String call() {
     return "Squaaaaaaaaaawk!";
   } 
@@ -50,7 +46,6 @@ public class Bird
   * Output: Everything known about myself
   *          to the standard output stream.
   */
-
   public void print()
   {
     System.out.println( getName() + ' ' + getClass().getName()

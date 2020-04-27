@@ -7,24 +7,23 @@
 
 public class Owl extends Bird {
 
- /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
+  /* default constructor
   */
-
   public Owl() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Owl(String name) {
     super(name);
   }
 
-
   /* An Owl's Call
   * Return: an owl-call ("Whoo-hoo!").
   */
-
   public String call() {
     return "Whoo hoo!";
   }

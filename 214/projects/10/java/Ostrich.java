@@ -6,15 +6,17 @@
 
 public class Ostrich extends WalkingBird {
 
-    /* explicit constructor
-    * Receive: name, a String 
-    * PostCond: myName == name.
-    */
 
+    /* default constructor
+    */
     public Ostrich() {
         super();
     }
 
+    /* explicit constructor
+    * Receive: name, a String 
+    * PostCond: myName == name.
+    */
     public Ostrich(String name) {
         super(name);
     }
@@ -22,7 +24,6 @@ public class Ostrich extends WalkingBird {
     /* An Ostrich's Call
     * Return: an Ostrich-call ("Whoo-hoo!").
     */
-
     public String call() {
         return "Snork!";
     }

@@ -6,15 +6,17 @@
 
 public class Kiwi extends WalkingBird {
 
-    /* explicit constructor
-    * Receive: name, a String 
-    * PostCond: myName == name.
-    */
 
+    /* default constructor
+    */
     public Kiwi() {
         super();
     }
 
+    /* explicit constructor
+    * Receive: name, a String 
+    * PostCond: myName == name.
+    */
     public Kiwi(String name) {
         super(name);
     }
@@ -22,7 +24,6 @@ public class Kiwi extends WalkingBird {
     /* An Kiwi's Call
     * Return: an Kiwi-call ("Whoo-hoo!").
     */
-
     public String call() {
         return "Sqwee! Sqwee!";
     }

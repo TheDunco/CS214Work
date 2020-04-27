@@ -7,15 +7,17 @@
 
 public class Owl extends FlyingBird {
 
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
-  */
 
+  /* default constructor
+  */
   public Owl() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Owl(String name) {
     super(name);
   }
@@ -24,7 +26,6 @@ public class Owl extends FlyingBird {
   /* An Owl's Call
   * Return: an owl-call ("Whoo-hoo!").
   */
-
   public String call() {
     return "Whoo hoo!";
   }

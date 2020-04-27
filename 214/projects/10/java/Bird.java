@@ -13,7 +13,6 @@ public class Bird
   /* default constructor
   * PostCond: myName == "".
   */
-
   public Bird() {
     myName = "";
   }
@@ -23,7 +22,6 @@ public class Bird
   * Receive: name, a String 
   * PostCond: myName == name.
   */
-
   public Bird(String name) {
     myName = name;
   }
@@ -32,7 +30,6 @@ public class Bird
   /* Name accessor
   * Return: myName.
   */
-
   public String getName() {
     return myName;
   }
@@ -57,6 +54,9 @@ public class Bird
                       + " and said " + call() );
   }
 
+  /* A Bird's Movement
+  * Return: a default bird movement ("existed")
+  */
   public String movement() {
     return "existed";
   }

@@ -6,15 +6,16 @@
 
 public class Penguin extends WalkingBird {
 
-    /* explicit constructor
-    * Receive: name, a String 
-    * PostCond: myName == name.
+    /* default constructor
     */
-
     public Penguin() {
         super();
     }
 
+    /* explicit constructor
+    * Receive: name, a String 
+    * PostCond: myName == name.
+    */
     public Penguin(String name) {
         super(name);
     }

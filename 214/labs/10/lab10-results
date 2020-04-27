@@ -15,7 +15,6 @@ public class Bird
   /* default constructor
   * PostCond: myName == "".
   */
-
   public Bird() {
     myName = "";
   }
@@ -25,7 +24,6 @@ public class Bird
   * Receive: name, a String 
   * PostCond: myName == name.
   */
-
   public Bird(String name) {
     myName = name;
   }
@@ -34,7 +32,6 @@ public class Bird
   /* Name accessor
   * Return: myName.
   */
-
   public String getName() {
     return myName;
   }
@@ -43,7 +40,6 @@ public class Bird
   /* A Bird's Call
   * Return: a default bird-call ("Squawk!").
   */
-
   public String call() {
     return "Squaaaaaaaaaawk!";
   } 
@@ -52,7 +48,6 @@ public class Bird
   * Output: Everything known about myself
   *          to the standard output stream.
   */
-
   public void print()
   {
     System.out.println( getName() + ' ' + getClass().getName()
@@ -102,15 +97,17 @@ public class Birds {
 
 public class Duck extends Bird {
     
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
-  */
 
+  /* default constructor
+  */
   public Duck() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Duck(String name) {     
     super(name);
   } 
@@ -120,7 +117,6 @@ public class Duck extends Bird {
   /* A Duck's Call
   * Return: a duck-call ("Quack!").
   */
-
   public String call() {
     return "Quack!";
   } 
@@ -135,15 +131,16 @@ public class Duck extends Bird {
 
 public class Goose extends Bird {
 
-  /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
+  /* default constructor
   */
-
   public Goose() {
     super();
   }
 
+  /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Goose(String name) {     
     super(name);
   } 
@@ -151,7 +148,6 @@ public class Goose extends Bird {
   /* A Goose's Call
   * Return: a goose-call ("Honk!").
   */
-
   public String call() {
     return "Honk!";
   }
@@ -167,15 +163,16 @@ public class Goose extends Bird {
 
 public class Owl extends Bird {
 
- /* explicit constructor
-  * Receive: name, a String 
-  * PostCond: myName == name.
+  /* default constructor
   */
-
   public Owl() {
     super();
   }
 
+ /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
   public Owl(String name) {
     super(name);
   }
@@ -184,7 +181,6 @@ public class Owl extends Bird {
   /* An Owl's Call
   * Return: an owl-call ("Whoo-hoo!").
   */
-
   public String call() {
     return "Whoo hoo!";
   }
