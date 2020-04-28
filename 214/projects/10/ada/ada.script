@@ -1,12 +1,12 @@
-Script started on 2020-04-27 19:51:22-0400
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ ls
+Script started on 2020-04-28 10:56:00-0400
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ ls
 ada.script        birds.adb         duck_package.o     goose_package.ads  kiwi_package.o       owl_package.adb      penguin_package.ali
 bird_package.adb  birds.ali         flying_bird.adb    goose_package.ali  Makefile             owl_package.ads      penguin_package.o
 bird_package.ads  birds.o           flying_bird.ads    goose_package.o    ostrich_package.adb  owl_package.ali      walking_bird.adb
 bird_package.ali  duck_package.adb  flying_bird.ali    kiwi_package.adb   ostrich_package.ads  owl_package.o        walking_bird.ads
 bird_package.o    duck_package.ads  flying_bird.o      kiwi_package.ads   ostrich_package.ali  penguin_package.adb  walking_bird.ali
 [0m[01;32mbirds[0m             duck_package.ali  goose_package.adb  kiwi_package.ali   ostrich_package.o    penguin_package.ads  walking_bird.o
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ cat *.ads ; cat *.adb
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ cat *.adb ; [K[K[K[Ks
 -- bird_package.ads gives Bird-related declarations
 --
 -- Begun by: Dr. Adams, for CS 214 at Calvin College.
@@ -16,7 +16,7 @@ bird_package.o    duck_package.ads  flying_bird.o      kiwi_package.ads   ostric
 
 package Bird_Package is
 
-type Bird_Type is tagged private;
+type Bird_Type is abstract tagged private;
 
  ----------------------------------------------------
  -- initialization                                  -
@@ -45,11 +45,11 @@ function  Call(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- A Bird's Movement                               -
- -- Receive: A_Bird, a Bird_Type                    -
- -- Return: a default bird movement("existed")      -
+ -- Abstract function - meant to be defined by      -
+ --     subclasses                                  -
  ----------------------------------------------------
 
-function Movement(A_Bird : in Bird_Type) return String;
+function Movement(A_Bird : in Bird_Type) return String is abstract;
 
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
@@ -70,7 +70,7 @@ procedure Put(A_Bird : in Bird_Type'Class);
 private
 
 type Bird_Type is
-    tagged record
+    abstract tagged record
         My_Name : String(1..6);
     end record;
 
@@ -380,7 +380,8 @@ private
             null;
         end record;
 
-end Walking_Bird;-- bird_package.adb gives Bird-related definitions
+end Walking_Bird;]0;djv78@gold02: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ cat *.adb
+-- bird_package.adb gives Bird-related definitions
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Duncan Van Keulen
@@ -426,17 +427,6 @@ package body Bird_Package is
     begin
         return "Squawwwwwwk!";
     end Call;
-
- ----------------------------------------------------
- -- A Bird's Movement                               -
- -- Receive: A_Bird, a Bird_Type                    -
- -- Return: a default bird movement("existed")      -
- ----------------------------------------------------
-
-function Movement(A_Bird : in Bird_Type) return String is
-begin
-    return "existed";
-end Movement;
 
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
@@ -499,7 +489,6 @@ use Bird_Package,
 
 procedure Birds is
 
-Bird1 : Bird_Type;       -- base class
 Bird2 : Duck_Type;       -- derived class 1
 Bird3 : Goose_Type;      -- derived class 2
 Bird4 : Owl_Type;        -- derived class 3
@@ -519,9 +508,6 @@ Put(Bird5); New_Line;
 
 Init(Bird6, "Walker");
 Put(Bird6); New_Line;
-
-Init(Bird1, "Tweety");
-Put(Bird1); New_Line;
 
 Init(Bird2, "Donald");
 Put(Bird2); New_Line;
@@ -832,14 +818,21 @@ begin
     return "Walking Bird";
 end Type_Name;
 
-end Walking_Bird;]0;djv78@gold03: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ make
-make: 'birds' is up to date.
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ ./birds
+end Walking_Bird;]0;djv78@gold02: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ make
+gcc -c  bird_package.adb
+gcc -c  duck_package.adb
+gcc -c  goose_package.adb
+gcc -c  owl_package.adb
+gcc -c  penguin_package.adb
+gcc -c  ostrich_package.adb
+gcc -c  kiwi_package.adb
+gnatbind birds.ali
+gnatlink birds.ali
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ ./birds
 
 Welcome to the Bird Park!
 Flyer  Flying Bird just flew past and said Squawwwwwwk!
 Walker Walking Bird just walked past and said Squawwwwwwk!
-Tweety Bird just existed and said Squawwwwwwk!
 Donald Duck just flew past and said Quack!
 Mother Goose just flew past and said Honk!
 Woodsy Owl just flew past and said Whoo!
@@ -847,6 +840,6 @@ Peter  Penguin just walked past and said Huh-huh-huh-huuuuh!
 Oliver Ostrich just walked past and said Snork!
 Kathy  Kiwi just walked past and said Squee! Squee!
 
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ exit
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ada[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ada[00m$ exit
 
-Script done on 2020-04-27 19:51:56-0400
+Script done on 2020-04-28 10:56:48-0400

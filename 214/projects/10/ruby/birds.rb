@@ -17,9 +17,6 @@ require './Kiwi.rb'
 
 puts "\nWelcome to the Bird Park!\n\n"
 
-bird0 = Bird.new "Hawkeye"
-bird0.print
-
 bird1 = Duck.new "Donald"
 bird1.print
 

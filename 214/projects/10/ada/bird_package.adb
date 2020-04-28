@@ -46,17 +46,6 @@ package body Bird_Package is
     end Call;
 
  ----------------------------------------------------
- -- A Bird's Movement                               -
- -- Receive: A_Bird, a Bird_Type                    -
- -- Return: a default bird movement("existed")      -
- ----------------------------------------------------
-
-function Movement(A_Bird : in Bird_Type) return String is
-begin
-    return "existed";
-end Movement;
-
- ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
  -- Receive: A_Bird, a Bird_Type.                   -
  -- Return: "Bird".                                 -

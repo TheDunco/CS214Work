@@ -29,7 +29,6 @@ use Bird_Package,
 
 procedure Birds is
 
-Bird1 : Bird_Type;       -- base class
 Bird2 : Duck_Type;       -- derived class 1
 Bird3 : Goose_Type;      -- derived class 2
 Bird4 : Owl_Type;        -- derived class 3
@@ -49,9 +48,6 @@ Put(Bird5); New_Line;
 
 Init(Bird6, "Walker");
 Put(Bird6); New_Line;
-
-Init(Bird1, "Tweety");
-Put(Bird1); New_Line;
 
 Init(Bird2, "Donald");
 Put(Bird2); New_Line;

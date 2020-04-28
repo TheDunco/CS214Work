@@ -1,5 +1,7 @@
 V "GNAT Lib v7"
 M P W=b
+A -mtune=generic
+A -march=x86-64
 P SS ZX
 
 RN
@@ -7,7 +9,7 @@ RV NO_IO
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U birds%b		birds.adb		bb500afd NE OO SU
+U birds%b		birds.adb		1f0dc294 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W bird_package%s	bird_package.adb	bird_package.ali
@@ -28,8 +30,8 @@ D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bird_package.ads	20200427231301 a5a39756 bird_package%s
-D birds.adb		20200427234808 a7f9b90c birds%b
+D bird_package.ads	20200428145205 440e320e bird_package%s
+D birds.adb		20200428145026 e209d43d birds%b
 D duck_package.ads	20200427233328 c656d415 duck_package%s
 D flying_bird.ads	20200427234943 e9749de5 flying_bird%s
 D goose_package.ads	20200427233318 3327d149 goose_package%s
@@ -59,47 +61,45 @@ X 1 ada.ads
 16K9*Ada 20e8 10|17r5 27r5
 X 6 a-textio.ads
 49K13*Text_IO 471e16 10|17w9 27r9
-166U14*New_Line 10|43s1 45s1 48s13 51s13 54s13 57s13 60s13 63s13 66s13 69s13
-. 72s13 74s1
-242U14*Put 10|44s1
+166U14*New_Line 10|42s1 44s1 47s13 50s13 53s13 56s13 59s13 62s13 65s13 68s13
+. 70s1
+242U14*Put 10|43s1
 X 9 bird_package.ads
 8K9*Bird_Package 68e17 10|8w6 18r5
-10R6*Bird_Type 66e15 10|32r9
-19U11*Init 10|47s1 50s1 53s1 56s1 59s1 62s1 65s1 68s1 71s1
-59U11*Put 10|48s1 51s1 54s1 57s1 60s1 63s1 66s1 69s1 72s1
+19U11*Init 10|46s1 49s1 52s1 55s1 58s1 61s1 64s1 67s1
+59U11*Put 10|47s1 50s1 53s1 56s1 59s1 62s1 65s1 68s1
 X 10 birds.adb
-30U11*Birds 30b11 75l5 75t10
-32r1 Bird1{9|10R6} 53m6 54r5
-33r1 Bird2{11|13R6} 56m6 57r5
-34r1 Bird3{13|13R10} 59m6 60r5
-35r1 Bird4{18|13R10} 62m6 63r5
-36r1 Bird5{12|11R6} 47m6 48r5
-37r1 Bird6{35|11R6} 50m6 51r5
-38r1 Bird7{19|13R10} 65m6 66r5
-39r1 Bird8{17|13R10} 68m6 69r5
-40r1 Bird9{16|13R10} 71m6 72r5
+30U11*Birds 30b11 71l5 71t10
+32r1 Bird2{11|13R6} 52m6 53r5
+33r1 Bird3{13|13R10} 55m6 56r5
+34r1 Bird4{18|13R10} 58m6 59r5
+35r1 Bird5{12|11R6} 46m6 47r5
+36r1 Bird6{35|11R6} 49m6 50r5
+37r1 Bird7{19|13R10} 61m6 62r5
+38r1 Bird8{17|13R10} 64m6 65r5
+39r1 Bird9{16|13R10} 67m6 68r5
 X 11 duck_package.ads
 11K9*Duck_Package 10|11w9 21r9 11|39e17
-13R6*Duck_Type<12|11R6> 10|33r9 11|37e19
+13R6*Duck_Type<12|11R6> 10|32r9 11|37e19
 X 12 flying_bird.ads
 9K9*Flying_Bird 10|9w9 19r9 12|36e16
-11R6*Flying_Bird_Type<9|10R6> 10|36r9 12|34e19
+11R6*Flying_Bird_Type<9|10R6> 10|35r9 12|34e19
 X 13 goose_package.ads
 11K9*Goose_Package 10|12w9 22r9 13|40e18
-13R10*Goose_Type<12|11R6> 10|34r9 13|38e19
+13R10*Goose_Type<12|11R6> 10|33r9 13|38e19
 X 16 kiwi_package.ads
 11K9*Kiwi_Package 10|16w9 26r9 16|39e17
-13R10*Kiwi_Type<35|11R6> 10|40r9 16|37e19
+13R10*Kiwi_Type<35|11R6> 10|39r9 16|37e19
 X 17 ostrich_package.ads
 11K9*Ostrich_Package 10|15w9 25r9 17|39e20
-13R10*Ostrich_Type<35|11R6> 10|39r9 17|37e19
+13R10*Ostrich_Type<35|11R6> 10|38r9 17|37e19
 X 18 owl_package.ads
 11K9*Owl_Package 10|13w9 23r9 18|39e16
-13R10*Owl_Type<12|11R6> 10|35r9 18|37e19
+13R10*Owl_Type<12|11R6> 10|34r9 18|37e19
 X 19 penguin_package.ads
 11K9*Penguin_Package 10|14w9 24r9 19|39e20
-13R10*Penguin_Type<35|11R6> 10|38r9 19|37e19
+13R10*Penguin_Type<35|11R6> 10|37r9 19|37e19
 X 35 walking_bird.ads
 9K9*Walking_Bird 10|10w9 20r9 35|36e17
-11R6*Walking_Bird_Type<9|10R6> 10|37r9 35|34e19
+11R6*Walking_Bird_Type<9|10R6> 10|36r9 35|34e19
 

@@ -1,9 +1,7 @@
-Script started on 2020-04-27 21:39:42-0400
-ls
-cat *.rb
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ ls
+Script started on 2020-04-28 10:45:34-0400
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ ls
 Bird.rb  birds.rb  Duck.rb  FlyingBird.rb  Goose.rb  Kiwi.rb  Ostrich.rb  Owl.rb  Penguin.rb  ruby.script  WalkingBird.rb
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ cat *.rb
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ co[K[Kcat *.rb
 # Bird.rb | Defines a Bird superclass 
 #   to be extended by specific bird sub-classes.
 #
@@ -20,6 +18,7 @@ class Bird
         @name = name
     end
 
+    # Define a default bird's call
     def call
         'Squaaaaaaawk!'
         end
@@ -28,13 +27,13 @@ class Bird
         self.class.to_s
     end
 
+    # Output a bird
     def print
         puts name + " " + className + " just " + movement + " and said " + call
     end
 
-    def movement
-        'existed'
-    end
+    # Define the movement of a bird abstractly, to be supplied by subclasses
+    def movement ; end
 
 end# birds.rb | Tests out the menagerie of bird classes.
 #
@@ -54,9 +53,6 @@ require './Ostrich.rb'
 require './Kiwi.rb'
 
 puts "\nWelcome to the Bird Park!\n\n"
-
-bird0 = Bird.new "Hawkeye"
-bird0.print
 
 bird1 = Duck.new "Donald"
 bird1.print
@@ -204,11 +200,10 @@ class WalkingBird < Bird
         'walked by'
     end
 
-end]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ ruby birds.rb
+end]0;djv78@gold02: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ ruby birds.rb
 
 Welcome to the Bird Park!
 
-Hawkeye Bird just existed and said Squaaaaaaawk!
 Donald Duck just flew by and said Quack!
 Mother Goose just flew by and said Honk!
 Woodsey Owl just flew by and said Whoo-hoo!
@@ -219,6 +214,6 @@ Orville Ostrich just walked by and said Snork!
 Kathy Kiwi just walked by and said Squee! Squee!
 
 
-]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ exit
+]0;djv78@gold02: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ exit
 
-Script done on 2020-04-27 21:40:25-0400
+Script done on 2020-04-28 10:45:59-0400

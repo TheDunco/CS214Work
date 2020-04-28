@@ -1,6 +1,4 @@
 V "GNAT Lib v7"
-A -mtune=generic
-A -march=x86-64
 P SS ZX
 
 RN
@@ -17,7 +15,7 @@ W ada%s			ada.ads			ada.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 
-U flying_bird%s		flying_bird.ads		4cd70ab3 EE OO PF PK
+U flying_bird%s		flying_bird.ads		ad7aafeb EE OO PF PK
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
@@ -34,7 +32,7 @@ D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bird_package.ads	20200427231301 a5a39756 bird_package%s
+D bird_package.ads	20200428145205 440e320e bird_package%s
 D flying_bird.ads	20200427234943 e9749de5 flying_bird%s
 D flying_bird.adb	20200427234921 0f9de8a8 flying_bird%b
 D interfac.ads		20160502101001 5ab55268 interfaces%s
@@ -61,7 +59,7 @@ X 6 a-textio.ads
 49K13*Text_IO 471e16 11|7w10 8r9
 X 9 bird_package.ads
 8K9*Bird_Package 68e17 10|7w6 7r24
-10R6*Bird_Type 66e15 10|11r30 31r34
+10H6*Bird_Type 66e15 10|11r30 31r34
 19U11*Init
 27V11*Name{string}
 35V11*Call{string}

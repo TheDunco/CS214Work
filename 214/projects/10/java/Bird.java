@@ -7,7 +7,7 @@
 
 import java.io.*;
 
-public class Bird
+public abstract class Bird
 {
 
   /* default constructor
@@ -57,11 +57,7 @@ public class Bird
   /* A Bird's Movement
   * Return: a default bird movement ("existed")
   */
-  public String movement() {
-    return "existed";
-  }
-
-
+  public abstract String movement();
 
   private String myName;
 }

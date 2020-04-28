@@ -10,15 +10,11 @@ public class Birds {
   public static void main(String[] args) {
     System.out.println("\nWelcome to the Bird Park!\n");
 
-    Bird bird0 = new Bird();
     WalkingBird bird01 = new WalkingBird();
     FlyingBird bird02 = new FlyingBird();
 
     bird01.print();
     bird02.print();
-
-    Bird bird1 = new Bird("Hawkeye");
-    bird1.print();
 
     Duck bird2 = new Duck("Donald");
     bird2.print();

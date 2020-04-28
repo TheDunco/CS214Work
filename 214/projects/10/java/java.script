@@ -1,9 +1,9 @@
-Script started on 2020-04-27 18:51:20-0400
-]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ ls
+Script started on 2020-04-28 10:40:02-0400
+]0;djv78@gold02: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ ls
 Bird.class   Birds.java  FlyingBird.class  Goose.java   Kiwi.java      Ostrich.java  Penguin.class      WalkingBird.java
 Bird.java    Duck.class  FlyingBird.java   java.script  Makefile       Owl.class     Penguin.java
 Birds.class  Duck.java   Goose.class       Kiwi.class   Ostrich.class  Owl.java      WalkingBird.class
-]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ cat *&.[K[K.java
+]0;djv78@gold02: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ cat *.java
 /* Bird.java provides a Bird class.
  *
  * Begun by: Prof. Adams, for CS 214 at Calvin College.
@@ -13,7 +13,7 @@ Birds.class  Duck.java   Goose.class       Kiwi.class   Ostrich.class  Owl.java 
 
 import java.io.*;
 
-public class Bird
+public abstract class Bird
 {
 
   /* default constructor
@@ -63,11 +63,7 @@ public class Bird
   /* A Bird's Movement
   * Return: a default bird movement ("existed")
   */
-  public String movement() {
-    return "existed";
-  }
-
-
+  public abstract String movement();
 
   private String myName;
 }
@@ -84,15 +80,11 @@ public class Birds {
   public static void main(String[] args) {
     System.out.println("\nWelcome to the Bird Park!\n");
 
-    Bird bird0 = new Bird();
     WalkingBird bird01 = new WalkingBird();
     FlyingBird bird02 = new FlyingBird();
 
     bird01.print();
     bird02.print();
-
-    Bird bird1 = new Bird("Hawkeye");
-    bird1.print();
 
     Duck bird2 = new Duck("Donald");
     bird2.print();
@@ -364,15 +356,14 @@ public class WalkingBird extends Bird {
     public String movement() {
         return "walked by";
     }
-}]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ make
+}]0;djv78@gold02: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ make
 javac -deprecation Birds.java
-]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ java Birds
+]0;djv78@gold02: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ java Birds
 
 Welcome to the Bird Park!
 
  WalkingBird just walked by and said Squaaaaaaaaaawk!
  FlyingBird just flew by and said Squaaaaaaaaaawk!
-Hawkeye Bird just existed and said Squaaaaaaaaaawk!
 Donald Duck just flew by and said Quack!
 Mother Goose Goose just flew by and said Honk!
 Woodsey Owl just flew by and said Whoo hoo!
@@ -380,6 +371,6 @@ Peter Penguin just walked by and said Huh-huh-huh-huuuuh!
 Orville Ostrich just walked by and said Snork!
 Kathy Kiwi just walked by and said Sqwee! Sqwee!
 
-]0;djv78@gold03: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ exit
+]0;djv78@gold02: ~/CS214Work/214/projects/10/java[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/214/projects/10/java[00m$ exit
 
-Script done on 2020-04-27 18:51:34-0400
+Script done on 2020-04-28 10:40:21-0400

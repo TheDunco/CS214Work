@@ -1,4 +1,6 @@
 V "GNAT Lib v7"
+A -mtune=generic
+A -march=x86-64
 P SS ZX
 
 RN
@@ -32,7 +34,7 @@ D a-tags.ads		20151016130316 01f5e3ef ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-unccon.ads		20170106103348 31484697 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bird_package.ads	20200427231301 a5a39756 bird_package%s
+D bird_package.ads	20200428145533 440e320e bird_package%s
 D flying_bird.ads	20200427234943 e9749de5 flying_bird%s
 D goose_package.ads	20200427233318 3327d149 goose_package%s
 D goose_package.adb	20200427231301 17093893 goose_package%b

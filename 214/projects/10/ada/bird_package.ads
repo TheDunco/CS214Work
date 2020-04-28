@@ -7,7 +7,7 @@
 
 package Bird_Package is
 
-type Bird_Type is tagged private;
+type Bird_Type is abstract tagged private;
 
  ----------------------------------------------------
  -- initialization                                  -
@@ -36,11 +36,11 @@ function  Call(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- A Bird's Movement                               -
- -- Receive: A_Bird, a Bird_Type                    -
- -- Return: a default bird movement("existed")      -
+ -- Abstract function - meant to be defined by      -
+ --     subclasses                                  -
  ----------------------------------------------------
 
-function Movement(A_Bird : in Bird_Type) return String;
+function Movement(A_Bird : in Bird_Type) return String is abstract;
 
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
@@ -61,7 +61,7 @@ procedure Put(A_Bird : in Bird_Type'Class);
 private
 
 type Bird_Type is
-    tagged record
+    abstract tagged record
         My_Name : String(1..6);
     end record;
 
