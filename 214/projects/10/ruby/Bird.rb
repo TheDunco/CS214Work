@@ -3,7 +3,7 @@
 #
 # Begun by: Dr. Adams, for CS 214 at Calvin College.
 # Completed by: Duncan Van Keulen
-# Date: 4/23/2020
+# Date: 4/27/2020
 ####################################################
 
 class Bird
@@ -23,7 +23,11 @@ class Bird
     end
 
     def print
-        puts name + " " + className + " says " + call
+        puts name + " " + className + " just " + movement + " and said " + call
+    end
+
+    def movement
+        'existed'
     end
 
 end

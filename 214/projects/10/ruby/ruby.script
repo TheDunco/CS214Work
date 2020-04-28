@@ -1,0 +1,224 @@
+Script started on 2020-04-27 21:39:42-0400
+ls
+cat *.rb
+]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ ls
+Bird.rb  birds.rb  Duck.rb  FlyingBird.rb  Goose.rb  Kiwi.rb  Ostrich.rb  Owl.rb  Penguin.rb  ruby.script  WalkingBird.rb
+]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ cat *.rb
+# Bird.rb | Defines a Bird superclass 
+#   to be extended by specific bird sub-classes.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# Date: 4/27/2020
+####################################################
+
+class Bird
+
+    attr_reader :name
+
+    def initialize(name)
+        @name = name
+    end
+
+    def call
+        'Squaaaaaaawk!'
+        end
+    
+    def className
+        self.class.to_s
+    end
+
+    def print
+        puts name + " " + className + " just " + movement + " and said " + call
+    end
+
+    def movement
+        'existed'
+    end
+
+end# birds.rb | Tests out the menagerie of bird classes.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# Date: 4/27/2020
+######################################################
+
+require './Bird.rb'
+require './Duck.rb'
+require './Goose.rb'
+require './Owl.rb'
+require './FlyingBird.rb'
+require './WalkingBird.rb'
+require './Penguin.rb'
+require './Ostrich.rb'
+require './Kiwi.rb'
+
+puts "\nWelcome to the Bird Park!\n\n"
+
+bird0 = Bird.new "Hawkeye"
+bird0.print
+
+bird1 = Duck.new "Donald"
+bird1.print
+
+bird2 = Goose.new "Mother"
+bird2.print
+
+bird3 = Owl.new "Woodsey"
+bird3.print
+
+bird4 = FlyingBird.new "Average Flyer"
+bird4.print
+
+bird5 = WalkingBird.new "Average Walker"
+bird5.print
+
+bird6 = Penguin.new "Peter"
+bird6.print
+
+bird7 = Ostrich.new "Orville"
+bird7.print
+
+bird8 = Kiwi.new "Kathy"
+bird8.print
+
+puts "\n\n"# Duck.rb | Defines the Duck class which inherits attributes and methods
+#   from the FlyingBird superclass.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './FlyingBird.rb'
+
+class Duck < FlyingBird
+
+    def call
+        'Quack!'
+    end
+
+end# FlyingBird.rb | Defines the FlyingBird class which inherits attributes and methods
+#   from the Bird superclass.
+#
+# By: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './Bird.rb'
+
+class FlyingBird < Bird
+
+    def movement
+        'flew by'
+    end
+end# Goose.rb | Defines the Goose class which inherits attributes and methods
+#   from the FlyingBird superclass.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './FlyingBird.rb'
+
+class Goose < FlyingBird
+
+    def call
+        'Honk!'
+    end
+
+end# Kiwi.rb | Defines the Kiwi class which inherits attributes and methods
+#   from the WalkingBird superclass.
+#
+# By: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './WalkingBird.rb'
+
+class Kiwi < WalkingBird
+
+    def call
+        'Squee! Squee!'
+    end
+
+end# Ostrich.rb | Defines the Ostrich class which inherits attributes and methods
+#   from the WalkingBird superclass.
+#
+# By: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './WalkingBird.rb'
+
+class Ostrich < WalkingBird
+
+    def call
+        'Snork!'
+    end
+
+end# Owl.rb | Defines the Owl class which inherits attributes and methods
+#   from the FlyingBird superclass.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './FlyingBird.rb'
+
+class Owl < FlyingBird
+
+    def call
+        'Whoo-hoo!'
+    end
+
+end# Penguin.rb | Defines the Penguin class which inherits attributes and methods
+#   from the WalkingBird superclass.
+#
+# By: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './WalkingBird.rb'
+
+class Penguin < WalkingBird
+
+    def call
+        'Huh-huh-huh-huuuuh!'
+    end
+
+end# WalkingBird.rb | Defines the WalkingBird class which inherits attributes and methods
+#   from the Bird superclass.
+#
+# By: Duncan Van Keulen
+# Date:4/27/2020
+####################################################
+
+require './Bird.rb'
+
+class WalkingBird < Bird
+
+    def movement
+        'walked by'
+    end
+
+end]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ ruby birds.rb
+
+Welcome to the Bird Park!
+
+Hawkeye Bird just existed and said Squaaaaaaawk!
+Donald Duck just flew by and said Quack!
+Mother Goose just flew by and said Honk!
+Woodsey Owl just flew by and said Whoo-hoo!
+Average Flyer FlyingBird just flew by and said Squaaaaaaawk!
+Average Walker WalkingBird just walked by and said Squaaaaaaawk!
+Peter Penguin just walked by and said Huh-huh-huh-huuuuh!
+Orville Ostrich just walked by and said Snork!
+Kathy Kiwi just walked by and said Squee! Squee!
+
+
+]0;djv78@gold03: ~/CS214Work/214/projects/10/ruby[01;32mdjv78@gold03[00m:[01;34m~/CS214Work/214/projects/10/ruby[00m$ exit
+
+Script done on 2020-04-27 21:40:25-0400
