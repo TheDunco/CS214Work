@@ -105,7 +105,7 @@ public class ThreadedArraySum {
    * @param: arr, an array of integers
    * Return: the sum of the int values in arr.
    */
-  private long sumArray() { 
+  private long sumArray(int[] arr) { 
    Helper[] helpers = new Helper[myNumThreads];
 
      for (int i = 1; i < myNumThreads; ++i) {     // for each helper:
@@ -129,6 +129,9 @@ public class ThreadedArraySum {
      return sum;
   }
 
+  /* allows to grab the number of threads from args
+  * Return: and int indicating the number of threads
+  */
    private final int getNumThreads( String [] args ) {
       if (args.length >= 2) {
          return Integer.parseInt( args[1] );
@@ -137,6 +140,7 @@ public class ThreadedArraySum {
       }
    }
 
+   /* A helper thread class to enable array addition multithreading */
    private class Helper extends Thread {
 
    public Helper(int id) {
@@ -157,6 +161,7 @@ public class ThreadedArraySum {
    private long myPartialSum = 0;
    } // Helper
 
+   /* Sum a slice of an array */
    private long sumSlice(int id) {
    int sliceSize = myArray.length / myNumThreads;
    int start = id * sliceSize;         // starting index
