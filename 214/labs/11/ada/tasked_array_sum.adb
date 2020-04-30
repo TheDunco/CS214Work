@@ -40,6 +40,8 @@ procedure tasked_array_sum is
       return Partial_Sum;
    end Sum_Slice;
 
+   -- Array adder task (thread) type
+   -- Allows for synchrony and communication
    task type Array_Adder_Task is
       entry sum(ID, Slice_Size : in Integer);
       entry report(Result : Out Long_Integer);
@@ -99,7 +101,7 @@ procedure tasked_array_sum is
       end loop;
    end Read_File;
 
-   -- Launch tasks and sum up the values in the array
+   -- Launch individual adder tasks to sum up the values in the array
    function Sum_In_Parallel(Values: in Int_Array_Pointer;
                             Num_Tasks: in Integer) return Long_Integer is
       Partial_Result, Result: Long_Integer := 0;
