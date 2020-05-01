@@ -1,6 +1,6 @@
-;;;; arraySum.clj sums the integers in a file using an array.
+;;;; arraySum.clj sums the integers in a file using an array with multithreading.
 ;;;;
-;;;; Usage: clojure -m arraySum <inputFileName> 
+;;;; Usage: clojure -m threadedArraySum <inputFileName> 
 ;;;;
 ;;;; Input: the name of the input file and the number of threads
 ;;;;         (both entered on the command-line).
@@ -16,7 +16,12 @@
 ;;;; Date: 5/1/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(ns arraySum)
+(ns threadedArraySum
+  (:require [clojure.core.async            ; need this clause to use async
+              :refer [chan go put! take! <! >! <!! >!!] 
+            ] 
+  ) 
+)
 
 ;;; recursively fill an array with values from a Java Scanner
 ;;;
@@ -80,24 +85,85 @@
     )
 )
 
+;;; calcPartialSum():
+;;; - sum a 'slice' of an array given start and stop indices.
+;;; 
+;;; Receive: anArray, an array containing values to be summed;
+;;;          start, a long containing the starting index;
+;;;          stop, a long containing the stopping index.
+;;; Return: the sum of anArray[start] .. anArray[stop-1] (inclusive).
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn calcPartialSum [anArray start stop]
+  (loop
+    [                           ; initially:
+      partialSum 0              ;  partialSum = 0
+      i          start          ;  i = start
+    ]
+    (if (>= i stop)             ; Basis: i >= stop:
+      partialSum                ;  return partialSum
+                                ; I-step:
+                                ;  return loop(partialSum + a[i], ++i)
+      (recur (+ partialSum (get anArray i)) (inc i))
+    )
+  )
+)
 
-;;; sum the values in an array sequentially.
+;;; sum a 'slice' of an array based on thread ID and numThreads
+;;;
+;;; Receive: anArray, the array of ints to be summed;
+;;;          id, the ID of the current thread;
+;;;          numThreads, how many workers we have;
+;;;          channel, the channel to write its slice-sum to.
+;;; Postcondition: the sum of the values in this thread's slice
+;;;           of anArray have been put into channel.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+(defn sumSlice [anArray id numThreads channel]
+  (let
+    [ arraySize   (count anArray)              ; determine array size
+      sliceSize   (quot arraySize numThreads)  ; calculate slice size
+      start       (* id sliceSize)             ; calc. starting index
+      stop        (if (< id (- numThreads 1))  ; calc. stopping index
+                     (+ start sliceSize)       ; - all but last thread
+                     arraySize                 ; - last thread
+                  )
+                                               ; calc. sum of my slice
+      partialSum  (calcPartialSum anArray start stop)
+    ]
+
+    ; write partial sum to channel
+    (put! channel partialSum)
+  )
+) 
+
+;;; sum the values in an array in parallel.
 ;;; 
 ;;; Receive: anArray, an array containing values to be summed.
 ;;; Return: the sum of the values in anArray.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn sumArray [anArray]
-  (loop
-    [
-      sum 0
-      i   0
-    ]
+(defn sumArray [anArray numThreads]
+  (let
+    [ resChannel (chan) ]        ; define shared channel for results
 
-    (if (>= i (count anArray)) ; Basis: i >= aVec.size:
-      sum                      ;  return sum (i.e., 0).
-                               ; I-Step: i < n:
-                               ;  return aVec[i] + sum and recurse(i+1).
-      (recur (+ (get anArray i) sum) (inc i))
+    (loop [id 1]                 ; loop to fork threads,
+      (when (< id numThreads)    ;  each writing its partial-sum 
+        (go                      ;  to the channel
+           (sumSlice anArray id numThreads resChannel)
+        )
+        (recur (inc id))
+      )
+    )
+                                 ; main thread does slice 0
+    (sumSlice anArray 0 numThreads resChannel)
+                                 ; loop to read each partial-sum
+    (loop [ sum 0                ;  from resChannel and add it to sum
+            id  0]               ;  
+      (if (>= id numThreads)     ; Basis: id >= numThreads:
+        sum                      ;  return sum
+                                 ; I-Step: 
+                                 ;  return sum + next resChannel val
+                                 ;          and recurse (id+1)
+        (recur (+ sum (<!! resChannel)) (inc id)) 
+      )
     )
   )
 )
@@ -113,21 +179,22 @@
 ;;; Output: the sum of the values in inFile
 ;;;           and the time required to sum them
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn -main [inFile]
+(defn -main [inFile numThreadsStr]
   (let
     [
       anArray    (readFile inFile)        ; read inFile into anArray 
       numValues  (count anArray)          ; determine numValues
+      numThreads   (read-string numThreadsStr)  ; numThreadsStr -> integer
       startTime  (System/nanoTime)        ; - start timer
-      sum        (sumArray anArray)       ; - sum values sequentially
+      sum        (sumArray anArray numThreads)       ; - sum values sequentially
       stopTime   (System/nanoTime)        ; - stop timer
       totalTime  (- stopTime startTime)   ; - calc. sequential time
     ]
                                           ; output results
-    (printf "\nThe sequential sum of the %d numbers is %d;\n"
+    (printf "\nThe parallel sum of the %d numbers is %d;\n"
                numValues sum)
-    (printf " summing them with 1 thread took %d time units.\n\n"
-               totalTime)
+    (printf " summing them with %d thread took %d time units.\n\n"
+               numThreads totalTime)
   )
 )
 
