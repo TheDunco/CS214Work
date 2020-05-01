@@ -1,5 +1,5 @@
-Script started on 2020-04-29 20:37:56-0400
-]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ cat Threwa[K[KadedArraySum.java
+Script started on 2020-05-01 18:41:58-0400
+]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ cat ThreadedArraySum.java
 /* ArraySum.java sums the integers in a file using an array.
  *
  * Usage: java -Xint ArraySum <fileName>
@@ -183,17 +183,17 @@ public class ThreadedArraySum {
 
 }
 
-]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ javac -deprecation ThreadedArraySum.java 
-]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ ThreadedArraySumjThreadedArraySumaThreadedArraySumvThreadedArraySumaThreadedArraySum ThreadedArraySum[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /home/cs/214/labs/11/numbers/1000000numbers.txt 1
+]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ javac - dep[K[K[K[Kdp[Keper[K[Krecation ThreadedArraySum.java 
+]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ java ThreadedArraySum /home/cs/214/labs/11/numbers/1000000numbers.txt 1
 
 The sum of the 1000000 numbers is: 50473230
- and summing them took 3207134 time units.
+ and summing them took 3234276 time units.
 
 ]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ java ThreadedArraySum /home/cs/214/labs/11/numbers/1000000numbers.txt 1[K4
 
 The sum of the 1000000 numbers is: 50473230
- and summing them took 3153358 time units.
+ and summing them took 3164294 time units.
 
 ]0;djv78@gold04: ~/CS214Work/214/labs/11/java[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/java[00m$ exit
 
-Script done on 2020-04-29 20:39:32-0400
+Script done on 2020-05-01 18:42:34-0400

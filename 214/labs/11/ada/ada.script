@@ -1,8 +1,5 @@
-Script started on 2020-04-29 22:45:26-0400
-]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ ls
-ada.script                adaTaskedTimeCommands.sh  array_sum.adb  array_sum.o  [0m[01;32mtasked_array_sum[0m      tasked_array_sum.ali
-adaSingleTimeCommands.sh  [01;32marray_sum[0m                 array_sum.ali  Makefile     tasked_array_sum.adb  tasked_array_sum.o
-]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ cat tasked_array_sum.adb
+Script started on 2020-05-01 18:42:43-0400
+]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ cat tasked_array_sum.adb
 -- array_sum.adb sums the values from an input file using an array.
 --
 -- Begun by: Prof. Adams, for CS 214 at Calvin College.
@@ -173,16 +170,23 @@ begin
    Display(Total, Time_Required);
 end tasked_array_sum;
 
+]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ cat tasked_array_sum.adb [K[Ks[K[Kmake
+gnatmake tasked_array_sum.adb
+x86_64-linux-gnu-gcc-7 -c tasked_array_sum.adb
+x86_64-linux-gnu-gnatbind-7 -x tasked_array_sum.ali
+x86_64-linux-gnu-gnatlink-7 tasked_array_sum.ali
+]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ ./ taskedbash: _xspecs: bad array subscript
+_array_sum[K[K[K^C
 ]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ ./tasked_array_sum /home/cs/214/labs/11/numbers/1000000numbers.txt 1
 
 The sum is             50473230
- and computing it took  0.002935648 secs.
+ and computing it took  0.002718199 secs.
 
 ]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ ./tasked_array_sum /home/cs/214/labs/11/numbers/1000000numbers.txt 1[K4
 
 The sum is             50473230
- and computing it took  0.001860989 secs.
+ and computing it took  0.001876044 secs.
 
 ]0;djv78@gold04: ~/CS214Work/214/labs/11/ada[01;32mdjv78@gold04[00m:[01;34m~/CS214Work/214/labs/11/ada[00m$ exit
 
-Script done on 2020-04-29 22:46:29-0400
+Script done on 2020-05-01 18:43:34-0400
