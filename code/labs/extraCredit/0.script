@@ -1,0 +1,9 @@
+Script started on 2020-05-05 18:54:46-0400
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit/src[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit/src[00m$ clojure
+Clojure 1.10.1
+user=> (+ 1 2 3 4 5)
+15
+user=> 
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit/src[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit/src[00m$ exit
+
+Script done on 2020-05-05 18:55:22-0400

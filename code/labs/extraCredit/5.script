@@ -1,0 +1,31 @@
+Script started on 2020-05-05 20:24:51-0400
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ clojure
+Clojure 1.10.1
+user=> (defn incMaker [incValue]
+   #(+ % incValue)
+)
+#'user/incMaker
+user=> (def inc5 (incMaker 5))
+#'user/inc5
+user=> (defn greetingBuilder [greeting]
+   (fn [visitor]
+      (str greeting ", " visitor "!")
+   )
+)
+#'user/greetingBuilder
+user=> (def csGreeting (greetingBuilder "Welcome to CS 214"))
+#'user/csGreeting
+user=> (def englishGreeting (greetingBuilder "Hello"))
+#'user/englishGreeting
+user=> (def frenchGreeting (greetingBuilder "Bonjour"))
+#'user/frenchGreeting
+user=> (csGreeting "Ann")
+"Welcome to CS 214, Ann!"
+user=> (englishGreeting "Chris")
+"Hello, Chris!"
+user=> (frenchGreeting "Chris")
+"Bonjour, Chris!"
+user=> 
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ exit
+
+Script done on 2020-05-05 20:28:22-0400

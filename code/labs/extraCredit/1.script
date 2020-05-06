@@ -1,0 +1,13 @@
+Script started on 2020-05-05 18:56:17-0400
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ slojure[Kclojure
+Clojure 1.10.1
+user=> (fn [x] (+ x x))
+#object[user$eval136$fn__137 0x6d467c87 "user$eval136$fn__137@6d467c87"]
+user=> ((fn[x[    x[  [x] (+xx   x x)) 21)
+42
+user=> ((fn [x y] (+ (* x x) (* y y))) 3 4)
+25
+user=> 
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ exit
+
+Script done on 2020-05-05 18:58:24-0400

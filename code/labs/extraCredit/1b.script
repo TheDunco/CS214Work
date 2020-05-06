@@ -1,0 +1,13 @@
+Script started on 2020-05-05 19:07:43-0400
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ clojure
+Clojure 1.10.1
+user=> ((fn [x y z] (+ x y z)) 10 20 30)
+60
+user=> ((fn [x] (nil? x)) 0)
+false
+user=> ((fn [] 17.2))
+17.2
+user=> 
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ exit
+
+Script done on 2020-05-05 19:08:05-0400

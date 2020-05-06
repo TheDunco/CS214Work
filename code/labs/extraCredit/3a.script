@@ -1,0 +1,13 @@
+Script started on 2020-05-05 19:44:34-0400
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ clojure
+Clojure 1.10.1
+user=> (defn negate [sequence] (map - sequence))
+#'user/negate
+user=> (negate [-1 2 -3])
+(1 -2 3)
+user=> (negate [4 -5 6])
+(-4 5 -6)
+user=> 
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ exit
+
+Script done on 2020-05-05 19:45:00-0400

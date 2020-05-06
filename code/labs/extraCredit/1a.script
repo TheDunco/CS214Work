@@ -1,0 +1,9 @@
+Script started on 2020-05-05 19:05:15-0400
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ s[Kclojure
+Clojure 1.10.1
+user=> ((fn [x y z] (max (Math/abs x) (Math/abs y) (Math/abs z) )) 1 -20 10)
+20
+user=> 
+]0;djv78@gold02: ~/CS214Work/code/labs/extraCredit[01;32mdjv78@gold02[00m:[01;34m~/CS214Work/code/labs/extraCredit[00m$ exit
+
+Script done on 2020-05-05 19:05:26-0400
